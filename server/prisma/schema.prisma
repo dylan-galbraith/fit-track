@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Exercise {
+  id          Int          @default(autoincrement()) @id
+  name        String       @db.VarChar(225)
+  record      Record[]
+  routine     Routine?      @relation(fields: [routineId], references: [id])
+  routineId   Int?
+}
+model Record {
+  id          Int         @default(autoincrement()) @id
+  exercise    Exercise   @relation(fields: [exerciseId], references: [id])
+  exerciseId  Int
+  date        DateTime    @default(now())
+  weight      String      @db.VarChar(225)
+  reps        String      @db.VarChar(225)
+}
+model Routine {
+  id          Int             @default(autoincrement()) @id
+  name        String          @db.VarChar(225)
+  exercise    Exercise[]
+}
