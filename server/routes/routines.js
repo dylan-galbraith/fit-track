@@ -6,11 +6,13 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
+// Get all routines
 router.get('/', async (req, res) => {
   const result = await prisma.routine.findMany();
   res.json(result);
 })
 
+// Add a new routine
 router.post('/', async (req, res) => {
   const result = await prisma.routine.create({
     data: {
@@ -20,6 +22,7 @@ router.post('/', async (req, res) => {
   res.json(result);
 })
 
+// Get a specific routine
 router.get('/:routineId', async (req, res) => {
   const result = await prisma.routine.findUnique({
     where: {
@@ -37,6 +40,7 @@ router.get('/:routineId', async (req, res) => {
   res.json(result)
 })
 
+// Delete a routine
 router.delete('/:routineId', async (req, res) => {
   const result = await prisma.routine.delete({
     where: {
@@ -45,22 +49,5 @@ router.delete('/:routineId', async (req, res) => {
   });
   res.json(result);
 })
-
-// router.put('/:routineId/add', async (req, res) => {
-//   const result = await prisma.exercise.update({
-//     where: {id: parseInt(req.params.routineId)},
-//     data: {
-//       name: req.body.name
-//       // exercises: {
-//       //   updateMany: {
-//       //     where: {
-
-//       //     }
-//       //   }
-//       // }
-//     }
-//   });
-//   res.json(result)
-// })
 
 module.exports = router;
