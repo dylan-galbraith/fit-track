@@ -20,4 +20,22 @@ router.post('/', async (req, res) => {
   res.json(result)
 })
 
+router.get('/:exerciseId', async (req, res) => {
+  const result = await prisma.exercise.findUnique({
+    where: {
+      id: parseInt(req.params.exerciseId)
+    }
+  })
+  res.json(result)
+})
+
+router.delete('/:exerciseId', async (req, res) => {
+  const result = await prisma.exercise.delete({
+    where: {
+      id: parseInt(req.params.exerciseId)
+    }
+  })
+  res.json(result)
+})
+
 module.exports = router;
