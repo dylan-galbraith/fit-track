@@ -1,8 +1,11 @@
+import './App.scss'
+import Footer from './components/Footer'
+
 
 function App() {
   return (
-    <div className="App">
-
+    <div className="app">
+      <Footer />
     </div>
   );
 }

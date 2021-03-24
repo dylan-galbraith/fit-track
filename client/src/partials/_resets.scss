@@ -1,0 +1,16 @@
+@use '../assets/fonts/stylesheet.css' as *;
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  color: white;
+  font-family: 'Open Sans Condensed';
+}
