@@ -14,8 +14,7 @@ model Exercise {
   id          Int          @default(autoincrement()) @id
   name        String       @db.VarChar(225)
   record      Record[]
-  routine     Routine?      @relation(fields: [routineId], references: [id])
-  routineId   Int?
+  routine     Routine[]      
 }
 model Record {
   id          Int         @default(autoincrement()) @id
