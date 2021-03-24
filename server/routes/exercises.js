@@ -45,6 +45,18 @@ router.put('/:exerciseId/add', async (req, res) => {
   res.json(result)
 })
 
+router.put('/:exerciseId/favourite', async (req, res) => {
+  const result = await prisma.exercise.update({
+    where: {
+      id: parseInt(req.params.exerciseId)
+    },
+    data: {
+      favourite: req.body.favourite
+    }
+  })
+  res.json(result)
+})
+
 router.delete('/:exerciseId', async (req, res) => {
   const result = await prisma.exercise.delete({
     where: {
