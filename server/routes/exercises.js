@@ -29,6 +29,22 @@ router.get('/:exerciseId', async (req, res) => {
   res.json(result)
 })
 
+router.put('/:exerciseId/add', async (req, res) => {
+  const result = await prisma.exercise.update({
+    where: {
+      id: parseInt(req.params.exerciseId)
+    },
+    data: {
+      routine: {
+        connect: {
+          id: parseInt(req.body.routineId)
+        }
+      }
+    }
+  })
+  res.json(result)
+})
+
 router.delete('/:exerciseId', async (req, res) => {
   const result = await prisma.exercise.delete({
     where: {
