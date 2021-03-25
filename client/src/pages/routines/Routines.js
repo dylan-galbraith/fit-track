@@ -25,7 +25,7 @@ class Routines extends Component {
         {this.state.routines.map(item => {
             return (
               <div className="category__item" key={item.id}>
-                <Link to='/routines/:routineId' className="category__name">{item.name}</Link>
+                <Link to={`/routines/${item.id}`} className="category__name">{item.name}</Link>
               </div>
             )
           })}

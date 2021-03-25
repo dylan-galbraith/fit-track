@@ -1,28 +1,34 @@
+import axios from 'axios';
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Exercises extends Component {
+
+  state = {
+    exercises: []
+  }
+
+  componentDidMount = () => {
+    axios
+      .get('http://localhost:8070/exercises')
+      .then(response => {
+        this.setState({
+          exercises: response.data
+        })
+      })
+  }
+
   render() {
     return (
       <main className="main">
         <h1 className="main__heading">Exercises</h1>
-          <div className="category__item">
-            <p className="category__name">Squat</p>
-          </div>
-          <div className="category__item">
-            <p className="category__name">Deadlift</p>
-          </div>
-          <div className="category__item">
-            <p className="category__name">Bench Press</p>
-          </div>
-          <div className="category__item">
-            <p className="category__name">Shoulder Press</p>
-          </div>
-          <div className="category__item">
-            <p className="category__name">Bent Over Row</p>
-          </div>
-          <div className="category__item">
-            <p className="category__name">Pull Ups</p>
-          </div>
+        {this.state.exercises.map(item => {
+            return (
+              <div className="category__item" key={item.id}>
+                <Link to={`/exercises/${item.id}`} className="category__name">{item.name}</Link>
+              </div>
+            )
+          })}
       </main>
     )
   }

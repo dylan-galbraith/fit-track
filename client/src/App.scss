@@ -1,7 +1,9 @@
 @use './partials/resets' as *;
 
 .app {
-  background-color: #121212;
+  // background-color: #121212;
+  // background-color: rgb(91, 99, 124);
+  background-color: rgb(217, 217, 217);
   min-height: 100vh;
 }
 
@@ -12,6 +14,7 @@
     padding: 2rem 2rem 0;
     font-size: 3rem;
     font-weight: 400;
+    color: black;
   }
 }
 
@@ -21,7 +24,8 @@
   &__heading {
     padding-left: 2rem;
     font-size: 2rem;
-    font-weight: 400;
+    font-weight: 600;
+    color: black;
   }
 
   &__item {
