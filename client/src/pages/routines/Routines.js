@@ -20,15 +20,15 @@ class Routines extends Component {
 
   render() {
     return (
-      <main className="main">
-        <h1 className="main__heading">Routines</h1>
-        {this.state.routines.map(item => {
+      <main className="routines">
+        <h1 className="routines__heading">Routines</h1>
+        <div className="routines__list">
+          {this.state.routines.map(item => {
             return (
-              <div className="category__item" key={item.id}>
-                <Link to={`/routines/${item.id}`} className="category__name">{item.name}</Link>
-              </div>
+                <Link to={`/routines/${item.id}`} className={this.state.routines.indexOf(item)===0 ? "routines__name routines__name--top" : "routines__name"}>{item.name}</Link>
             )
           })}
+        </div>
       </main>
     )
   }

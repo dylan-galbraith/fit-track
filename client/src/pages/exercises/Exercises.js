@@ -23,7 +23,7 @@ class Exercises extends Component {
     return (
       <main className="exercises">
         <h1 className="exercises__heading">Exercises</h1>
-        <div className="exercises__category">
+        <div className="exercises__list">
           {this.state.exercises.map(item => {
             return (
                 <Link to={`/exercises/${item.id}`} className={this.state.exercises.indexOf(item)===0 ? "exercises__name exercises__name--top" : "exercises__name"}>{item.name} <img src={item.favourite ? filledStarIcon : ""} className="exercises__icon" /></Link>
