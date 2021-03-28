@@ -31,25 +31,21 @@ class Home extends Component {
 
   render() {
     return(
-      <main className="main">
-        <h1 className="main__heading">Welcome, Dylan!</h1>
-        <article className="category">
-        <h3 className="category__heading">Routines</h3>
+      <main className="home">
+        <h1 className="home__heading">Welcome back, Dylan!</h1>
+        <article className="home__category">
+        <h3 className="home__category__heading">Routines</h3>
           {this.state.routines.map(item => {
             return (
-              <div className="category__item" key={item.id}>
-                <Link to={`/routines/${item.id}`} className="category__name">{item.name}</Link>
-              </div>
+                <Link to={`/routines/${item.id}`} className={this.state.routines.indexOf(item)===0 ? "home__name home__name--top" : "home__name"}>{item.name}</Link>
             )
           })}
         </article>
-        <article className="category">
-          <h3 className="category__heading">Favourites</h3>
+        <article className="home__category">
+          <h3 className="home__category__heading">Favourites</h3>
           {this.state.favourites.map(item => {
             return (
-              <div className="category__item" key={item.id}>
-                <Link to={`/exercises/${item.id}`} className="category__name">{item.name}</Link>
-              </div>
+                <Link to={`/exercises/${item.id}`} className={this.state.favourites.indexOf(item)===0 ? "home__name home__name--top" : "home__name"}>{item.name}</Link>
             )
           })}
         </article>

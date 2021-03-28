@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import filledStarIcon from '../../assets/icons/star.svg';
 
 class Exercises extends Component {
 
@@ -20,14 +21,12 @@ class Exercises extends Component {
 
   render() {
     return (
-      <main className="main">
-        <h1 className="main__heading">Exercises</h1>
-        <div className="category">
+      <main className="exercises">
+        <h1 className="exercises__heading">Exercises</h1>
+        <div className="exercises__category">
           {this.state.exercises.map(item => {
             return (
-              <div className="category__item" key={item.id}>
-                <Link to={`/exercises/${item.id}`} className="category__name">{item.name}</Link>
-              </div>
+                <Link to={`/exercises/${item.id}`} className={this.state.exercises.indexOf(item)===0 ? "exercises__name exercises__name--top" : "exercises__name"}>{item.name} <img src={item.favourite ? filledStarIcon : ""} className="exercises__icon" /></Link>
             )
           })}
         </div>
