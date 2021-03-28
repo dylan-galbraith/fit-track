@@ -38,14 +38,14 @@ class SingleExercise extends Component {
     if (!this.state.exercise) return <p>Loading...</p>
     console.log(this.state);
     return (
-      <main className="main">
-        <h1 className="main__heading">{this.state.exercise.name} <img onClick={this.favouriteHandler} className="exercise__icon" src={this.state.exercise.favourite ? filledStarIcon : starIcon} /> </h1>
+      <main className="exercise">
+        <h1 className="exercise__heading">{this.state.exercise.name} <img onClick={this.favouriteHandler} className="exercise__icon" src={this.state.exercise.favourite ? filledStarIcon : starIcon} /> </h1>
         {this.state.exercise.record.map(item => {
           return (
-            <div className="category__item" key={item.id}>
-              <p className="category__name">Date: {item.date}</p>
-              <p className="category__name">Weight: {item.weight}</p>
-              <p className="category__name">Reps: {item.reps}</p>
+            <div className="exercise__record" key={item.id}>
+              <p className="exercise__stat"><span className="exercise__label">DATE: </span>{item.date}</p>
+              <p className="exercise__stat"><span className="exercise__label">WEIGHT: </span>{item.weight}</p>
+              <p className="exercise__stat"><span className="exercise__label">REPS: </span>{item.reps}</p>
             </div>
           )
         })}

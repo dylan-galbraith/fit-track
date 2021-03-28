@@ -80,6 +80,39 @@
   }
 }
 
+.exercise {
+  padding: 1rem 1rem 8rem;
+
+  &__heading {
+    font-size: 2rem;
+    text-align: center;
+    padding-bottom: 0.5rem;
+  }
+
+  &__record {
+    background-color: #0B0C10;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  &__stat {
+    padding: 0.5rem;
+  }
+
+  &__label {
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+  }
+
+  &__icon {
+    height: 2rem;
+  }
+}
+
 .routines {
   padding: 1rem 1rem 8rem;
 
@@ -190,8 +223,4 @@
     text-decoration: none;
     padding-bottom: 3rem;
   }
-}
-
-.exercise__icon {
-  height: 3rem;
 }
