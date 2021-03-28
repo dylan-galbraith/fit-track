@@ -38,7 +38,7 @@ class Home extends Component {
           {this.state.routines.map(item => {
             return (
               <div className="category__item" key={item.id}>
-                <Link to='/routines/:routineId' className="category__name">{item.name}</Link>
+                <Link to={`/routines/${item.id}`} className="category__name">{item.name}</Link>
               </div>
             )
           })}
@@ -48,7 +48,7 @@ class Home extends Component {
           {this.state.favourites.map(item => {
             return (
               <div className="category__item" key={item.id}>
-                <Link to='/exercises/:exerciseId' className="category__name">{item.name}</Link>
+                <Link to={`/exercises/${item.id}`} className="category__name">{item.name}</Link>
               </div>
             )
           })}

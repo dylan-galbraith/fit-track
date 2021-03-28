@@ -27,6 +27,16 @@ router.get('/:exerciseId', async (req, res) => {
   const result = await prisma.exercise.findUnique({
     where: {
       id: parseInt(req.params.exerciseId)
+    },
+    select: {
+      name: true,
+      record: {
+        select: {
+          date: true,
+          weight: true,
+          reps: true
+        }
+      }
     }
   })
   res.json(result)

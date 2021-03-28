@@ -1,9 +1,7 @@
 @use './partials/resets' as *;
 
 .app {
-  // background-color: #121212;
-  // background-color: rgb(91, 99, 124);
-  background-color: rgb(217, 217, 217);
+  background-color: rgb(15, 23, 50);
   min-height: 100vh;
 }
 
@@ -14,30 +12,53 @@
     padding: 2rem 2rem 0;
     font-size: 3rem;
     font-weight: 400;
-    color: black;
   }
 }
 
 .category {
-  padding: 1rem 0;
+  padding: 1rem 0 1rem 1rem;
 
   &__heading {
-    padding-left: 2rem;
     font-size: 2rem;
     font-weight: 600;
-    color: black;
+    padding-bottom: 1rem;
+    text-align: center;
   }
 
   &__item {
-    background-color: black;
-    padding: 1rem;
-    padding-left: 3rem;
-    margin-top: 1rem;
+    padding: 1rem 0;
+    margin-left: 1rem;
+    border-top: 1px solid rgb(176, 176, 176);
   }
 
   &__name {
     font-size: 1.5rem;
-    font-weight: bold;
+    text-decoration: none;
+  }
+}
+
+.routine {
+  &__item {
+    padding: 1rem 0;
+    margin-left: 1rem;
+    border-top: 1px solid rgb(176, 176, 176);
+
+    &__info {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__section {
+      width: 50%;
+    }
+
+    &__input {
+      color: black;
+    }
+  }
+
+  &__name {
+    font-size: 1.5rem;
     text-decoration: none;
   }
 }
@@ -45,7 +66,7 @@
 .footer {
   position: fixed;
   bottom: 0;
-  background-color: black;
+  background-color: rgb(11, 16, 35);
   width: 100%;
   padding: 1rem 2rem;
   display: flex;
@@ -67,7 +88,7 @@
   top: 0;
   height: 100vh;
   width: 100vw;
-  background-color: black;
+  background-color: rgb(11, 16, 35);
 
   &__list {
     margin: 50% 4rem;

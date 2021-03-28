@@ -19,7 +19,7 @@ model Exercise {
 }
 model Record {
   id          Int         @default(autoincrement()) @id
-  exercise    Exercise   @relation(fields: [exerciseId], references: [id])
+  exercise    Exercise    @relation(fields: [exerciseId], references: [id])
   exerciseId  Int
   date        DateTime    @default(now())
   weight      String      @db.VarChar(225)
