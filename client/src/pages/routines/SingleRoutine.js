@@ -9,9 +9,17 @@ class SingleRoutine extends Component {
 
   addRecord = (e) => {
     e.preventDefault();
-    const weight = e.target.weight.value
-    const reps = e.target.reps.value
-    console.log(weight, reps);
+    const newRecord = {
+      weight: e.target.weight.value,
+      reps: e.target.reps.value,
+      exerciseId: e.target.id
+    }
+    console.log(newRecord);
+    axios
+      .post(`http://localhost:8070/records`, newRecord)
+      .then(response => {
+        console.log(response);
+      })
   }
 
   componentDidMount = () => {
@@ -26,6 +34,7 @@ class SingleRoutine extends Component {
 
   render() {
     if (!this.state.routine) return <p>Loading...</p>
+    console.log(this.state.routine);
     return (
       <main className="main">
         <h1 className="main__heading">{this.state.routine.name}</h1>
@@ -40,7 +49,7 @@ class SingleRoutine extends Component {
                     <p>Weight: {item.record.length>0 ? item.record[0].weight : "N/A"}</p>
                     <p>Reps: {item.record.length>0 ? item.record[0].reps : "N/A"}</p>
                   </div>
-                  <form onSubmit={this.addRecord} className="routine__item__section">
+                  <form id={item.id} onSubmit={this.addRecord} className="routine__item__section">
                     <label>Weight: <input className="routine__item__input" name="weight"/></label>
                     <label>Reps: <input className="routine__item__input" name="reps" /></label>
                     <button>Add</button>

@@ -33,7 +33,8 @@ router.get('/:routineId', async (req, res) => {
       exercise: {
         select: {
           name: true,
-          record: true
+          record: true,
+          id: true
         }
       }
     }
