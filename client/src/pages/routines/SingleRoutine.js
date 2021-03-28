@@ -9,17 +9,17 @@ class SingleRoutine extends Component {
 
   addRecord = (e) => {
     e.preventDefault();
-    // const newRecord = {
-    //   weight: e.target.weight.value,
-    //   reps: e.target.reps.value,
-    //   exerciseId: e.target.id
-    // }
-    // console.log(newRecord);
-    // axios
-    //   .post(`http://localhost:8070/records`, newRecord)
-    //   .then(response => {
-    //     console.log(response);
-    //   })
+    const newRecord = {
+      weight: e.target.weight.value,
+      reps: e.target.reps.value,
+      exerciseId: e.target.id
+    }
+    console.log(newRecord);
+    axios
+      .post(`http://localhost:8070/records`, newRecord)
+      .then(response => {
+        console.log(response);
+      })
   }
 
   componentDidMount = () => {

@@ -24,6 +24,7 @@ class Footer extends Component {
             <NavLink className="menu__item" to='/routines' onClick={this.menuHandler}>Routines</NavLink>
             <NavLink className="menu__item" to='/favourites' onClick={this.menuHandler}>Favourites</NavLink>
             <NavLink className="menu__item" to='/exercises' onClick={this.menuHandler}>Exercises</NavLink>
+            <NavLink className="menu__item" to='/' exact onClick={this.menuHandler}>Home</NavLink>
           </div>
           <footer className="footer">
             <Link className="footer__logo" to='/'  onClick={this.menuHandler}>FitTrack</Link>
