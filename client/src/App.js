@@ -8,6 +8,7 @@ import Exercises from './pages/exercises/Exercises'
 import SingleExercise from './pages/exercises/SingleExercise'
 import Routines from './pages/routines/Routines'
 import SingleRoutine from './pages/routines/SingleRoutine';
+import Favourites from './pages/favourites/Favourites';
 
 class App extends Component {
 
@@ -23,6 +24,7 @@ class App extends Component {
             <Route path='/exercises/:exerciseId' component={SingleExercise} />
             <Route path='/routines' exact component={Routines} />
             <Route path='/routines/:routineId' component={SingleRoutine} />
+            <Route path='/favourites' component={Favourites} />
           </Switch>
           <Footer/>
         </BrowserRouter>
