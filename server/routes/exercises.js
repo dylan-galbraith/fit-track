@@ -30,6 +30,7 @@ router.get('/:exerciseId', async (req, res) => {
     },
     select: {
       name: true,
+      favourite: true,
       record: {
         select: {
           date: true,
