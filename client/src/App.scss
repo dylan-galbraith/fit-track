@@ -87,12 +87,14 @@
     font-size: 2rem;
     text-align: center;
     padding-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
   }
 
   &__record {
     background-color: #0B0C10;
-    margin-top: 1rem;
-    padding: 0.5rem;
+    margin-top: 1.5rem;
+    padding: 1rem;
     border-radius: 0.7rem;
     display: flex;
     flex-direction: column;
@@ -147,10 +149,18 @@
 .routine {
   padding: 1rem 1rem 8rem;
 
+  &__icon {
+    height: 2rem;
+  }
+
   &__heading {
     font-size: 2rem;
-    text-align: center;
     padding-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    text-align: right;
   }
 
   &__item {
@@ -208,6 +218,7 @@
       &:hover {
         background-color: #45A29E;
         color: #0B0C10;
+        cursor: pointer;
       }
     }
   }

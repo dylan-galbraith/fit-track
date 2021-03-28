@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { Component } from 'react';
+import backIcon from '../../assets/icons/arrow-back.svg';
+import { Link } from 'react-router-dom';
 
 class SingleRoutine extends Component {
 
@@ -37,7 +39,7 @@ class SingleRoutine extends Component {
     console.log(this.state.routine);
     return (
       <main className="routine">
-        <h1 className="routine__heading">{this.state.routine.name}</h1>
+        <h1 className="routine__heading"><Link to="/routines"><img className="routine__icon" src={backIcon} /></Link>{this.state.routine.name}</h1>
         {this.state.routine.exercise.map(item => {
           return (
             <div className="routine__item" key={item.id}>
@@ -49,7 +51,7 @@ class SingleRoutine extends Component {
                 </div>
                 <div className="routine__item__row">
                   <p className="routine__item__stat">Weight: {item.record.length>0 ? item.record[0].weight : "N/A"}</p>
-                  <input className="routine__item__input" name="weight" placeholder="Weight" />
+                  <input className="routine__item__input" name="weight" placeholder="Weight (in lbs)" />
                 </div>
                 <div className="routine__item__row">
                   <p className="routine__item__stat">Reps: {item.record.length>0 ? item.record[0].reps : "N/A"}</p>

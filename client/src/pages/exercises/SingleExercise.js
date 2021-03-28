@@ -2,6 +2,8 @@ import axios from 'axios';
 import { Component } from 'react';
 import starIcon from '../../assets/icons/star-outline.svg';
 import filledStarIcon from '../../assets/icons/star.svg';
+import backIcon from '../../assets/icons/arrow-back.svg';
+import { Link } from 'react-router-dom';
 
 class SingleExercise extends Component {
 
@@ -39,7 +41,7 @@ class SingleExercise extends Component {
     console.log(this.state);
     return (
       <main className="exercise">
-        <h1 className="exercise__heading">{this.state.exercise.name} <img onClick={this.favouriteHandler} className="exercise__icon" src={this.state.exercise.favourite ? filledStarIcon : starIcon} /> </h1>
+        <h1 className="exercise__heading"><Link to="/exercises"><img src={backIcon} className="exercise__icon" /></Link>{this.state.exercise.name} <img onClick={this.favouriteHandler} className="exercise__icon" src={this.state.exercise.favourite ? filledStarIcon : starIcon} /> </h1>
         {this.state.exercise.record.map(item => {
           return (
             <div className="exercise__record" key={item.id}>
