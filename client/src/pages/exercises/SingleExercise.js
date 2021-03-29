@@ -57,6 +57,23 @@ class SingleExercise extends Component {
       })
   }
 
+  deleteRecord = (id) => {
+    console.log(id);
+    axios
+      .delete(`http://localhost:8070/records/${id}`)
+      .then(response => {
+        console.log(response);
+        axios
+          .get(`http://localhost:8070/exercises/${this.props.match.params.exerciseId}`)
+          .then(response => {
+            this.setState({
+              exercise: response.data
+            })
+          })
+      })
+
+  }
+
   componentDidMount = () => {
     axios
       .get(`http://localhost:8070/exercises/${this.props.match.params.exerciseId}`)
@@ -80,8 +97,10 @@ class SingleExercise extends Component {
           <button className="exercise__form__button">Add</button>
         </form>
         {this.state.exercise.record.map(item => {
+        console.log(item);
           return (
             <div className="exercise__record" key={item.id}>
+              <img onClick={() => this.deleteRecord(item.id)} src={deleteIcon} className="exercise__icon exercise__delete-record" />
               <p className="exercise__stat"><span className="exercise__label">DATE: </span>{new Date(item.date).toDateString()}</p>
               <p className="exercise__stat"><span className="exercise__label">WEIGHT: </span>{item.weight}</p>
               <p className="exercise__stat"><span className="exercise__label">REPS: </span>{item.reps}</p>

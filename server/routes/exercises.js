@@ -35,7 +35,8 @@ router.get('/:exerciseId', async (req, res) => {
         select: {
           date: true,
           weight: true,
-          reps: true
+          reps: true,
+          id: true
         }
       }
     }
