@@ -38,14 +38,13 @@ class SingleExercise extends Component {
 
   render() {
     if (!this.state.exercise) return <p>Loading...</p>
-    console.log(this.state);
     return (
       <main className="exercise">
         <h1 className="exercise__heading"><Link to="/exercises"><img src={backIcon} className="exercise__icon" /></Link>{this.state.exercise.name} <img onClick={this.favouriteHandler} className="exercise__icon" src={this.state.exercise.favourite ? filledStarIcon : starIcon} /> </h1>
         {this.state.exercise.record.map(item => {
           return (
             <div className="exercise__record" key={item.id}>
-              <p className="exercise__stat"><span className="exercise__label">DATE: </span>{item.date}</p>
+              <p className="exercise__stat"><span className="exercise__label">DATE: </span>{new Date(item.date).toDateString()}</p>
               <p className="exercise__stat"><span className="exercise__label">WEIGHT: </span>{item.weight}</p>
               <p className="exercise__stat"><span className="exercise__label">REPS: </span>{item.reps}</p>
             </div>

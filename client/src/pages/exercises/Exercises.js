@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import filledStarIcon from '../../assets/icons/star.svg';
+import ellipIcon from '../../assets/icons/ellipsis-horizontal.svg';
 
 class Exercises extends Component {
 
@@ -19,10 +20,17 @@ class Exercises extends Component {
       })
   }
 
+  optionMenu = (e) => {
+    console.log(e);
+  }
+
   render() {
     return (
       <main className="exercises">
-        <h1 className="exercises__heading">Exercises</h1>
+        <h1 className="exercises__heading">Exercises <img onClick={this.optionMenu} className="exercises__icon" src={ellipIcon} /></h1>
+        <div className="exercises__options">
+          <Link to="exercises/add" >Add</Link>
+        </div>
         <div className="exercises__list">
           {this.state.exercises.map(item => {
             return (
