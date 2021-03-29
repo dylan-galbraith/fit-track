@@ -193,6 +193,43 @@
   &__icon {
     height: 2rem;
   }
+
+  &__form {
+    &__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &__input {
+      background-color: #0B0C10;
+      border: none;
+      border-bottom: 1px solid #45A29E;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+      width: 45%;
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &__button {
+      background-color: #0B0C10;
+      border: 1px solid #45A29E;
+      color: #45A29E;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      width: 100%;
+      &:focus {
+        outline: none;
+      }
+      &:hover {
+        background-color: #45A29E;
+        color: #0B0C10;
+        cursor: pointer;
+      }
+    }
+  }
 }
 
 .routines {

@@ -27,6 +27,28 @@ class SingleExercise extends Component {
       })
   }
 
+  addRecord = (e) => {
+    e.preventDefault();
+    const newRecord = {
+      weight: e.target.weight.value,
+      reps: e.target.reps.value,
+      exerciseId: this.props.match.params.exerciseId
+    }
+    axios
+      .post(`http://localhost:8070/records`, newRecord)
+      .then(response => {
+        e.target.weight.value = "";
+        e.target.reps.value = "";
+        axios
+        .get(`http://localhost:8070/exercises/${this.props.match.params.exerciseId}`)
+        .then(response => {
+          this.setState({
+            exercise: response.data
+          })
+        })
+      })
+  }
+
   deleteHandler = () => {
     axios
       .delete(`http://localhost:8070/exercises/${this.props.match.params.exerciseId}`)
@@ -50,6 +72,13 @@ class SingleExercise extends Component {
     return (
       <main className="exercise">
         <h1 className="exercise__heading"><Link to="/exercises"><img src={backIcon} className="exercise__icon" /></Link>{this.state.exercise.name}<Link to="/exercises"><img src={deleteIcon} className="exercise__icon" onClick={this.deleteHandler} /></Link> <img onClick={this.favouriteHandler} className="exercise__icon" src={this.state.exercise.favourite ? filledStarIcon : starIcon} /> </h1>
+        <form onSubmit={this.addRecord} className="exercise__record">
+          <div className="exercise__form__row">
+            <input className="exercise__form__input" name="weight" placeholder="Weight (in lbs)" />
+            <input className="exercise__form__input" name="reps" placeholder="Reps" />
+          </div>
+          <button className="exercise__form__button">Add</button>
+        </form>
         {this.state.exercise.record.map(item => {
           return (
             <div className="exercise__record" key={item.id}>
