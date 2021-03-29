@@ -10,12 +10,9 @@ import Routines from './pages/routines/Routines'
 import SingleRoutine from './pages/routines/SingleRoutine';
 import Favourites from './pages/favourites/Favourites';
 import AddExercise from './pages/exercises/AddExercise';
-
+import AddRoutine from './pages/routines/AddRoutine';
 
 class App extends Component {
-
-
-
   render() {
     return (
       <div className="app">
@@ -26,6 +23,7 @@ class App extends Component {
             <Route path='/exercises/add' component={AddExercise} />
             <Route path='/exercises/:exerciseId' component={SingleExercise} />
             <Route path='/routines' exact component={Routines} />
+            <Route path='/routines/add' component={AddRoutine} />
             <Route path='/routines/:routineId' component={SingleRoutine} />
             <Route path='/favourites' component={Favourites} />
           </Switch>

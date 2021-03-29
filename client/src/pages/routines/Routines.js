@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import addIcon from '../../assets/icons/add.svg';
+
 
 class Routines extends Component {
 
@@ -21,7 +23,7 @@ class Routines extends Component {
   render() {
     return (
       <main className="routines">
-        <h1 className="routines__heading">Routines</h1>
+        <h1 className="routines__heading">Routines <Link to="/routines/add"><img onClick={this.optionMenu} className="exercises__icon" src={addIcon} /></Link></h1>
         <div className="routines__list">
           {this.state.routines.map(item => {
             return (
