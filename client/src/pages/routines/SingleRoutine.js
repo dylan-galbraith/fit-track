@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Component } from 'react';
 import backIcon from '../../assets/icons/arrow-back.svg';
 import { Link } from 'react-router-dom';
+import deleteIcon from '../../assets/icons/trash-outline.svg';
 
 class SingleRoutine extends Component {
 
@@ -24,6 +25,14 @@ class SingleRoutine extends Component {
       })
   }
 
+  deleteHandler = () => {
+    axios
+      .delete(`http://localhost:8070/routines/${this.props.match.params.routineId}`)
+      .then(response => {
+        console.log(response);
+      })
+  }
+
   componentDidMount = () => {
     axios
       .get(`http://localhost:8070/routines/${this.props.match.params.routineId}`)
@@ -39,7 +48,7 @@ class SingleRoutine extends Component {
     console.log(this.state.routine);
     return (
       <main className="routine">
-        <h1 className="routine__heading"><Link to="/routines"><img className="routine__icon" src={backIcon} /></Link>{this.state.routine.name}</h1>
+        <h1 className="routine__heading"><Link to="/routines"><img className="routine__icon" src={backIcon} /></Link>{this.state.routine.name}<Link to="/routines"><img src={deleteIcon} className="routine__icon" onClick={this.deleteHandler} /></Link></h1>
         {this.state.routine.exercise.map(item => {
           return (
             <div className="routine__item" id={item.id} key={item.id}>
