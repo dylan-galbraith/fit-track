@@ -42,6 +42,23 @@ router.get('/:routineId', async (req, res) => {
   res.json(result)
 })
 
+// Delete an exercise from a routine
+router.put('/:routineId/remove/:exerciseId', async (req, res) => {
+  const result = await prisma.routine.update({
+    where: {
+      id: parseInt(req.params.routineId)
+    },
+    data: {
+      exercise: {
+        disconnect: {
+          id: parseInt(req.params.exerciseId)
+        }
+      }
+    }
+  })
+  res.json(result)
+})
+
 // Delete a routine
 router.delete('/:routineId', async (req, res) => {
   const result = await prisma.routine.delete({

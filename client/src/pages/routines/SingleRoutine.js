@@ -62,6 +62,21 @@ class SingleRoutine extends Component {
       })
   }
 
+  deleteExercise = (id) => {
+    axios
+      .put(`http://localhost:8070/routines/${this.props.match.params.routineId}/remove/${id}`)
+      .then(response => {
+        console.log(response);
+        axios
+          .get(`http://localhost:8070/routines/${this.props.match.params.routineId}`)
+          .then(response => {
+            this.setState({
+              routine: response.data
+            })
+          })
+      })
+  }
+
   deleteHandler = () => {
     axios
       .delete(`http://localhost:8070/routines/${this.props.match.params.routineId}`)
@@ -107,6 +122,7 @@ class SingleRoutine extends Component {
         {this.state.routine.exercise.map(item => {
           return (
             <div className="routine__item" id={item.id} key={item.id}>
+              <img onClick={() => this.deleteExercise(item.id)} src={exitIcon} className="routine__icon" />
               <p className="routine__item__name">{item.name}</p>
               <form id={item.id} onSubmit={this.addRecord} className="routine__item__form">
                 <div className="routine__item__row">

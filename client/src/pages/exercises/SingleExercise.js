@@ -61,7 +61,6 @@ class SingleExercise extends Component {
   }
 
   deleteRecord = (id) => {
-    console.log(id);
     axios
       .delete(`http://localhost:8070/records/${id}`)
       .then(response => {
@@ -74,7 +73,6 @@ class SingleExercise extends Component {
             })
           })
       })
-
   }
 
   componentDidMount = () => {
