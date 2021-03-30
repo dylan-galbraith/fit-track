@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import filledStarIcon from '../../assets/icons/star.svg';
 import './Favourites.scss';
+import { API_URL } from '../../utils';
 
 class Favourites extends Component {
 
@@ -12,7 +13,7 @@ class Favourites extends Component {
 
   componentDidMount = () => {
     axios
-    .get('http://localhost:8070/exercises')
+    .get(`${API_URL}/exercises`)
     .then( response => {
       const favourites = response.data.filter(item => item.favourite)
       this.setState({

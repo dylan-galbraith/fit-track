@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import filledStarIcon from '../../assets/icons/star.svg';
 import addIcon from '../../assets/icons/add.svg';
 import './Exercises.scss';
+import { API_URL } from '../../utils';
 
 class Exercises extends Component {
 
@@ -20,7 +21,7 @@ class Exercises extends Component {
 
   componentDidMount = () => {
     axios
-      .get('http://localhost:8070/exercises')
+      .get(`${API_URL}/exercises`)
       .then(response => {
         this.setState({
           exercises: response.data

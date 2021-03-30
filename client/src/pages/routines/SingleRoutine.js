@@ -5,6 +5,7 @@ import { Link, Redirect } from 'react-router-dom';
 import deleteIcon from '../../assets/icons/trash-outline.svg';
 import addIcon from '../../assets/icons/add.svg';
 import exitIcon from '../../assets/icons/exit-icon.svg';
+import { API_URL } from '../../utils';
 
 class SingleRoutine extends Component {
 
@@ -24,14 +25,14 @@ class SingleRoutine extends Component {
     }
     document.getElementById(e.target.id).classList.add("disabled");
     axios
-      .post(`http://localhost:8070/records`, newRecord)
+      .post(`${API_URL}/records`, newRecord)
       .then(response => {
       })
   }
 
   addExercises = () => {
     axios
-      .get('http://localhost:8070/exercises')
+      .get(`${API_URL}/exercises`)
       .then(response => {
         this.setState({
           allExercises: response.data,
@@ -42,7 +43,7 @@ class SingleRoutine extends Component {
 
   selectedExercise = (id) => {
     axios
-      .put(`http://localhost:8070/exercises/${id}/add/${this.props.match.params.routineId}`)
+      .put(`${API_URL}/exercises/${id}/add/${this.props.match.params.routineId}`)
       .then (response => {
         this.setState({
           allExercises: this.state.allExercises.filter(item => item.id !== id)
@@ -52,7 +53,7 @@ class SingleRoutine extends Component {
 
   exitAdding = () => {
     axios
-      .get(`http://localhost:8070/routines/${this.props.match.params.routineId}`)
+      .get(`${API_URL}/routines/${this.props.match.params.routineId}`)
       .then(response => {
         this.setState({
           routine: response.data,
@@ -63,10 +64,10 @@ class SingleRoutine extends Component {
 
   deleteExercise = (id) => {
     axios
-      .put(`http://localhost:8070/routines/${this.props.match.params.routineId}/remove/${id}`)
+      .put(`${API_URL}/routines/${this.props.match.params.routineId}/remove/${id}`)
       .then(response => {
         axios
-          .get(`http://localhost:8070/routines/${this.props.match.params.routineId}`)
+          .get(`${API_URL}/routines/${this.props.match.params.routineId}`)
           .then(response => {
             this.setState({
               routine: response.data
@@ -77,7 +78,7 @@ class SingleRoutine extends Component {
 
   deleteHandler = () => {
     axios
-      .delete(`http://localhost:8070/routines/${this.props.match.params.routineId}`)
+      .delete(`${API_URL}/routines/${this.props.match.params.routineId}`)
       .then(response => {
         this.setState({
           redirect: '/routines'
@@ -87,7 +88,7 @@ class SingleRoutine extends Component {
 
   componentDidMount = () => {
     axios
-      .get(`http://localhost:8070/routines/${this.props.match.params.routineId}`)
+      .get(`${API_URL}/routines/${this.props.match.params.routineId}`)
       .then(response => {
         this.setState({
           routine: response.data

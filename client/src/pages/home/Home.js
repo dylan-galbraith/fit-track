@@ -2,6 +2,7 @@ import { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Home.scss';
+import { API_URL } from '../../utils';
 
 class Home extends Component {
 
@@ -12,7 +13,7 @@ class Home extends Component {
 
   componentDidMount = () => {
     axios
-      .get('http://localhost:8070/routines')
+      .get(`${API_URL}/routines`)
       .then( response => {
         this.setState({
           routines: response.data
@@ -20,7 +21,7 @@ class Home extends Component {
       })
       .then(
         axios
-          .get('http://localhost:8070/exercises')
+          .get(`${API_URL}/exercises`)
           .then( response => {
             const favourites = response.data.filter(item => item.favourite)
             this.setState({

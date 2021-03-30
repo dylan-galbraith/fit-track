@@ -5,6 +5,7 @@ import filledStarIcon from '../../assets/icons/star.svg';
 import backIcon from '../../assets/icons/arrow-back.svg';
 import deleteIcon from '../../assets/icons/trash-outline.svg';
 import { Link, Redirect } from 'react-router-dom';
+import { API_URL } from '../../utils';
 
 class SingleExercise extends Component {
 
@@ -16,10 +17,10 @@ class SingleExercise extends Component {
   favouriteHandler = () => {
     const favourite = {favourite: !this.state.exercise.favourite}
     axios
-      .put(`http://localhost:8070/exercises/${this.props.match.params.exerciseId}/favourite`, favourite)
+      .put(`${API_URL}/exercises/${this.props.match.params.exerciseId}/favourite`, favourite)
       .then(response => {
         axios
-        .get(`http://localhost:8070/exercises/${this.props.match.params.exerciseId}`)
+        .get(`${API_URL}/exercises/${this.props.match.params.exerciseId}`)
         .then(response => {
           this.setState({
             exercise: response.data
@@ -36,12 +37,12 @@ class SingleExercise extends Component {
       exerciseId: this.props.match.params.exerciseId
     }
     axios
-      .post(`http://localhost:8070/records`, newRecord)
+      .post(`${API_URL}/records`, newRecord)
       .then(response => {
         e.target.weight.value = "";
         e.target.reps.value = "";
         axios
-        .get(`http://localhost:8070/exercises/${this.props.match.params.exerciseId}`)
+        .get(`${API_URL}/exercises/${this.props.match.params.exerciseId}`)
         .then(response => {
           this.setState({
             exercise: response.data
@@ -52,7 +53,7 @@ class SingleExercise extends Component {
 
   deleteHandler = () => {
     axios
-      .delete(`http://localhost:8070/exercises/${this.props.match.params.exerciseId}`)
+      .delete(`${API_URL}/exercises/${this.props.match.params.exerciseId}`)
       .then(response => {
         this.setState({
           redirect: '/exercises'
@@ -62,10 +63,10 @@ class SingleExercise extends Component {
 
   deleteRecord = (id) => {
     axios
-      .delete(`http://localhost:8070/records/${id}`)
+      .delete(`${API_URL}/records/${id}`)
       .then(response => {
         axios
-          .get(`http://localhost:8070/exercises/${this.props.match.params.exerciseId}`)
+          .get(`${API_URL}/exercises/${this.props.match.params.exerciseId}`)
           .then(response => {
             this.setState({
               exercise: response.data
@@ -76,7 +77,7 @@ class SingleExercise extends Component {
 
   componentDidMount = () => {
     axios
-      .get(`http://localhost:8070/exercises/${this.props.match.params.exerciseId}`)
+      .get(`${API_URL}/exercises/${this.props.match.params.exerciseId}`)
       .then(response => {
         this.setState({
           exercise: response.data

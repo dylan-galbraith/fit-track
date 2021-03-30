@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import errorIcon from '../../assets/icons/alert-circle.svg';
 import { Redirect } from 'react-router-dom';
+import { API_URL } from '../../utils';
 
 class AddRoutine extends Component {
 
@@ -12,7 +13,7 @@ class AddRoutine extends Component {
 
   componentDidMount = () => {
     axios
-      .get('http://localhost:8070/routines')
+      .get(`${API_URL}/routines`)
       .then(response => {
         this.setState({
           routines: response.data
@@ -34,7 +35,7 @@ class AddRoutine extends Component {
     })
     if (approved) {
       axios
-        .post('http://localhost:8070/routines', newRoutine)
+        .post(`${API_URL}/routines`, newRoutine)
         .then(response => {
           this.setState({
             redirect: `/routines/${response.data.id}`

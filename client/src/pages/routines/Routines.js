@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import addIcon from '../../assets/icons/add.svg';
 import './Routines.scss';
-
+import { API_URL } from '../../utils';
 
 class Routines extends Component {
 
@@ -13,7 +13,7 @@ class Routines extends Component {
 
   componentDidMount = () => {
     axios
-      .get('http://localhost:8070/routines')
+      .get(`${API_URL}/routines`)
       .then(response => {
         this.setState({
           routines: response.data
