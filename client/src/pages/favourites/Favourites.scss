@@ -1,37 +1,19 @@
 @use '../../partials/variables' as *;
+@use '../../partials/mixins' as *;
 
 .favourites {
   padding: 1rem 1rem 8rem;
 
   &__heading {
-    font-size: 2rem;
-    text-align: center;
-    padding-bottom: 0.5rem;
+    @include page-heading;
   }
 
   &__list {
-    background-color: $secondary-background;
-    margin-top: 1rem;
-    padding: 0.5rem;
-    border-radius: 0.7rem;
-    display: flex;
-    flex-direction: column;
+    @include container;
   }
 
   &__name {
-    text-decoration: none;
-    border-top: 0.1px solid $border-color;
-    width: 100%;
-    padding: 1rem;
-    text-align: center;
-    &:hover {
-      background-color: $secondary-color;
-      color: $secondary-background;
-    }
-
-    &--top {
-      border-top: none;
-    }
+    @include list-item;
   }
 
   &__icon {

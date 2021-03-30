@@ -1,4 +1,5 @@
 @use '../../partials/variables' as *;
+@use '../../partials/mixins' as *;
 
 .adding {
   background-color: $secondary-background;
@@ -17,34 +18,15 @@
   padding: 1rem 1rem 8rem;
 
   &__heading {
-    font-size: 2rem;
-    text-align: center;
-    padding-bottom: 0.5rem;
+    @include page-heading;
   }
 
   &__list {
-    background-color: $secondary-background;
-    margin-top: 1rem;
-    padding: 0.5rem;
-    border-radius: 0.7rem;
-    display: flex;
-    flex-direction: column;
+    @include container;
   }
 
   &__name {
-    text-decoration: none;
-    border-top: 0.1px solid $border-color;
-    width: 100%;
-    padding: 1rem;
-    text-align: center;
-    &:hover {
-      background-color: $secondary-color;
-      color: $secondary-background;
-    }
-
-    &--top {
-      border-top: none;
-    }
+    @include list-item;
   }
 }
 
@@ -52,46 +34,19 @@
   padding: 1rem 1rem 8rem;
 
   &__heading {
-    font-size: 2rem;
-    text-align: center;
-    padding-bottom: 0.5rem;
+    @include page-heading;
   }
 
   &__form {
-    background-color: $secondary-background;
-    margin-top: 1rem;
-    padding: 0.5rem;
-    border-radius: 0.7rem;
-    display: flex;
-    flex-direction: column;
+    @include container;
   }
 
   &__input {
-    background-color: $secondary-background;
-    border: none;
-    border-bottom: 1px solid $border-color;
-    margin-bottom: 0.5rem;
-    padding: 0.5rem;
-    width: 100%;
-    &:focus {
-      outline: none;
-    }
+    @include input;
   }
 
   &__button {
-    background-color: $secondary-background;
-    border: 1px solid $border-color;
-    color: $border-color;
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    &:focus {
-      outline: none;
-    }
-    &:hover {
-      background-color: $border-color;
-      color: $secondary-background;
-      cursor: pointer;
-    }
+    @include button;
   }
 
   &__icon {
@@ -117,22 +72,14 @@
   }
 
   &__heading {
-    font-size: 2rem;
-    padding-bottom: 0.5rem;
+    @include page-heading;
     display: flex;
     align-items: center;
-    width: 100%;
     justify-content: space-between;
-    text-align: right;
   }
 
   &__item {
-    background-color: $secondary-background;
-    margin-top: 1rem;
-    padding: 0.5rem;
-    border-radius: 0.7rem;
-    display: flex;
-    flex-direction: column;
+    @include container;
 
     &__name {
       font-weight: 600;
@@ -153,15 +100,8 @@
     }
 
     &__input {
-      background-color: $secondary-background;
-      border: none;
-      border-bottom: 1px solid $border-color;
-      margin-bottom: 0.5rem;
-      padding: 0.5rem;
+      @include input;
       width: 75%;
-      &:focus {
-        outline: none;
-      }
     }
 
     &__stat {
@@ -170,19 +110,7 @@
     }
 
     &__button {
-      background-color: $secondary-background;
-      border: 1px solid $border-color;
-      color: $border-color;
-      padding: 0.5rem;
-      margin-top: 0.5rem;
-      &:focus {
-        outline: none;
-      }
-      &:hover {
-        background-color: $secondary-color;
-        color: $secondary-background;
-        cursor: pointer;
-      }
+      @include button;
     }
   }
 }
