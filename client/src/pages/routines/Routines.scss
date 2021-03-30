@@ -1,0 +1,188 @@
+@use '../../partials/variables' as *;
+
+.adding {
+  background-color: $secondary-background;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.routines {
+  padding: 1rem 1rem 8rem;
+
+  &__heading {
+    font-size: 2rem;
+    text-align: center;
+    padding-bottom: 0.5rem;
+  }
+
+  &__list {
+    background-color: $secondary-background;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.7rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__name {
+    text-decoration: none;
+    border-top: 0.1px solid $border-color;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    &:hover {
+      background-color: $secondary-color;
+      color: $secondary-background;
+    }
+
+    &--top {
+      border-top: none;
+    }
+  }
+}
+
+.add-routine {
+  padding: 1rem 1rem 8rem;
+
+  &__heading {
+    font-size: 2rem;
+    text-align: center;
+    padding-bottom: 0.5rem;
+  }
+
+  &__form {
+    background-color: $secondary-background;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.7rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__input {
+    background-color: $secondary-background;
+    border: none;
+    border-bottom: 1px solid $border-color;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    width: 100%;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__button {
+    background-color: $secondary-background;
+    border: 1px solid $border-color;
+    color: $border-color;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      background-color: $border-color;
+      color: $secondary-background;
+      cursor: pointer;
+    }
+  }
+
+  &__icon {
+    height: 0.8rem;
+  }
+
+  &__error {
+    display: none;
+    &--show {
+      color: red;
+      font-size: 0.8rem;
+      font-weight: 500;
+      display: initial;  
+    }
+  }
+}
+
+.routine {
+  padding: 1rem 1rem 8rem;
+
+  &__icon {
+    height: 2rem;
+  }
+
+  &__heading {
+    font-size: 2rem;
+    padding-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    text-align: right;
+  }
+
+  &__item {
+    background-color: $secondary-background;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.7rem;
+    display: flex;
+    flex-direction: column;
+
+    &__name {
+      font-weight: 600;
+      font-size: 1.2rem;
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem;
+    }
+
+    &__row {
+      display: flex;
+      align-items: center;
+    }
+
+    &__input {
+      background-color: $secondary-background;
+      border: none;
+      border-bottom: 1px solid $border-color;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+      width: 75%;
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &__stat {
+      padding-bottom: 0.5rem;
+      width: 50%;
+    }
+
+    &__button {
+      background-color: $secondary-background;
+      border: 1px solid $border-color;
+      color: $border-color;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      &:focus {
+        outline: none;
+      }
+      &:hover {
+        background-color: $secondary-color;
+        color: $secondary-background;
+        cursor: pointer;
+      }
+    }
+  }
+}

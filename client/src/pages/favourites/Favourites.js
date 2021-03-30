@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import filledStarIcon from '../../assets/icons/star.svg';
+import './Favourites.scss';
 
 class Favourites extends Component {
 

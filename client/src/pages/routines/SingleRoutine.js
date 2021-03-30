@@ -106,7 +106,7 @@ class SingleRoutine extends Component {
             {this.state.allExercises.map(item => {
               if (!this.state.routine.exercise.find(each => each.id === item.id)){
                 return (
-                  <button onClick={() => this.selectedExercise(item.id)} className={this.state.allExercises.indexOf(item)===0 ? "exercises__name exercises__name--top adding" : "exercises__name adding"}>{item.name} </button>
+                  <button key={item.id} onClick={() => this.selectedExercise(item.id)} className={this.state.allExercises.indexOf(item)===0 ? "exercises__name exercises__name--top adding" : "exercises__name adding"}>{item.name} </button>
                 )
               }
               return null

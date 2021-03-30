@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import addIcon from '../../assets/icons/add.svg';
+import './Routines.scss';
 
 
 class Routines extends Component {
