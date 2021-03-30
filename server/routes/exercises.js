@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs");
 const { PrismaClient } = require('@prisma/client');
+const { DESTRUCTION } = require("dns");
 
 const prisma = new PrismaClient();
 
@@ -32,6 +33,9 @@ router.get('/:exerciseId', async (req, res) => {
       name: true,
       favourite: true,
       record: {
+        orderBy: {
+          date: 'desc'
+        },
         select: {
           date: true,
           weight: true,
