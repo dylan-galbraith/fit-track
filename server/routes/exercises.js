@@ -9,7 +9,11 @@ const prisma = new PrismaClient();
 
 // Get all exercises
 router.get('/', async (req, res) => {
-  const result = await prisma.exercise.findMany()
+  const result = await prisma.exercise.findMany({
+    orderBy: {
+      name: 'asc'
+    }
+  })
   res.json(result);
 })
 
