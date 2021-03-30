@@ -75,6 +75,17 @@
     flex-direction: column;
   }
 
+  &__search {
+    background-color: #0B0C10;
+    border: none;
+    border-bottom: 1px solid #45A29E;
+    padding: 0.5rem;
+    width: 100%;
+    &:focus {
+      outline: none;
+    }
+  }
+
   &__name {
     text-decoration: none;
     border-top: 0.1px solid #45A29E;

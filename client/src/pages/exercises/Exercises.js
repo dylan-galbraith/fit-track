@@ -7,7 +7,14 @@ import addIcon from '../../assets/icons/add.svg';
 class Exercises extends Component {
 
   state = {
-    exercises: []
+    exercises: [],
+    search: ""
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      search: e.target.value.toUpperCase()
+    })
   }
 
   componentDidMount = () => {
@@ -25,10 +32,11 @@ class Exercises extends Component {
       <main className="exercises">
         <h1 className="exercises__heading">Exercises <Link to="/exercises/add"><img onClick={this.optionMenu} className="exercises__icon" src={addIcon} /></Link></h1>
         <div className="exercises__list">
+          <input onChange={this.handleChange} className="exercises__search" placeholder="Search" />
           {this.state.exercises.map(item => {
-            return (
-                <Link to={`/exercises/${item.id}`} className={this.state.exercises.indexOf(item)===0 ? "exercises__name exercises__name--top" : "exercises__name"}>{item.name} <img src={item.favourite ? filledStarIcon : ""} className="exercises__icon" /></Link>
-            )
+            if (item.name.toUpperCase().includes(this.state.search)){
+              return <Link to={`/exercises/${item.id}`} className={this.state.exercises.indexOf(item)===0 ? "exercises__name exercises__name--top" : "exercises__name"}>{item.name} <img src={item.favourite ? filledStarIcon : ""} className="exercises__icon" /></Link>
+            }
           })}
         </div>
       </main>
