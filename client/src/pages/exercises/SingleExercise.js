@@ -64,7 +64,6 @@ class SingleExercise extends Component {
     axios
       .delete(`http://localhost:8070/records/${id}`)
       .then(response => {
-        console.log(response);
         axios
           .get(`http://localhost:8070/exercises/${this.props.match.params.exerciseId}`)
           .then(response => {
@@ -90,7 +89,7 @@ class SingleExercise extends Component {
     if (this.state.redirect) return <Redirect to={this.state.redirect} />
     return (
       <main className="exercise">
-        <h1 className="exercise__heading"><Link to="/exercises"><img src={backIcon} className="exercise__icon" /></Link>{this.state.exercise.name}<img src={deleteIcon} className="exercise__icon" onClick={this.deleteHandler} /><img onClick={this.favouriteHandler} className="exercise__icon" src={this.state.exercise.favourite ? filledStarIcon : starIcon} /> </h1>
+        <h1 className="exercise__heading"><Link to="/exercises"><img src={backIcon} className="exercise__icon" alt="back icon" /></Link>{this.state.exercise.name}<img src={deleteIcon} className="exercise__icon" onClick={this.deleteHandler} alt="delete icon" /><img onClick={this.favouriteHandler} className="exercise__icon" src={this.state.exercise.favourite ? filledStarIcon : starIcon} alt="favourite icon" /> </h1>
         <form onSubmit={this.addRecord} className="exercise__record">
           <div className="exercise__form__row">
             <input className="exercise__form__input" name="weight" placeholder="Weight (in lbs)" />
@@ -99,10 +98,9 @@ class SingleExercise extends Component {
           <button className="exercise__form__button">Add</button>
         </form>
         {this.state.exercise.record.map(item => {
-        console.log(item);
           return (
             <div className="exercise__record" key={item.id}>
-              <img onClick={() => this.deleteRecord(item.id)} src={deleteIcon} className="exercise__icon exercise__delete-record" />
+              <img onClick={() => this.deleteRecord(item.id)} src={deleteIcon} className="exercise__icon exercise__delete-record" alt="delete icon" />
               <p className="exercise__stat"><span className="exercise__label">DATE: </span>{new Date(item.date).toDateString()}</p>
               <p className="exercise__stat"><span className="exercise__label">WEIGHT: </span>{item.weight}</p>
               <p className="exercise__stat"><span className="exercise__label">REPS: </span>{item.reps}</p>

@@ -50,7 +50,7 @@ class AddExercise extends Component {
         <h1 className="add-exercise__heading">Add a New Exercise</h1>
         <form onSubmit={this.handleSubmit} className="add-exercise__form">
           <input className="add-exercise__input" name="name" placeholder="Name of Exercise" />
-          <span className="add-exercise__error"><img className="add-exercise__icon" src={errorIcon} /> You already have an exercise with this name</span>
+          <span className="add-exercise__error"><img className="add-exercise__icon" src={errorIcon} alt="error icon" /> You already have an exercise with this name</span>
           <button className="add-exercise__button">Add</button>
         </form>
       </main>

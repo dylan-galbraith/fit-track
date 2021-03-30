@@ -37,7 +37,7 @@ class Home extends Component {
         <article className="home__category">
           {this.state.routines.map(item => {
             return (
-                <Link to={`/routines/${item.id}`} className={this.state.routines.indexOf(item)===0 ? "home__name home__name--top" : "home__name"}>{item.name}</Link>
+                <Link key={item.id} to={`/routines/${item.id}`} className={this.state.routines.indexOf(item)===0 ? "home__name home__name--top" : "home__name"}>{item.name}</Link>
             )
           })}
         </article>
@@ -45,7 +45,7 @@ class Home extends Component {
         <article className="home__category">
           {this.state.favourites.map(item => {
             return (
-                <Link to={`/exercises/${item.id}`} className={this.state.favourites.indexOf(item)===0 ? "home__name home__name--top" : "home__name"}>{item.name}</Link>
+                <Link key={item.id} to={`/exercises/${item.id}`} className={this.state.favourites.indexOf(item)===0 ? "home__name home__name--top" : "home__name"}>{item.name}</Link>
             )
           })}
         </article>

@@ -27,7 +27,7 @@ class Favourites extends Component {
         <div className="favourites__list">
           {this.state.favourites.map(item => {
             return (
-                <Link to={`/exercises/${item.id}`} className={this.state.favourites.indexOf(item)===0 ? "favourites__name favourites__name--top" : "favourites__name"}>{item.name} <img className="favourites__icon" src={filledStarIcon} /></Link>
+                <Link key={item.id} to={`/exercises/${item.id}`} className={this.state.favourites.indexOf(item)===0 ? "favourites__name favourites__name--top" : "favourites__name"}>{item.name} <img className="favourites__icon" src={filledStarIcon} alt="favourite icon" /></Link>
             )
           })}      
         </div>

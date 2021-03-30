@@ -52,7 +52,7 @@ class AddRoutine extends Component {
         <h1 className="add-routine__heading">Add a New Routine</h1>
         <form onSubmit={this.handleSubmit} className="add-routine__form">
           <input className="add-routine__input" name="name" placeholder="Name of routine" />
-          <span className="add-routine__error"><img className="add-routine__icon" src={errorIcon} /> You already have a routine with this name</span>
+          <span className="add-routine__error"><img className="add-routine__icon" src={errorIcon} alt="error icon" /> You already have a routine with this name</span>
           <button className="add-routine__button">Add</button>
         </form>
       </main>
