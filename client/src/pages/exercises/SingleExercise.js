@@ -4,12 +4,13 @@ import starIcon from '../../assets/icons/star-outline.svg';
 import filledStarIcon from '../../assets/icons/star.svg';
 import backIcon from '../../assets/icons/arrow-back.svg';
 import deleteIcon from '../../assets/icons/trash-outline.svg';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class SingleExercise extends Component {
 
   state = {
-    exercise: null
+    exercise: null,
+    redirect: null
   }
 
   favouriteHandler = () => {
@@ -53,7 +54,9 @@ class SingleExercise extends Component {
     axios
       .delete(`http://localhost:8070/exercises/${this.props.match.params.exerciseId}`)
       .then(response => {
-        console.log(response);
+        this.setState({
+          redirect: '/exercises'
+        })
       })
   }
 
@@ -86,9 +89,10 @@ class SingleExercise extends Component {
 
   render() {
     if (!this.state.exercise) return <p>Loading...</p>
+    if (this.state.redirect) return <Redirect to={this.state.redirect} />
     return (
       <main className="exercise">
-        <h1 className="exercise__heading"><Link to="/exercises"><img src={backIcon} className="exercise__icon" /></Link>{this.state.exercise.name}<Link to="/exercises"><img src={deleteIcon} className="exercise__icon" onClick={this.deleteHandler} /></Link> <img onClick={this.favouriteHandler} className="exercise__icon" src={this.state.exercise.favourite ? filledStarIcon : starIcon} /> </h1>
+        <h1 className="exercise__heading"><Link to="/exercises"><img src={backIcon} className="exercise__icon" /></Link>{this.state.exercise.name}<img src={deleteIcon} className="exercise__icon" onClick={this.deleteHandler} /><img onClick={this.favouriteHandler} className="exercise__icon" src={this.state.exercise.favourite ? filledStarIcon : starIcon} /> </h1>
         <form onSubmit={this.addRecord} className="exercise__record">
           <div className="exercise__form__row">
             <input className="exercise__form__input" name="weight" placeholder="Weight (in lbs)" />

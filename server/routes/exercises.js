@@ -45,7 +45,7 @@ router.get('/:exerciseId', async (req, res) => {
 })
 
 // Add an exercise to a routine
-router.put('/:exerciseId/add', async (req, res) => {
+router.put('/:exerciseId/add/:routineId', async (req, res) => {
   const result = await prisma.exercise.update({
     where: {
       id: parseInt(req.params.exerciseId)
@@ -53,7 +53,7 @@ router.put('/:exerciseId/add', async (req, res) => {
     data: {
       routine: {
         connect: {
-          id: parseInt(req.body.routineId)
+          id: parseInt(req.params.routineId)
         }
       }
     }

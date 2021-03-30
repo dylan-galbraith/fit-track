@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import errorIcon from '../../assets/icons/alert-circle.svg';
+import { Redirect } from 'react-router-dom';
 
 class AddExercise extends Component {
 
   state = {
     exercises: [],
-    hasBeenAdded: false
+    redirect: null
   }
 
   componentDidMount = () => {
@@ -36,20 +37,14 @@ class AddExercise extends Component {
         .post('http://localhost:8070/exercises', newExercise)
         .then(response => {
           this.setState({
-            hasBeenAdded: true
+            redirect: `${response.data.id}`
           })
         })
     }
   }
 
   render() {
-    if (this.state.hasBeenAdded) {
-      return (
-        <main className="add-exercise">
-          <h1 className="add-exercise__heading">Your new exercise has been added!</h1>
-        </main>
-      )
-    }
+    if (this.state.redirect) return <Redirect to={this.state.redirect} />
     return (
       <main className="add-exercise">
         <h1 className="add-exercise__heading">Add a New Exercise</h1>

@@ -1,13 +1,18 @@
 import axios from 'axios';
 import { Component } from 'react';
 import backIcon from '../../assets/icons/arrow-back.svg';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import deleteIcon from '../../assets/icons/trash-outline.svg';
+import addIcon from '../../assets/icons/add.svg';
+import exitIcon from '../../assets/icons/exit-icon.svg';
 
 class SingleRoutine extends Component {
 
   state = {
-    routine: null
+    routine: null,
+    redirect: null,
+    adding: false,
+    allExercises: null
   }
 
   addRecord = (e) => {
@@ -25,11 +30,45 @@ class SingleRoutine extends Component {
       })
   }
 
+  addExercises = () => {
+    axios
+      .get('http://localhost:8070/exercises')
+      .then(response => {
+        this.setState({
+          allExercises: response.data,
+          adding: true
+        })
+      })
+  }
+
+  selectedExercise = (id) => {
+    axios
+      .put(`http://localhost:8070/exercises/${id}/add/${this.props.match.params.routineId}`)
+      .then (response => {
+        this.setState({
+          allExercises: this.state.allExercises.filter(item => item.id !== id)
+        })
+      })
+  }
+
+  exitAdding = () => {
+    axios
+      .get(`http://localhost:8070/routines/${this.props.match.params.routineId}`)
+      .then(response => {
+        this.setState({
+          routine: response.data,
+          adding: false
+        })
+      })
+  }
+
   deleteHandler = () => {
     axios
       .delete(`http://localhost:8070/routines/${this.props.match.params.routineId}`)
       .then(response => {
-        console.log(response);
+        this.setState({
+          redirect: '/routines'
+        })
       })
   }
 
@@ -45,10 +84,26 @@ class SingleRoutine extends Component {
 
   render() {
     if (!this.state.routine) return <p>Loading...</p>
-    console.log(this.state.routine);
+    if (this.state.redirect) return <Redirect to={this.state.redirect} />
+    if (this.state.adding) {
+      return (
+        <main className="routine">
+          <h1 className="routine__heading"><Link to="/routines"><img className="routine__icon" src={backIcon} /></Link>{this.state.routine.name}<img onClick={this.exitAdding} src={exitIcon} className="routine__icon" /><img src={deleteIcon} className="routine__icon" onClick={this.deleteHandler} /></h1>    
+          <div className="exercises__list">
+            {this.state.allExercises.map(item => {
+              if (!this.state.routine.exercise.find(each => each.id === item.id)){
+                return (
+                  <button onClick={() => this.selectedExercise(item.id)} className={this.state.allExercises.indexOf(item)===0 ? "exercises__name exercises__name--top adding" : "exercises__name adding"}>{item.name} </button>
+                )
+              }
+            })}
+          </div>
+        </main>
+      )
+    }
     return (
       <main className="routine">
-        <h1 className="routine__heading"><Link to="/routines"><img className="routine__icon" src={backIcon} /></Link>{this.state.routine.name}<Link to="/routines"><img src={deleteIcon} className="routine__icon" onClick={this.deleteHandler} /></Link></h1>
+        <h1 className="routine__heading"><Link to="/routines"><img className="routine__icon" src={backIcon} /></Link>{this.state.routine.name}<img onClick={this.addExercises} src={addIcon} className="routine__icon" /><img src={deleteIcon} className="routine__icon" onClick={this.deleteHandler} /></h1>
         {this.state.routine.exercise.map(item => {
           return (
             <div className="routine__item" id={item.id} key={item.id}>
