@@ -1,10 +1,31 @@
 @use './partials/resets' as *;
 @use './partials/variables' as *;
+@use './partials/mixins' as *;
 
 .app {
   background-color: $primary-background;
   min-height: 100vh;
   color: $primary-color;
+}
+
+.login {
+  padding: 1rem 1rem 8rem;
+
+  &__heading {
+    @include page-heading;
+  }
+  
+  &__form {
+    @include container;
+  }
+
+  &__input {
+    @include input;
+  }
+
+  &__button {
+    @include button;
+  }
 }
 
 .footer {

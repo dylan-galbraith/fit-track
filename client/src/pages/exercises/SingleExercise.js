@@ -14,7 +14,7 @@ class SingleExercise extends Component {
     redirect: null
   }
 
-  favouriteHandler = () => {
+  favouriteExercise = () => {
     const favourite = {favourite: !this.state.exercise.favourite}
     axios
       .put(`${API_URL}/exercises/${this.props.match.params.exerciseId}/favourite`, favourite)
@@ -34,7 +34,7 @@ class SingleExercise extends Component {
     const newRecord = {
       weight: e.target.weight.value,
       reps: e.target.reps.value,
-      exerciseId: this.props.match.params.exerciseId
+      exerciseId: this.state.exercise.id
     }
     axios
       .post(`${API_URL}/records`, newRecord)
@@ -42,7 +42,7 @@ class SingleExercise extends Component {
         e.target.weight.value = "";
         e.target.reps.value = "";
         axios
-        .get(`${API_URL}/exercises/${this.props.match.params.exerciseId}`)
+        .get(`${API_URL}/exercises/${this.state.exercise.id}`)
         .then(response => {
           this.setState({
             exercise: response.data
@@ -51,9 +51,9 @@ class SingleExercise extends Component {
       })
   }
 
-  deleteHandler = () => {
+  deleteExercise = () => {
     axios
-      .delete(`${API_URL}/exercises/${this.props.match.params.exerciseId}`)
+      .delete(`${API_URL}/exercises/${this.state.exercise.id}`)
       .then(response => {
         this.setState({
           redirect: '/exercises'
@@ -66,7 +66,7 @@ class SingleExercise extends Component {
       .delete(`${API_URL}/records/${id}`)
       .then(response => {
         axios
-          .get(`${API_URL}/exercises/${this.props.match.params.exerciseId}`)
+          .get(`${API_URL}/exercises/${this.state.exercise.id}`)
           .then(response => {
             this.setState({
               exercise: response.data
@@ -90,7 +90,12 @@ class SingleExercise extends Component {
     if (this.state.redirect) return <Redirect to={this.state.redirect} />
     return (
       <main className="exercise">
-        <h1 className="exercise__heading"><Link to="/exercises"><img src={backIcon} className="exercise__icon" alt="back icon" /></Link>{this.state.exercise.name}<img src={deleteIcon} className="exercise__icon" onClick={this.deleteHandler} alt="delete icon" /><img onClick={this.favouriteHandler} className="exercise__icon" src={this.state.exercise.favourite ? filledStarIcon : starIcon} alt="favourite icon" /> </h1>
+        <h1 className="exercise__heading">
+          <Link to="/exercises"><img src={backIcon} className="exercise__icon" alt="back icon" /></Link>
+          {this.state.exercise.name}
+          <img src={deleteIcon} className="exercise__icon" onClick={this.deleteExercise} alt="delete icon" />
+          <img onClick={this.favouriteExercise} className="exercise__icon" src={this.state.exercise.favourite ? filledStarIcon : starIcon} alt="favourite icon" /> 
+        </h1>
         <form onSubmit={this.addRecord} className="exercise__record">
           <div className="exercise__form__row">
             <input className="exercise__form__input" name="weight" placeholder="Weight (in lbs)" />

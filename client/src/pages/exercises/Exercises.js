@@ -37,7 +37,14 @@ class Exercises extends Component {
           <input onChange={this.handleChange} className="exercises__search" placeholder="Search" />
           {this.state.exercises.map(item => {
             if (item.name.toUpperCase().includes(this.state.search)){
-              return <Link key={item.id} to={`/exercises/${item.id}`} className={this.state.exercises.indexOf(item)===0 ? "exercises__name exercises__name--top" : "exercises__name"}>{item.name} <img src={item.favourite ? filledStarIcon : null} className="exercises__icon" alt="favourite icon" /></Link>
+              return (
+                <Link 
+                  key={item.id} 
+                  to={`/exercises/${item.id}`} 
+                  className={this.state.exercises.indexOf(item)===0 ? "exercises__name exercises__name--top" : "exercises__name"}>
+                    {item.name} {item.favourite ? <img src={filledStarIcon} className="exercises__icon" alt="favourite icon" /> : null}
+                </Link>
+              )
             }
             return null
           })}

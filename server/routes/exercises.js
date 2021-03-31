@@ -36,6 +36,7 @@ router.get('/:exerciseId', async (req, res) => {
     select: {
       name: true,
       favourite: true,
+      id: true,
       record: {
         orderBy: {
           date: 'desc'

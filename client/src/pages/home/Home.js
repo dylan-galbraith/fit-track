@@ -34,7 +34,7 @@ class Home extends Component {
   render() {
     return(
       <main className="home">
-        <h1 className="home__heading">Welcome back, Dylan!</h1>
+        <h1 className="home__heading">Welcome back, {this.props.username}!</h1>
         <h3 className="home__category__heading">Routines</h3>
         <article className="home__category">
           {this.state.routines.map(item => {
