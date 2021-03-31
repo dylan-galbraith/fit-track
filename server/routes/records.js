@@ -3,7 +3,6 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs");
 const { PrismaClient } = require('@prisma/client');
-const { runInNewContext } = require("vm");
 
 const prisma = new PrismaClient();
 
