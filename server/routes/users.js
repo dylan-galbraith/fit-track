@@ -11,19 +11,50 @@ const prisma = new PrismaClient();
 const JWT_KEY = process.env.JWT_KEY;
 
 router.post('/login' , async (req, res) => {
-  console.log(userId);
   const { username, password } = req.body
   const user = await prisma.user.findUnique({
     where: {
       username: username
+    },
+    select: {
+      id: true,
+      firstName: true,
+      password: true,
+      exercise: {
+        select: {
+          id: true,
+          name: true,
+          favourite: true,
+          record: {
+            select: {
+              id: true,
+              date: true,
+              weight: true,
+              reps: true
+            }
+          }
+        }
+      },
+      routine: {
+        select: {
+          id: true,
+          name: true,
+          exercise: {
+            select: {
+              id: true,              
+            }
+          }
+        }
+      }
     }
   })
-  if (password === user.password) {
+  if (user && password === user.password) {
     const payload = {name: username};
     const token = jwt.sign(payload, JWT_KEY)
     res.status(200).json({token, user})
+  } else {
+    res.status(403).json({message: "invalid username or password"})
   }
-  res.status(403).json({message: "invalid username or password"})
 })
 
 router.post('/signup', async (req, res) => {

@@ -6,7 +6,7 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-router.post('/', async (req, res) => {
+router.post('/:userId', async (req, res) => {
   const result = await prisma.record.create({
     data: {
       exercise: {
@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
   res.json(result)
 })
 
-router.delete('/:recordId', async (req, res) => {
+router.delete('/:recordId/:userId', async (req, res) => {
   const result = await prisma.record.delete({
     where: {
       id: parseInt(req.params.recordId)

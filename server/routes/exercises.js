@@ -8,8 +8,11 @@ const { DESTRUCTION } = require("dns");
 const prisma = new PrismaClient();
 
 // Get all exercises
-router.get('/', async (req, res) => {
+router.get('/:userId', async (req, res) => {
   const result = await prisma.exercise.findMany({
+    where: {
+      userId: parseInt(req.params.userId)
+    },
     orderBy: {
       name: 'asc'
     }
@@ -18,7 +21,7 @@ router.get('/', async (req, res) => {
 })
 
 // Add a new exercise
-router.post('/', async (req, res) => {
+router.post('/:userId', async (req, res) => {
   const result = await prisma.exercise.create({
     data: {
       name: req.body.name,
@@ -28,7 +31,7 @@ router.post('/', async (req, res) => {
 })
 
 // Get a specific exercise
-router.get('/:exerciseId', async (req, res) => {
+router.get('/:exerciseId/:userId', async (req, res) => {
   const result = await prisma.exercise.findUnique({
     where: {
       id: parseInt(req.params.exerciseId)
@@ -54,7 +57,7 @@ router.get('/:exerciseId', async (req, res) => {
 })
 
 // Add an exercise to a routine
-router.put('/:exerciseId/add/:routineId', async (req, res) => {
+router.put('/:exerciseId/add/:routineId/:userId', async (req, res) => {
   const result = await prisma.exercise.update({
     where: {
       id: parseInt(req.params.exerciseId)
@@ -71,7 +74,7 @@ router.put('/:exerciseId/add/:routineId', async (req, res) => {
 })
 
 // Favourite an exercise
-router.put('/:exerciseId/favourite', async (req, res) => {
+router.put('/:exerciseId/favourite/:userId', async (req, res) => {
   const result = await prisma.exercise.update({
     where: {
       id: parseInt(req.params.exerciseId)
@@ -84,7 +87,7 @@ router.put('/:exerciseId/favourite', async (req, res) => {
 })
 
 // Delete an exercise
-router.delete('/:exerciseId', async (req, res) => {
+router.delete('/:exerciseId/:userId', async (req, res) => {
   const result = await prisma.exercise.delete({
     where: {
       id: parseInt(req.params.exerciseId)

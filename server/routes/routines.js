@@ -17,7 +17,7 @@ router.get('/:userId', async (req, res) => {
 })
 
 // Add a new routine
-router.post('/', async (req, res) => {
+router.post('/:userId', async (req, res) => {
   const result = await prisma.routine.create({
     data: {
       name: req.body.name
@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
 })
 
 // Get a specific routine
-router.get('/:routineId', async (req, res) => {
+router.get('/:routineId/:userId', async (req, res) => {
   const result = await prisma.routine.findUnique({
     where: {
       id: parseInt(req.params.routineId)
@@ -47,7 +47,7 @@ router.get('/:routineId', async (req, res) => {
 })
 
 // Delete an exercise from a routine
-router.put('/:routineId/remove/:exerciseId', async (req, res) => {
+router.put('/:routineId/remove/:exerciseId/:userId', async (req, res) => {
   const result = await prisma.routine.update({
     where: {
       id: parseInt(req.params.routineId)
@@ -64,7 +64,7 @@ router.put('/:routineId/remove/:exerciseId', async (req, res) => {
 })
 
 // Delete a routine
-router.delete('/:routineId', async (req, res) => {
+router.delete('/:routineId/:userId', async (req, res) => {
   const result = await prisma.routine.delete({
     where: {
       id: parseInt(req.params.routineId)
