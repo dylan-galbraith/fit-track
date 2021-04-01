@@ -7,8 +7,12 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 // Get all routines
-router.get('/', async (req, res) => {
-  const result = await prisma.routine.findMany();
+router.get('/:userId', async (req, res) => {
+  const result = await prisma.routine.findMany({
+    where: {
+      userId: parseInt(req.params.userId)
+    }
+  });
   res.json(result);
 })
 

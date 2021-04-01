@@ -14,8 +14,7 @@ app.use(express.json());
 app.use('/exercises', exerciseRoutes);
 app.use('/routines', routineRoutes);
 app.use('/records', recordRoutes);
-app.use('/login', userRoutes);
-app.use('/signup', userRoutes);
+app.use('/', userRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
