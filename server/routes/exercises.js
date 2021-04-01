@@ -8,7 +8,7 @@ const { DESTRUCTION } = require("dns");
 const prisma = new PrismaClient();
 
 // Get all exercises
-router.get('/:userId', async (req, res) => {
+router.get('/all/:userId', async (req, res) => {
   const result = await prisma.exercise.findMany({
     where: {
       userId: parseInt(req.params.userId)
@@ -21,7 +21,7 @@ router.get('/:userId', async (req, res) => {
 })
 
 // Add a new exercise
-router.post('/:userId', async (req, res) => {
+router.post('/all/:userId', async (req, res) => {
   const result = await prisma.exercise.create({
     data: {
       name: req.body.name,
@@ -36,7 +36,7 @@ router.post('/:userId', async (req, res) => {
 })
 
 // Get a specific exercise
-router.get('/:exerciseId/:userId', async (req, res) => {
+router.get('/:exerciseId', async (req, res) => {
   const result = await prisma.exercise.findUnique({
     where: {
       id: parseInt(req.params.exerciseId)
@@ -45,6 +45,11 @@ router.get('/:exerciseId/:userId', async (req, res) => {
       name: true,
       favourite: true,
       id: true,
+      user: {
+        select: {
+          id: true
+        }
+      },
       record: {
         orderBy: {
           date: 'desc'

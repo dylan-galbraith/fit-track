@@ -25,7 +25,7 @@ class AddExercise extends Component {
     })
     if (approved) {
       axios
-        .post(`${API_URL}/exercises/${this.props.userId}`, newExercise)
+        .post(`${API_URL}/exercises/all/${this.props.userId}`, newExercise)
         .then(response => {
           this.props.resetExercises();
           this.setState({

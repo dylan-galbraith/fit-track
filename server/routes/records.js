@@ -14,6 +14,11 @@ router.post('/:userId', async (req, res) => {
           id: parseInt(req.body.exerciseId)
         }
       },
+      user: {
+        connect: {
+          id: parseInt(req.params.userId)
+        }
+      },
       weight: `${req.body.weight} lbs`,
       reps: req.body.reps
     }

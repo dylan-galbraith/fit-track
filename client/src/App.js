@@ -83,7 +83,7 @@ class App extends Component {
 
   resetExercises = () => {
     axios
-      .get(`${API_URL}/exercises/${this.state.user.id}`)
+      .get(`${API_URL}/exercises/all/${this.state.user.id}`)
       .then(response => {
         this.setState({
           exercises: response.data
