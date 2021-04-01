@@ -76,11 +76,9 @@ class SingleExercise extends Component {
   }
 
   componentDidMount = () => {
-    console.log(this.props.match.params.exerciseId);
     axios
       .get(`${API_URL}/exercises/${this.props.match.params.exerciseId}`)
       .then(response => {
-        console.log(response);
         this.setState({
           exercise: response.data
         })
@@ -88,7 +86,6 @@ class SingleExercise extends Component {
   }
 
   render() {
-    console.log(this.state);
     if (!this.state.exercise) return <p>Loading...</p>
     if (this.state.redirect) return <Redirect to={this.state.redirect} />
     return (

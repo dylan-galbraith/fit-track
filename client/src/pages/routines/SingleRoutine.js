@@ -25,14 +25,14 @@ class SingleRoutine extends Component {
     }
     document.getElementById(e.target.id).classList.add("disabled");
     axios
-      .post(`${API_URL}/records/${this.props.userId}`, newRecord)
+      .post(`${API_URL}/records/${this.state.routine.user.id}`, newRecord)
       .then(response => {
       })
   }
 
   addExercises = () => {
     axios
-      .get(`${API_URL}/exercises/${this.props.userId}`)
+      .get(`${API_URL}/exercises/all/${this.state.routine.user.id}`)
       .then(response => {
         this.setState({
           allExercises: response.data,
@@ -43,7 +43,7 @@ class SingleRoutine extends Component {
 
   selectedExercise = (id) => {
     axios
-      .put(`${API_URL}/exercises/${id}/add/${this.props.match.params.routineId}/${this.props.userId}`)
+      .put(`${API_URL}/exercises/${id}/add/${this.props.match.params.routineId}/${this.state.routine.user.id}`)
       .then (response => {
         this.setState({
           allExercises: this.state.allExercises.filter(item => item.id !== id)
@@ -53,7 +53,7 @@ class SingleRoutine extends Component {
 
   exitAdding = () => {
     axios
-      .get(`${API_URL}/routines/${this.props.match.params.routineId}/${this.props.userId}`)
+      .get(`${API_URL}/routines/${this.props.match.params.routineId}`)
       .then(response => {
         this.setState({
           routine: response.data,
@@ -64,7 +64,7 @@ class SingleRoutine extends Component {
 
   deleteExercise = (id) => {
     axios
-      .put(`${API_URL}/routines/${this.props.match.params.routineId}/remove/${id}/${this.props.userId}`)
+      .put(`${API_URL}/routines/${this.props.match.params.routineId}/remove/${id}/${this.state.routine.user.id}`)
       .then(response => {
         axios
           .get(`${API_URL}/routines/${this.props.match.params.routineId}`)
@@ -78,7 +78,7 @@ class SingleRoutine extends Component {
 
   deleteHandler = () => {
     axios
-      .delete(`${API_URL}/routines/${this.props.match.params.routineId}/${this.props.userId}`)
+      .delete(`${API_URL}/routines/${this.props.match.params.routineId}/${this.state.routine.user.id}`)
       .then(response => {
         this.setState({
           redirect: '/routines'
@@ -87,9 +87,8 @@ class SingleRoutine extends Component {
   }
 
   componentDidMount = () => {
-    console.log(this.props);
     axios
-      .get(`${API_URL}/routines/${this.props.match.params.routineId}/${this.props.userId}`)
+      .get(`${API_URL}/routines/${this.props.match.params.routineId}`)
       .then(response => {
         this.setState({
           routine: response.data

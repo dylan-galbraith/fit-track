@@ -77,6 +77,11 @@ router.put('/:exerciseId/add/:routineId/:userId', async (req, res) => {
         connect: {
           id: parseInt(req.params.routineId)
         }
+      },
+      user: {
+        connect: {
+          id: parseInt(req.params.userId)
+        }
       }
     }
   })

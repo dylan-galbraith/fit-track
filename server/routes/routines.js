@@ -7,7 +7,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 // Get all routines
-router.get('/:userId', async (req, res) => {
+router.get('/all/:userId', async (req, res) => {
   const result = await prisma.routine.findMany({
     where: {
       userId: parseInt(req.params.userId)
@@ -17,23 +17,33 @@ router.get('/:userId', async (req, res) => {
 })
 
 // Add a new routine
-router.post('/:userId', async (req, res) => {
+router.post('/all/:userId', async (req, res) => {
   const result = await prisma.routine.create({
     data: {
-      name: req.body.name
+      name: req.body.name,
+      user: {
+        connect: {
+          id: parseInt(req.params.userId)
+        }
+      }
     }
   });
   res.json(result);
 })
 
 // Get a specific routine
-router.get('/:routineId/:userId', async (req, res) => {
+router.get('/:routineId', async (req, res) => {
   const result = await prisma.routine.findUnique({
     where: {
       id: parseInt(req.params.routineId)
     },
     select: {
       name: true,
+      user: {
+        select: {
+          id: true
+        }
+      },
       exercise: {
         select: {
           name: true,

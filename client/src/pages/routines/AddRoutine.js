@@ -7,18 +7,8 @@ import { API_URL } from '../../utils';
 class AddRoutine extends Component {
 
   state = {
-    routines: [],
+    routines: this.props.routines,
     redirect: null
-  }
-
-  componentDidMount = () => {
-    axios
-      .get(`${API_URL}/routines/${this.props.userId}`)
-      .then(response => {
-        this.setState({
-          routines: response.data
-        })
-      })
   }
 
   handleSubmit = (e) => {
@@ -35,7 +25,7 @@ class AddRoutine extends Component {
     })
     if (approved) {
       axios
-        .post(`${API_URL}/routines/${this.props.userId}`, newRoutine)
+        .post(`${API_URL}/routines/all/${this.props.userId}`, newRoutine)
         .then(response => {
           this.setState({
             redirect: `/routines/${response.data.id}`
