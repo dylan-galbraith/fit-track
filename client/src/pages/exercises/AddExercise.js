@@ -13,7 +13,7 @@ class AddExercise extends Component {
 
   componentDidMount = () => {
     axios
-      .get(`${API_URL}/exercises`)
+      .get(`${API_URL}/exercises/${this.props.userId}`)
       .then(response => {
         this.setState({
           exercises: response.data
@@ -35,7 +35,7 @@ class AddExercise extends Component {
     })
     if (approved) {
       axios
-        .post(`${API_URL}/exercises`, newExercise)
+        .post(`${API_URL}/exercises/${this.props.userId}`, newExercise)
         .then(response => {
           this.setState({
             redirect: `${response.data.id}`

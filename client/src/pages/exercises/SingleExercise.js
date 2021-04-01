@@ -17,10 +17,10 @@ class SingleExercise extends Component {
   favouriteExercise = () => {
     const favourite = {favourite: !this.state.exercise.favourite}
     axios
-      .put(`${API_URL}/exercises/${this.props.match.params.exerciseId}/favourite`, favourite)
+      .put(`${API_URL}/exercises/${this.props.match.params.exerciseId}/favourite/${this.props.userId}`, favourite)
       .then(response => {
         axios
-        .get(`${API_URL}/exercises/${this.props.match.params.exerciseId}`)
+        .get(`${API_URL}/exercises/${this.props.match.params.exerciseId}/${this.props.userId}`)
         .then(response => {
           this.setState({
             exercise: response.data
@@ -37,12 +37,12 @@ class SingleExercise extends Component {
       exerciseId: this.state.exercise.id
     }
     axios
-      .post(`${API_URL}/records`, newRecord)
+      .post(`${API_URL}/records/${this.props.userId}`, newRecord)
       .then(response => {
         e.target.weight.value = "";
         e.target.reps.value = "";
         axios
-        .get(`${API_URL}/exercises/${this.state.exercise.id}`)
+        .get(`${API_URL}/exercises/${this.state.exercise.id}/${this.props.userId}`)
         .then(response => {
           this.setState({
             exercise: response.data
@@ -53,7 +53,7 @@ class SingleExercise extends Component {
 
   deleteExercise = () => {
     axios
-      .delete(`${API_URL}/exercises/${this.state.exercise.id}`)
+      .delete(`${API_URL}/exercises/${this.state.exercise.id}/${this.props.userId}`)
       .then(response => {
         this.setState({
           redirect: '/exercises'
@@ -63,10 +63,10 @@ class SingleExercise extends Component {
 
   deleteRecord = (id) => {
     axios
-      .delete(`${API_URL}/records/${id}`)
+      .delete(`${API_URL}/records/${id}/${this.props.userId}`)
       .then(response => {
         axios
-          .get(`${API_URL}/exercises/${this.state.exercise.id}`)
+          .get(`${API_URL}/exercises/${this.state.exercise.id}/${this.props.userId}`)
           .then(response => {
             this.setState({
               exercise: response.data
@@ -77,7 +77,7 @@ class SingleExercise extends Component {
 
   componentDidMount = () => {
     axios
-      .get(`${API_URL}/exercises/${this.props.match.params.exerciseId}`)
+      .get(`${API_URL}/exercises/${this.props.match.params.exerciseId}/${this.props.userId}`)
       .then(response => {
         this.setState({
           exercise: response.data

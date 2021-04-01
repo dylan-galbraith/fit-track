@@ -1,8 +1,5 @@
-import React from 'react'
 
-
-
-function Login({ login }) {
+function Login({ signUp, login }) {
   return (
     <main className="login">
       <h1 className="login__heading">Please Log In</h1>
@@ -11,6 +8,7 @@ function Login({ login }) {
         <input className="login__input" name="password" placeholder="Password" type="password"/>
         <button className="login__button">Login</button>
       </form>
+      <p>Don't have an account? <span onClick={signUp}>Sign Up</span> </p>
     </main>
   )
 }

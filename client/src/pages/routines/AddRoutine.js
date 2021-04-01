@@ -13,7 +13,7 @@ class AddRoutine extends Component {
 
   componentDidMount = () => {
     axios
-      .get(`${API_URL}/routines`)
+      .get(`${API_URL}/routines/${this.props.userId}`)
       .then(response => {
         this.setState({
           routines: response.data
@@ -35,7 +35,7 @@ class AddRoutine extends Component {
     })
     if (approved) {
       axios
-        .post(`${API_URL}/routines`, newRoutine)
+        .post(`${API_URL}/routines/${this.props.userId}`, newRoutine)
         .then(response => {
           this.setState({
             redirect: `/routines/${response.data.id}`
