@@ -27,6 +27,7 @@ class AddRoutine extends Component {
       axios
         .post(`${API_URL}/routines/all/${this.props.userId}`, newRoutine)
         .then(response => {
+          this.props.resetRoutines()
           this.setState({
             redirect: `/routines/${response.data.id}`
           })

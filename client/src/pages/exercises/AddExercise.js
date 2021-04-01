@@ -27,6 +27,7 @@ class AddExercise extends Component {
       axios
         .post(`${API_URL}/exercises/all/${this.props.userId}`, newExercise)
         .then(response => {
+          this.props.resetExercises();
           this.setState({
             redirect: `/exercises/${response.data.id}`
           })

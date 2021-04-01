@@ -116,10 +116,10 @@ class App extends Component {
           <Switch>
             <Route path='/' exact > <Home user={this.state.user} routines={this.state.routines} exercises={this.state.exercises}/> </Route>
             <Route path='/exercises' exact > <Exercises exercises={this.state.exercises} resetExercises={this.resetExercises} /> </Route>
-            <Route path='/exercises/add' > <AddExercise exercises={this.state.exercises} userId={this.state.user.id} /> </Route>
+            <Route path='/exercises/add' > <AddExercise exercises={this.state.exercises} userId={this.state.user.id} resetExercises={this.resetExercises} /> </Route>
             <Route path='/exercises/:exerciseId' component={SingleExercise} />
             <Route path='/routines' exact > <Routines routines={this.state.routines} resetRoutines={this.resetRoutines} /> </Route>
-            <Route path='/routines/add' > <AddRoutine routines={this.state.routines} userId={this.state.user.id} /> </Route>
+            <Route path='/routines/add' > <AddRoutine routines={this.state.routines} userId={this.state.user.id}  resetRoutines={this.resetRoutines}/> </Route>
             <Route path='/routines/:routineId' component={SingleRoutine} />
             <Route path='/favourites' > <Favourites exercises={this.state.exercises} /> </Route>
           </Switch>
