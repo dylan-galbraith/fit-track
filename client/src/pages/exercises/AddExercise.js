@@ -7,18 +7,8 @@ import { API_URL } from '../../utils';
 class AddExercise extends Component {
 
   state = {
-    exercises: [],
+    exercises: this.props.exercises,
     redirect: null
-  }
-
-  componentDidMount = () => {
-    axios
-      .get(`${API_URL}/exercises/${this.props.userId}`)
-      .then(response => {
-        this.setState({
-          exercises: response.data
-        })
-      })
   }
 
   handleSubmit = (e) => {
@@ -37,8 +27,9 @@ class AddExercise extends Component {
       axios
         .post(`${API_URL}/exercises/${this.props.userId}`, newExercise)
         .then(response => {
+          this.props.resetExercises();
           this.setState({
-            redirect: `${response.data.id}`
+            redirect: `/exercises/${response.data.id}`
           })
         })
     }

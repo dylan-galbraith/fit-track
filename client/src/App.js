@@ -28,12 +28,6 @@ class App extends Component {
     routines: null
   }
 
-  startSignUp = (e) => {
-    this.setState({
-      signUp: true
-    })
-  }
-
   handleLogin = (e) => {
     e.preventDefault();
     const user = {
@@ -55,6 +49,12 @@ class App extends Component {
           })
         }
       })
+  }
+
+  startSignUp = (e) => {
+    this.setState({
+      signUp: true
+    })
   }
 
   handleSignUp = (e) => {
@@ -81,6 +81,16 @@ class App extends Component {
       })
   }
 
+  resetExercises = () => {
+    axios
+      .get(`${API_URL}/exercises/${this.state.user.id}`)
+      .then(response => {
+        this.setState({
+          exercises: response.data
+        })
+      })
+  }
+
   render() {
     if (!this.state.isLoggedIn) {
       return (
@@ -95,8 +105,8 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route path='/' exact > <Home user={this.state.user} routines={this.state.routines} exercises={this.state.exercises}/> </Route>
-            <Route path='/exercises' exact > <Exercises exercises={this.state.exercises} /> </Route>
-            <Route path='/exercises/add' component={AddExercise} />
+            <Route path='/exercises' exact > <Exercises exercises={this.state.exercises} resetExercises={this.resetExercises} /> </Route>
+            <Route path='/exercises/add' > <AddExercise exercises={this.state.exercises} userId={this.state.user.id} resetExercises={this.resetExercises} /> </Route>
             <Route path='/exercises/:exerciseId' component={SingleExercise} />
             <Route path='/routines' > <Routines routines={this.state.routines} /> </Route>
             <Route path='/routines/add' component={AddRoutine} />

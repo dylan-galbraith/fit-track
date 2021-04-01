@@ -16,6 +16,10 @@ class Exercises extends Component {
     })
   }
 
+  componentDidMount = () => {
+    this.props.resetExercises();
+  }
+
   render() {
     return (
       <main className="exercises">
