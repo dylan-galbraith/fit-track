@@ -91,6 +91,7 @@ class App extends Component {
   }
 
   handleLogOut = () => {
+    sessionStorage.removeItem("authToken")
     this.setState({
       token: null,
       isLoggedIn: false,
@@ -119,6 +120,27 @@ class App extends Component {
         this.setState({
           routines: response.data
         })
+      })
+  }
+
+  componentDidMount = () => {
+    const token = sessionStorage.getItem("authToken");
+    axios
+      .get(`${API_URL}/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        if (response.status === 200) {
+          console.log(response);
+          this.setState({
+            isLoggedIn: true,
+            user: response.data,
+            exercises: response.data.exercise,
+            routines: response.data.routine
+          })
+        }
       })
   }
 

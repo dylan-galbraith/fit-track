@@ -33,7 +33,7 @@ class Exercises extends Component {
                 <Link 
                   key={item.id} 
                   to={`/exercises/${item.id}`} 
-                  className="exercises__name">
+                  className={this.props.exercises.indexOf(item)===0 ? "exercises__name exercises__name--top" : "exercises__name"}>
                     {item.name} {item.favourite ? <img src={filledStarIcon} className="exercises__icon" alt="favourite icon" /> : null}
                 </Link>
               )
