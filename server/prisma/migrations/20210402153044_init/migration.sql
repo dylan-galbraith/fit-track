@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE `Record` MODIFY `userId` INTEGER NOT NULL DEFAULT 20;
+
+-- AlterTable
+ALTER TABLE `Routine` MODIFY `userId` INTEGER NOT NULL DEFAULT 20;

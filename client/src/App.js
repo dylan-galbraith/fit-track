@@ -71,14 +71,35 @@ class App extends Component {
     axios
       .post(`${API_URL}/signup`, newUser)
       .then(response => {
-        console.log(response);
         if(response.status === 200) {
-          this.setState({
-            isLoggedIn: true,
-            username: response.data.user.firstName
+          axios
+          .post(`${API_URL}/login`, newUser)
+          .then(response => {
+            if (response.status === 200) {
+              sessionStorage.setItem("authToken", response.data.token);
+    
+              this.setState({
+                isLoggedIn: true,
+                user: response.data.user,
+                exercises: response.data.user.exercise,
+                routines: response.data.user.routine
+              })
+            }
           })
         }
       })
+  }
+
+  handleLogOut = () => {
+    this.setState({
+      token: null,
+      isLoggedIn: false,
+      signUp: false,
+      errorMessage: null,
+      user: null,
+      exercises: null,
+      routines: null
+    })
   }
 
   resetExercises = () => {
@@ -123,7 +144,7 @@ class App extends Component {
             <Route path='/routines/:routineId' component={SingleRoutine} />
             <Route path='/favourites' > <Favourites exercises={this.state.exercises} /> </Route>
           </Switch>
-          <Footer/>
+          <Footer logout={this.handleLogOut}/>
         </BrowserRouter>
       </div>
     );

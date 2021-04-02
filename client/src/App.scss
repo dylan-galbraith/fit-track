@@ -104,6 +104,13 @@
       color: $secondary-color;
     }
   }
+
+  &__logout {
+    @include button;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+  }
 }
 
 .active {

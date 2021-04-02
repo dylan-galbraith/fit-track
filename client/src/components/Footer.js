@@ -20,6 +20,7 @@ class Footer extends Component {
     if (this.state.menuOpen) {
       return (
         <section className="menu">
+          <button onClick={this.props.logout} className="menu__logout">Log Out</button>
           <div className="menu__list">
             <NavLink className="menu__item" to='/routines' onClick={this.menuHandler}>Routines</NavLink>
             <NavLink className="menu__item" to='/favourites' onClick={this.menuHandler}>Favourites</NavLink>
