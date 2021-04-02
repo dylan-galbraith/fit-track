@@ -3,6 +3,7 @@ import axios from 'axios';
 import errorIcon from '../../assets/icons/alert-circle.svg';
 import { Redirect } from 'react-router-dom';
 import { API_URL } from '../../utils';
+import { Link } from 'react-router-dom'
 
 class AddRoutine extends Component {
 
@@ -45,8 +46,11 @@ class AddRoutine extends Component {
         <form onSubmit={this.handleSubmit} className="add-routine__form">
           <input className="add-routine__input" name="name" placeholder="Name of routine" />
           <span className="add-routine__error"><img className="add-routine__icon" src={errorIcon} alt="error icon" /> You already have a routine with this name</span>
-          <button className="add-routine__button">Add</button>
+          <button className="add-routine__add">Add</button>
         </form>
+        <div className="add-routine__form" >
+          <Link to='/routines' className="add-routine__cancel">Cancel</Link>
+        </div>
       </main>
     )
   }

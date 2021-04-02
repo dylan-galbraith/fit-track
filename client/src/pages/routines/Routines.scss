@@ -51,8 +51,21 @@
     @include input;
   }
 
-  &__button {
+  &__add {
     @include button;
+  }
+
+  &__cancel {
+    @include button;
+    margin-top: 0;
+    text-align: center;
+    text-decoration: none;
+    &:hover {
+      background-color: red;
+      color: white;
+      font-weight: 600;
+      border-color: red;
+    }
   }
 
   &__icon {
@@ -75,6 +88,9 @@
 
   &__icon {
     height: 2rem;
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &__heading {
@@ -86,6 +102,16 @@
 
   &__item {
     @include container;
+    position: relative;
+
+    &__icon {
+      height: 1rem;
+      position: absolute;
+      right: 0.5rem;
+      &:hover {
+        cursor: pointer;
+      }
+    }
 
     &__name {
       font-weight: 600;
@@ -117,6 +143,22 @@
 
     &__button {
       @include button;
+    }
+  }
+
+  &__add {
+    @include button;
+    margin-top: 0;
+  }
+
+  &__delete {
+    @include button;
+    margin-top: 0;
+    &:hover {
+      background-color: red;
+      color: white;
+      font-weight: 600;
+      border-color: red;
     }
   }
 }

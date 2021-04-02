@@ -76,7 +76,7 @@ class SingleRoutine extends Component {
       })
   }
 
-  deleteHandler = () => {
+  deleteRoutine = () => {
     axios
       .delete(`${API_URL}/routines/${this.props.match.params.routineId}/${this.state.routine.user.id}`)
       .then(response => {
@@ -102,7 +102,10 @@ class SingleRoutine extends Component {
     if (this.state.adding) {
       return (
         <main className="routine">
-          <h1 className="routine__heading"><Link to="/routines"><img className="routine__icon" src={backIcon} alt="back icon" /></Link>{this.state.routine.name}<img onClick={this.exitAdding} src={exitIcon} className="routine__icon" alt="exit icon" /><img src={deleteIcon} className="routine__icon" onClick={this.deleteHandler} alt="delete icon" /></h1>    
+          <h1 className="routine__heading"><Link to="/routines"><img className="routine__icon" src={backIcon} alt="back icon" /></Link>{this.state.routine.name}</h1>    
+          <div className="routine__item">
+            <button  onClick={this.exitAdding} className="routine__add">Done</button>
+          </div>
           <div className="exercises__list">
             {this.state.allExercises.map(item => {
               if (!this.state.routine.exercise.find(each => each.id === item.id)){
@@ -118,11 +121,14 @@ class SingleRoutine extends Component {
     }
     return (
       <main className="routine">
-        <h1 className="routine__heading"><Link to="/routines"><img className="routine__icon" src={backIcon} alt="back icon" /></Link>{this.state.routine.name}<img onClick={this.addExercises} src={addIcon} className="routine__icon" alt="add icon" /><img src={deleteIcon} className="routine__icon" onClick={this.deleteHandler} alt="delete icon" /></h1>
+        <h1 className="routine__heading"><Link to="/routines"><img className="routine__icon" src={backIcon} alt="back icon" /></Link>{this.state.routine.name}</h1>
+        <div className="routine__item">
+          <button  onClick={this.addExercises} className="routine__add">Add an Exercise!</button>
+        </div>
         {this.state.routine.exercise.map(item => {
           return (
             <div className="routine__item" id={item.id} key={item.id}>
-              <img onClick={() => this.deleteExercise(item.id)} src={exitIcon} className="routine__icon" alt="exit icon" />
+              <img onClick={() => this.deleteExercise(item.id)} src={exitIcon} className="routine__item__icon" alt="exit icon" />
               <p className="routine__item__name">{item.name}</p>
               <form id={item.id} onSubmit={this.addRecord} className="routine__item__form">
                 <div className="routine__item__row">
@@ -142,6 +148,9 @@ class SingleRoutine extends Component {
             </div>
           )
         })}
+        <div className="routine__item">
+          <button  onClick={this.deleteRoutine} className="routine__delete">Delete Routine</button>
+        </div>
       </main>
     )
   }
