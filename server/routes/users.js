@@ -76,7 +76,13 @@ router.post('/signup', async (req, res) => {
 router.get('/profile', async (req, res) => {
   const tokenString = req.headers.authorization;
   const token = tokenString ? tokenString.split(' ')[1] : '';
-  const decoded = jwt.verify(token, JWT_KEY);
+  const decoded = jwt.verify(token, JWT_KEY, function(err, decoded) {
+    if (err) {
+      res.status(403).json({message: "Session Expired"})
+    } else {
+      return decoded
+    }
+  });
   const user = await prisma.user.findUnique({
     where: {
       username: decoded.name
@@ -115,31 +121,5 @@ router.get('/profile', async (req, res) => {
   })
   res.status(200).json(user)
 })
-
-function authorize(req, res, next) {
-  // STEP 2: Logic for getting the token and
-  // decoding the contents of the token. The
-  // decoded contents should be placed on req.decoded
-  // If the token is not provided, or invalid, then
-  // this function should not continue on to the
-  // end-point.
-  console.log(req.headers.authorization);
-  const tokenString = req.headers.authorization;
-  const token = tokenString ? tokenString.split(' ')[1] : '';
-  if (token.length > 0) {
-    jwt.verify(token, JWT_KEY, (err, decodedData) => {
-      if(err) {
-        res.status(403).json({message: 'Token invalid or expired'});
-      } else {
-        req.decoded = decodedData;
-        next();
-      }
-    })
-  }
-  else {
-    res.status(403).json({message: 'Not authorized to access this.'});
-  }
-}
-
 
 module.exports = router;

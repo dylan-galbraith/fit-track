@@ -12,9 +12,9 @@ class Routines extends Component {
   render() {
     return (
       <main className="routines">
-        <h1 className="routines__heading">Routines <Link to="/routines/add"><img className="exercises__icon" src={addIcon} alt="add icon" /></Link></h1>
+        <h1 className="routines__heading">Routines</h1>
         <div className="routines__list">
-          <Link to='/routines/add' className="routines__name routines__name--top">Add a New Routine!</Link>
+          <Link to='/routines/add' className="routines__add">Add a New Routine!</Link>
           {this.props.routines.map(item => {
             return <Link key={item.id} to={`/routines/${item.id}`} className= "routines__name">{item.name}</Link>
           })}

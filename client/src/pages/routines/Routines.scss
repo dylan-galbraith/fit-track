@@ -28,6 +28,12 @@
   &__name {
     @include list-item;
   }
+
+  &__add {
+    @include list-item;
+    border-top: none;
+    color: $secondary-color;
+  }
 }
 
 .add-routine {
