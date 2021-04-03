@@ -23,6 +23,9 @@ router.post('/login' , async (req, res) => {
       firstName: true,
       password: true,
       exercise: {
+        orderBy: {
+          name: 'asc'
+        },
         select: {
           id: true,
           name: true,
@@ -92,6 +95,9 @@ router.get('/profile', async (req, res) => {
       firstName: true,
       password: true,
       exercise: {
+        orderBy: {
+          name: 'asc'
+        },
         select: {
           id: true,
           name: true,
@@ -121,5 +127,35 @@ router.get('/profile', async (req, res) => {
   })
   res.status(200).json(user)
 })
+
+
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
+
+
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const passport = require('passport')
+
+passport.use(new GoogleStrategy({
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://localhost:3000/auth"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
+
+router.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile'] }));
+
+router.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 module.exports = router;

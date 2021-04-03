@@ -20,6 +20,10 @@
   font-size: 2rem;
   text-align: center;
   padding-bottom: 0.5rem;
+  font-weight: 200;
+  &--main {
+    letter-spacing: 0.6rem;
+  }
 }
 
 @mixin container {

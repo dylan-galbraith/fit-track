@@ -19,7 +19,6 @@ import SignUp from './components/SignUp';
 class App extends Component {
 
   state = {
-    token: null,
     isLoggedIn: false,
     signUp: false,
     errorMessage: null,
@@ -37,10 +36,8 @@ class App extends Component {
     axios
       .post(`${API_URL}/login`, user)
       .then(response => {
-        console.log(response.data);
         if (response.status === 200) {
           sessionStorage.setItem("authToken", response.data.token);
-
           this.setState({
             isLoggedIn: true,
             user: response.data.user,
@@ -54,6 +51,11 @@ class App extends Component {
   startSignUp = (e) => {
     this.setState({
       signUp: true
+    })
+  }
+  startLogin = (e) => {
+    this.setState({
+      signUp: false
     })
   }
 
@@ -125,6 +127,7 @@ class App extends Component {
 
   componentDidMount = () => {
     const token = sessionStorage.getItem("authToken");
+    if (!token) return
     axios
       .get(`${API_URL}/profile`, {
         headers: {
@@ -133,7 +136,6 @@ class App extends Component {
       })
       .then(response => {
         if (response.status === 200) {
-          console.log(response);
           this.setState({
             isLoggedIn: true,
             user: response.data,
@@ -148,7 +150,7 @@ class App extends Component {
     if (!this.state.isLoggedIn) {
       return (
         <div className="app">
-          {this.state.signUp ? <SignUp signup={this.handleSignUp}  /> : <Login login={this.handleLogin} signUp={this.startSignUp}/>}
+          {this.state.signUp ? <SignUp signup={this.handleSignUp} login={this.startLogin}  /> : <Login login={this.handleLogin} signUp={this.startSignUp}/>}
         </div>
       )
     }

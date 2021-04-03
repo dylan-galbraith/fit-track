@@ -2,8 +2,6 @@ import axios from 'axios';
 import { Component } from 'react';
 import backIcon from '../../assets/icons/arrow-back.svg';
 import { Link, Redirect } from 'react-router-dom';
-import deleteIcon from '../../assets/icons/trash-outline.svg';
-import addIcon from '../../assets/icons/add.svg';
 import exitIcon from '../../assets/icons/exit-icon.svg';
 import { API_URL } from '../../utils';
 

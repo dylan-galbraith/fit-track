@@ -27,6 +27,21 @@
   &__button {
     @include button;
   }
+
+  &__signup {
+    font-size: 0.8rem;
+    padding-top: 1rem;
+    text-align: center;
+
+    &__link {
+      color: $secondary-color;
+      font-size: 0.8rem;
+      font-weight: 600;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 }
 
 .signup {
@@ -47,6 +62,21 @@
 
   &__button {
     @include button;
+  }
+  
+  &__login {
+    font-size: 0.8rem;
+    padding-top: 1rem;
+    text-align: center;
+
+    &__link {
+      color: $secondary-color;
+      font-size: 0.8rem;
+      font-weight: 600;
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }
 

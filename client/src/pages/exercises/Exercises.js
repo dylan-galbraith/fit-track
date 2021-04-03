@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import filledStarIcon from '../../assets/icons/star.svg';
-import addIcon from '../../assets/icons/add.svg';
 import './Exercises.scss';
 
 class Exercises extends Component {

@@ -3,7 +3,7 @@ import { Component } from 'react';
 import starIcon from '../../assets/icons/star-outline.svg';
 import filledStarIcon from '../../assets/icons/star.svg';
 import backIcon from '../../assets/icons/arrow-back.svg';
-import deleteIcon from '../../assets/icons/trash-outline.svg';
+import exitIcon from '../../assets/icons/exit-icon.svg';
 import { Link, Redirect } from 'react-router-dom';
 import { API_URL } from '../../utils';
 
@@ -93,7 +93,6 @@ class SingleExercise extends Component {
         <h1 className="exercise__heading">
           <Link to="/exercises"><img src={backIcon} className="exercise__icon" alt="back icon" /></Link>
           {this.state.exercise.name}
-          <img src={deleteIcon} className="exercise__icon" onClick={this.deleteExercise} alt="delete icon" />
           <img onClick={this.favouriteExercise} className="exercise__icon" src={this.state.exercise.favourite ? filledStarIcon : starIcon} alt="favourite icon" /> 
         </h1>
         <form onSubmit={this.addRecord} className="exercise__record">
@@ -106,13 +105,16 @@ class SingleExercise extends Component {
         {this.state.exercise.record.map(item => {
           return (
             <div className="exercise__record" key={item.id}>
-              <img onClick={() => this.deleteRecord(item.id)} src={deleteIcon} className="exercise__icon exercise__delete-record" alt="delete icon" />
+              <img onClick={() => this.deleteRecord(item.id)} src={exitIcon} className="exercise__delete-icon" alt="delete icon" />
               <p className="exercise__stat"><span className="exercise__label">DATE: </span>{new Date(item.date).toDateString()}</p>
               <p className="exercise__stat"><span className="exercise__label">WEIGHT: </span>{item.weight}</p>
               <p className="exercise__stat"><span className="exercise__label">REPS: </span>{item.reps}</p>
             </div>
           )
         })}
+        <div className="exercise__record">
+          <button  onClick={this.deleteExercise} className="exercise__delete">Delete Exercise</button>
+        </div>
       </main>
     )
   }
