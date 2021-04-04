@@ -12,6 +12,10 @@ const prisma = new PrismaClient();
 
 const JWT_KEY = process.env.JWT_KEY;
 
+router.get('/', (req, res) => {
+  res.send("hi")
+})
+
 router.post('/login' , async (req, res) => {
   const { username, password } = req.body
   const user = await prisma.user.findUnique({

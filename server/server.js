@@ -20,6 +20,8 @@ app.use('/', userRoutes);
 
 let connection;
 
+console.log(process.env.PORT);
+
 if(process.env.JAWSDB_URL) {
   connection = mysql.createConnection(process.env.JAWSDB_URL)
 }
