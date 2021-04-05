@@ -12,7 +12,6 @@ function SignUp({ signup, login }) {
         <input className="signup__input" name="confirm" placeholder="Confirm Password *" type="password"/>
         <button className="signup__button">Sign Up</button>
         <p className="signup__login">Already have an account? <span className="signup__login__link" onClick={login}>Log In</span> </p>
-        <a href='http://localhost:8070/auth/google' >Login with Google</a>
       </form>
     </main>
   )

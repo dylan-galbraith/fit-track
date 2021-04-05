@@ -95,6 +95,7 @@ class SingleRoutine extends Component {
   }
 
   render() {
+    console.log(this.state.allExercises);
     if (!this.state.routine) return <p>Loading...</p>
     if (this.state.redirect) return <Redirect to={this.state.redirect} />
     if (this.state.adding) {
@@ -105,11 +106,10 @@ class SingleRoutine extends Component {
             <button  onClick={this.exitAdding} className="routine__add">Done</button>
           </div>
           <div className="exercises__list">
+          <Link to='/exercises/add' className="exercises__add">Create A New Exercise!</Link>
             {this.state.allExercises.map(item => {
               if (!this.state.routine.exercise.find(each => each.id === item.id)){
-                return (
-                  <button key={item.id} onClick={() => this.selectedExercise(item.id)} className={this.state.allExercises.indexOf(item)===0 ? "routines__name routines__name--top adding" : "routines__name adding"}>{item.name} </button>
-                )
+                return <button key={item.id} onClick={() => this.selectedExercise(item.id)} className="routines__name adding">{item.name} </button>
               }
               return null
             })}
