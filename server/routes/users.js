@@ -3,14 +3,14 @@ const express = require("express");
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt'); 
 const saltRounds = 10;
 
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-const JWT_KEY = process.env.JWT_KEY;
+const JWT_KEY = `${process.env.JWT_KEY}`;
 
 router.get('/', (req, res) => {
   res.send("hi")
@@ -77,6 +77,9 @@ router.post('/signup', async (req, res) => {
       password: hash
     }
   })
+  .catch(err => {
+    res.json({message: err})
+  })
   res.status(200).json({newUser})
 })
 
@@ -133,33 +136,33 @@ router.get('/profile', async (req, res) => {
 })
 
 
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
+// const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
+// const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
 
 
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const passport = require('passport')
+// const GoogleStrategy = require('passport-google-oauth20').Strategy;
+// const passport = require('passport')
 
-passport.use(new GoogleStrategy({
-    clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth"
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
-  }
-));
+// passport.use(new GoogleStrategy({
+//     clientID: GOOGLE_CLIENT_ID,
+//     clientSecret: GOOGLE_CLIENT_SECRET,
+//     callbackURL: "http://localhost:3000/auth"
+//   },
+//   function(accessToken, refreshToken, profile, cb) {
+//     User.findOrCreate({ googleId: profile.id }, function (err, user) {
+//       return cb(err, user);
+//     });
+//   }
+// ));
 
-router.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile'] }));
+// router.get('/auth/google',
+//   passport.authenticate('google', { scope: ['profile'] }));
 
-router.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
+// router.get('/auth/google/callback', 
+//   passport.authenticate('google', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     // Successful authentication, redirect home.
+//     res.redirect('/');
+//   });
 
 module.exports = router;

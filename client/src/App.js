@@ -127,7 +127,6 @@ class App extends Component {
 
   componentDidMount = () => {
     const token = sessionStorage.getItem("authToken");
-    if (!token) return
     axios
       .get(`${API_URL}/profile`, {
         headers: {
