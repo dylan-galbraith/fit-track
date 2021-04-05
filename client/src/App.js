@@ -25,7 +25,7 @@ class App extends Component {
     user: null,
     exercises: null,
     routines: null,
-    isLoading: true
+    // isLoading: true
   }
 
   handleLogin = (e) => {
@@ -148,7 +148,7 @@ class App extends Component {
   }
 
   render() {
-    if(this.state.isLoading) return <p>Loading...</p>
+    // if(this.state.isLoading) return <p>Loading...</p>
     
     if (!this.state.isLoggedIn) {
       return (
