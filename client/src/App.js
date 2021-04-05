@@ -24,7 +24,8 @@ class App extends Component {
     errorMessage: null,
     user: null,
     exercises: null,
-    routines: null
+    routines: null,
+    isLoading: true
   }
 
   handleLogin = (e) => {
@@ -139,13 +140,16 @@ class App extends Component {
             isLoggedIn: true,
             user: response.data,
             exercises: response.data.exercise,
-            routines: response.data.routine
+            routines: response.data.routine,
+            isLoading: false
           })
         }
       })
   }
 
   render() {
+    if(this.state.isLoading) return <p>Loading...</p>
+    
     if (!this.state.isLoggedIn) {
       return (
         <div className="app">
