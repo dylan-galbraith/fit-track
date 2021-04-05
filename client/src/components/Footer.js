@@ -10,10 +10,15 @@ class Footer extends Component {
     menuOpen: false
   }
 
-  menuHandler = (e) => {
+  menuHandler = () => {
     this.setState({
       menuOpen: !this.state.menuOpen
     })
+  }
+
+  reset = () => {
+    this.props.resetExercises();
+    this.props.resetRoutines();
   }
 
   render() {
@@ -36,7 +41,7 @@ class Footer extends Component {
     }
     return (
       <footer className="footer">
-        <Link className="footer__logo" to='/'>FitTrack</Link>
+        <Link onClick={this.reset} className="footer__logo" to='/'>FitTrack</Link>
         <img className="footer__icon" onClick={this.menuHandler} src={menuIcon} alt="menu icon" />
       </footer>
     )

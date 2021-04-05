@@ -181,7 +181,7 @@ class App extends Component {
             <Route path='/routines/:routineId' component={SingleRoutine} />
             <Route path='/favourites' > <Favourites exercises={this.state.exercises} /> </Route>
           </Switch>
-          <Footer logout={this.handleLogOut}/>
+          <Footer resetExercises={this.resetExercises} resetRoutines={this.resetRoutines} logout={this.handleLogOut}/>
         </BrowserRouter>
       </div>
     );
