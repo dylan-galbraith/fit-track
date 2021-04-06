@@ -1,5 +1,6 @@
+import errorIcon from '../assets/icons/alert-circle.svg'
 
-function SignUp({ signup, login }) {
+function SignUp({ error, signup, login }) {
 
   return (
     <main className="signup">
@@ -10,6 +11,7 @@ function SignUp({ signup, login }) {
         <input className="signup__input" name="username" placeholder="Username *" />
         <input className="signup__input" name="password" placeholder="Password *" type="password" />
         <input className="signup__input" name="confirm" placeholder="Confirm Password *" type="password"/>
+        <span className={error ? "signup__error" : "signup__error--hidden"}><img className={error ? "signup__error__icon" : "signup__error__icon--hidden"}  src={errorIcon} alt="error icon" /> This username is already taken</span>
         <button className="signup__button">Sign Up</button>
         <p className="signup__login">Already have an account? <span className="signup__login__link" onClick={login}>Log In</span> </p>
       </form>

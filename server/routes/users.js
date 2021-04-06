@@ -62,7 +62,7 @@ router.post('/login' , async (req, res) => {
     const token = jwt.sign(payload, JWT_KEY)
     res.status(200).json({token, user})
   } else {
-    res.status(403).json({message: "invalid username or password"})
+    res.status(403).json({message: "Invalid Username or Password"})
   }
 })
 
@@ -78,7 +78,7 @@ router.post('/signup', async (req, res) => {
     }
   })
   .catch(err => {
-    res.json({message: err})
+    res.status(403).json({message: "Username not available"})
   })
   res.status(200).json({newUser})
 })

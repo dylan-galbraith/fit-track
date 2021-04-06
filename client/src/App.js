@@ -25,7 +25,8 @@ class App extends Component {
     user: null,
     exercises: null,
     routines: null,
-    isLoading: true
+    isLoading: true,
+    error: false
   }
 
   handleLogin = (e) => {
@@ -45,7 +46,16 @@ class App extends Component {
             exercises: response.data.user.exercise,
             routines: response.data.user.routine
           })
-        }
+        } else (
+          this.setState({
+            error: true
+          })
+        )
+      })
+      .catch(err => {
+        this.setState({
+          error: true
+        })
       })
   }
 
@@ -90,6 +100,11 @@ class App extends Component {
             }
           })
         }
+      })
+      .catch(err => {
+        this.setState({
+          error: true
+        })
       })
   }
 
@@ -163,7 +178,7 @@ class App extends Component {
     if (!this.state.isLoggedIn) {
       return (
         <div className="app">
-          {this.state.signUp ? <SignUp signup={this.handleSignUp} login={this.startLogin}  /> : <Login login={this.handleLogin} signUp={this.startSignUp}/>}
+          {this.state.signUp ? <SignUp error={this.state.error} signup={this.handleSignUp} login={this.startLogin}  /> : <Login error={this.state.error} login={this.handleLogin} signUp={this.startSignUp}/>}
         </div>
       )
     }

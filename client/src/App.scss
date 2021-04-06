@@ -78,6 +78,19 @@
       }
     }
   }
+
+  &__error {
+    color: red;
+    font-size: 0.8rem;
+
+    &__icon {
+      height: 0.8rem;
+    }
+
+    &--hidden {
+      display: none;
+    }
+  }
 }
 
 .footer {
