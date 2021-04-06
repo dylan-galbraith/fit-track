@@ -60,11 +60,13 @@
     margin-top: 0;
     text-align: center;
     text-decoration: none;
+    color: $danger-color;
+    border-color: $danger-color;
     &:hover {
-      background-color: red;
+      background-color: $danger-color;
       color: white;
       font-weight: 600;
-      border-color: red;
+      border-color: $danger-color;
     }
   }
 
@@ -75,7 +77,7 @@
   &__error {
     display: none;
     &--show {
-      color: red;
+      color: $danger-color;
       font-size: 0.8rem;
       font-weight: 500;
       display: initial;  
@@ -154,11 +156,13 @@
   &__delete {
     @include button;
     margin-top: 0;
+    color: $danger-color;
+    border-color: $danger-color;
     &:hover {
-      background-color: red;
+      background-color: $danger-color;
       color: white;
       font-weight: 600;
-      border-color: red;
+      border-color: $danger-color;
     }
   }
 }

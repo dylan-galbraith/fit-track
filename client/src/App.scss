@@ -9,7 +9,7 @@
 }
 
 .login {
-  padding: 1rem 1rem 8rem;
+  padding: 10rem 1rem 8rem;
 
   &__heading {
     @include page-heading;
@@ -45,7 +45,7 @@
 }
 
 .signup {
-  padding: 1rem 1rem 8rem;
+  padding: 8rem 1rem 8rem;
 
   &__heading {
     @include page-heading;
@@ -80,7 +80,7 @@
   }
 
   &__error {
-    color: red;
+    color: $danger-color;
     font-size: 0.8rem;
 
     &__icon {
@@ -130,10 +130,8 @@
   justify-content: flex-end;
   align-items: center;
 
-
   &__list {
-    height: 100vh;
-    padding: 6rem 2rem;
+    padding-right: 2rem;
     display: flex;
     flex-direction: column;
     text-align: right;
