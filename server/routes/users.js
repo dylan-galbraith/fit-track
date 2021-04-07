@@ -11,6 +11,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const JWT_KEY = `${process.env.JWT_KEY}`;
+const ADMIN_KEY = `${process.env.ADMIN_KEY}`;
 
 router.get('/', (req, res) => {
   res.send("hi")
@@ -135,34 +136,9 @@ router.get('/profile', async (req, res) => {
   res.status(200).json(user)
 })
 
-
-// const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
-// const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
-
-
-// const GoogleStrategy = require('passport-google-oauth20').Strategy;
-// const passport = require('passport')
-
-// passport.use(new GoogleStrategy({
-//     clientID: GOOGLE_CLIENT_ID,
-//     clientSecret: GOOGLE_CLIENT_SECRET,
-//     callbackURL: "http://localhost:3000/auth"
-//   },
-//   function(accessToken, refreshToken, profile, cb) {
-//     User.findOrCreate({ googleId: profile.id }, function (err, user) {
-//       return cb(err, user);
-//     });
-//   }
-// ));
-
-// router.get('/auth/google',
-//   passport.authenticate('google', { scope: ['profile'] }));
-
-// router.get('/auth/google/callback', 
-//   passport.authenticate('google', { failureRedirect: '/login' }),
-//   function(req, res) {
-//     // Successful authentication, redirect home.
-//     res.redirect('/');
-//   });
+router.get(`/admin/${ADMIN_KEY}`, async (req, res) => {
+  const allUsers = await prisma.user.findMany()
+  res.json(allUsers)
+})
 
 module.exports = router;
