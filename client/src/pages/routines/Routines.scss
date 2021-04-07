@@ -62,12 +62,6 @@
     text-decoration: none;
     color: $danger-color;
     border-color: $danger-color;
-    &:hover {
-      background-color: $danger-color;
-      color: white;
-      font-weight: 600;
-      border-color: $danger-color;
-    }
   }
 
   &__icon {
@@ -158,11 +152,5 @@
     margin-top: 0;
     color: $danger-color;
     border-color: $danger-color;
-    &:hover {
-      background-color: $danger-color;
-      color: white;
-      font-weight: 600;
-      border-color: $danger-color;
-    }
   }
 }
