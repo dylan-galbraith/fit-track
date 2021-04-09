@@ -141,4 +141,13 @@ router.get(`/admin/${ADMIN_KEY}`, async (req, res) => {
   res.json(allUsers)
 })
 
+router.delete(`/admin/delete/:userId/${ADMIN_KEY}`, async (req, res) => {
+  const user = await prisma.user.delete({
+    where: {
+      id: parseInt(req.params.userId)
+    }
+  })
+  res.json(user);
+})
+
 module.exports = router;
