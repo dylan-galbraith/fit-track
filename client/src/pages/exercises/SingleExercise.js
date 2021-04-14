@@ -100,6 +100,7 @@ class SingleExercise extends Component {
             <input className="exercise__form__input" name="weight" placeholder="Weight (in lbs)" />
             <input className="exercise__form__input" name="reps" placeholder="Reps" />
           </div>
+          <textarea className="exercise__form__input exercise__form__input--note" name="note" placeholder="Notes" />
           <button className="exercise__form__button">Add</button>
         </form>
         {this.state.exercise.record.map(item => {
@@ -109,6 +110,7 @@ class SingleExercise extends Component {
               <p className="exercise__stat"><span className="exercise__label">DATE: </span>{new Date(item.date).toDateString()}</p>
               <p className="exercise__stat"><span className="exercise__label">WEIGHT: </span>{item.weight}</p>
               <p className="exercise__stat"><span className="exercise__label">REPS: </span>{item.reps}</p>
+              <p className="exercise__stat"><span className="exercise__label">NOTE: </span>{item.note}</p>
             </div>
           )
         })}
