@@ -28,10 +28,11 @@ model Record {
   reps        String      @db.VarChar(225)
   user        User         @relation(fields: [userId], references: [id])
   userId      Int         
+  note        String      @db.VarChar(225) @default(undefined)
 }
 model Routine {
-  id          Int             @default(autoincrement()) @id
-  name        String          @db.VarChar(225)
+  id          Int          @default(autoincrement()) @id
+  name        String       @db.VarChar(225)
   exercise    Exercise[]
   user        User         @relation(fields: [userId], references: [id])
   userId      Int          
