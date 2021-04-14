@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Record` ADD COLUMN     `note` VARCHAR(225) NOT NULL DEFAULT '';

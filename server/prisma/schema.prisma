@@ -28,7 +28,7 @@ model Record {
   reps        String      @db.VarChar(225)
   user        User         @relation(fields: [userId], references: [id])
   userId      Int         
-  note        String      @db.VarChar(225) @default(undefined)
+  note        String      @db.VarChar(225) @default("")
 }
 model Routine {
   id          Int          @default(autoincrement()) @id

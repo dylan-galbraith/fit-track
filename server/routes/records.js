@@ -20,7 +20,8 @@ router.post('/:userId', async (req, res) => {
         }
       },
       weight: `${req.body.weight} lbs`,
-      reps: req.body.reps
+      reps: req.body.reps,
+      note: req.body.note
     }
   })
   res.json(result)

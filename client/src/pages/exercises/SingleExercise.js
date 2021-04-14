@@ -34,13 +34,15 @@ class SingleExercise extends Component {
     const newRecord = {
       weight: e.target.weight.value,
       reps: e.target.reps.value,
-      exerciseId: this.state.exercise.id
+      exerciseId: this.state.exercise.id,
+      note: e.target.note.value
     }
     axios
       .post(`${API_URL}/records/${this.state.exercise.user.id}`, newRecord)
       .then(response => {
         e.target.weight.value = "";
         e.target.reps.value = "";
+        e.target.note.value = "";
         axios
         .get(`${API_URL}/exercises/${this.props.match.params.exerciseId}`)
         .then(response => {
