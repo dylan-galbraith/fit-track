@@ -112,7 +112,7 @@ class SingleExercise extends Component {
               <p className="exercise__stat"><span className="exercise__label">DATE: </span>{new Date(item.date).toDateString()}</p>
               <p className="exercise__stat"><span className="exercise__label">WEIGHT: </span>{item.weight}</p>
               <p className="exercise__stat"><span className="exercise__label">REPS: </span>{item.reps}</p>
-              <p className="exercise__stat"><span className="exercise__label">NOTE: </span>{item.note}</p>
+              <p className={item.note ? "exercise__stat" : "exercise__stat--hide"}><span className="exercise__label">NOTE: </span>{item.note}</p>
             </div>
           )
         })}

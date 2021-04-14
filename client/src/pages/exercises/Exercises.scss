@@ -101,6 +101,10 @@
 
   &__stat {
     padding: 0.5rem;
+
+    &--hide {
+      display: none;
+    }
   }
 
   &__label {
