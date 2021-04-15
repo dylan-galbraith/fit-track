@@ -29,6 +29,15 @@ class App extends Component {
     error: false
   }
 
+  handleGoogle = (e) => {
+    e.preventDefault();
+    axios
+      .get(`${API_URL}/auth/google`)
+      .then(response => {
+        console.log(response);
+      })
+  }
+
   handleLogin = (e) => {
     e.preventDefault();
     const user = {
@@ -178,7 +187,7 @@ class App extends Component {
     if (!this.state.isLoggedIn) {
       return (
         <div className="app">
-          {this.state.signUp ? <SignUp error={this.state.error} signup={this.handleSignUp} login={this.startLogin}  /> : <Login error={this.state.error} login={this.handleLogin} signUp={this.startSignUp}/>}
+          {this.state.signUp ? <SignUp error={this.state.error} signup={this.handleSignUp} login={this.startLogin}  /> : <Login google={this.handleGoogle} error={this.state.error} login={this.handleLogin} signUp={this.startSignUp}/>}
         </div>
       )
     }

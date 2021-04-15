@@ -1,6 +1,6 @@
 import errorIcon from '../assets/icons/alert-circle.svg'
 
-function Login({ error, signUp, login }) {
+function Login({ google, error, signUp, login }) {
   return (
     <main className="login">
       <h1 className="login__heading">Please Log In</h1>
@@ -11,6 +11,7 @@ function Login({ error, signUp, login }) {
         <button className="login__button">Login</button>
         <p className="login__signup">Don't have an account? <span className="login__signup__link" onClick={signUp}>Sign Up</span> </p>
       </form>
+      <button onClick={google}>Google</button>
     </main>
   )
 }
