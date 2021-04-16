@@ -29,7 +29,13 @@ class App extends Component {
     exercises: null,
     routines: null,
     isLoading: true,
-    error: false
+    error: false,
+
+    info: {
+      exercises: [],
+      routines: []
+    },
+    loggedIn: false
   }
 
   handleGoogle = (e) => {
@@ -133,51 +139,69 @@ class App extends Component {
     })
   }
 
-  resetExercises = () => {
-    axios
-      .get(`${API_URL}/exercises/all/${this.state.user.id}`)
-      .then(response => {
-        this.setState({
-          exercises: response.data
-        })
-      })
+  getExercises = async () => {
+    try {
+      const exercises = await axios.get(`${API_URL}/exercises/all/20`)
+      const routines = await axios.get(`${API_URL}/routines/all/20`)
+      return {exercises: exercises.data, routines: routines.data}
+    } catch {
+      console.log("error");
+    }
+    // axios
+    //   .get(`${API_URL}/exercises/all/20`)
+    //   .then(response => {
+    //     const exercises = response.data
+    //     axios
+    //     .get(`${API_URL}/routines/all/20`)
+    //     .then(response => {
+    //       const info = {
+    //         routines: response.data,
+    //         exercises: exercises
+    //       }
+    //       return info
+    //     })
+    //   })
   }
 
-  resetRoutines = () => {
-    axios
-      .get(`${API_URL}/routines/all/${this.state.user.id}`)
-      .then(response => {
-        this.setState({
-          routines: response.data
-        })
-      })
-  }
-
-  // componentDidMount = () => {
-  //   const token = sessionStorage.getItem("authToken");
+  // getRoutines = () => {
   //   axios
-  //     .get(`${API_URL}/profile`, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`
-  //       }
-  //     })
+  //     .get(`${API_URL}/routines/all/20`)
   //     .then(response => {
-  //       if (response.status === 200) {
-  //         this.setState({
-  //           isLoggedIn: true,
-  //           user: response.data,
-  //           exercises: response.data.exercise,
-  //           routines: response.data.routine,
-  //           isLoading: false
-  //         })
-  //       }
-  //     })
-  //     .catch (err => {
   //       this.setState({
-  //         isLoading: false
+  //         info: {
+  //           routines: response.data
+  //         }
   //       })
   //     })
   // }
+
+
+
+  componentDidMount = () => {
+    // const token = sessionStorage.getItem("authToken");
+    // axios
+    //   .get(`${API_URL}/profile`, {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`
+    //     }
+    //   })
+    //   .then(response => {
+    //     if (response.status === 200) {
+    //       this.setState({
+    //         isLoggedIn: true,
+    //         user: response.data,
+    //         exercises: response.data.exercise,
+    //         routines: response.data.routine,
+    //         isLoading: false
+    //       })
+    //     }
+    //   })
+    //   .catch (err => {
+    //     this.setState({
+    //       isLoading: false
+    //     })
+    //   })
+  }
 
   render() {
     // if(this.state.isLoading) 
@@ -186,13 +210,14 @@ class App extends Component {
     //     <p>Loading...</p>
     //   </div>
     // ) 
-    
+    console.log(this.state);
     return (
       <div className="app">
         <BrowserRouter>
           <AuthProvider>
             <Switch>
-              <PrivateRoute path='/' exact component={TestHome} />
+              <PrivateRoute path='/' exact component={()=> <Home getExercises={this.getExercises} info={this.state.info} />} />
+              {/* <PrivateRoute path='/' exact component={TestHome} /> */}
               <Route path='/signup' component={SignUp} />
               <Route path='/login' component={Login} />
             </Switch>

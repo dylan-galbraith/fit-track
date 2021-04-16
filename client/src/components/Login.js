@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom'
 
-function Login({ signUp }) {
+function Login() {
 
   const { login, currentUser } = useAuth();
   const [error, setError] = useState('')
