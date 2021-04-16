@@ -1,10 +1,7 @@
 import errorIcon from '../assets/icons/alert-circle.svg'
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { useHistory } from 'react-router-dom'
-import axios from 'axios';
-import { API_URL } from '../utils';
-
+import { Link, useHistory } from 'react-router-dom'
 
 function Login({ signUp }) {
 
@@ -34,7 +31,7 @@ function Login({ signUp }) {
         <input className="login__input" name="password" placeholder="Password *" type="password"/>
         <span className={error ? "signup__error" : "signup__error--hidden"}><img className={error ? "signup__error__icon" : "signup__error__icon--hidden"}  src={errorIcon} alt="error icon" /> {error}</span>
         <button disabled={loading} className="login__button">Login</button>
-        <p className="login__signup">Don't have an account? <span className="login__signup__link" onClick={signUp}>Sign Up</span> </p>
+        <p className="login__signup">Don't have an account? <Link to='/signup' className="login__signup__link">Sign Up</Link> </p>
       </form>
     </main>
   )

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import errorIcon from '../assets/icons/alert-circle.svg';
 import { useAuth } from '../contexts/AuthContext';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 
 function SignUp({ login }) {
@@ -41,7 +41,7 @@ function SignUp({ login }) {
         <input className="signup__input" name="confirm" placeholder="Confirm Password *" type="password"/>
         <span className={error ? "signup__error" : "signup__error--hidden"}><img className={error ? "signup__error__icon" : "signup__error__icon--hidden"}  src={errorIcon} alt="error icon" />{error}</span>
         <button className="signup__button" disabled={loading}>Sign Up</button>
-        <p className="signup__login">Already have an account? <span className="signup__login__link" onClick={login}>Log In</span> </p>
+        <p className="signup__login">Already have an account? <Link to='/login' className="signup__login__link">Log In</Link> </p>
       </form>
     </main>
   )
