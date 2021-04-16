@@ -17,7 +17,6 @@ import AddRoutine from './pages/routines/AddRoutine';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import { AuthProvider } from './contexts/AuthContext';
-import TestHome from './components/TestHome';
 
 class App extends Component {
 
@@ -173,8 +172,8 @@ class App extends Component {
         <BrowserRouter>
           <AuthProvider>
             <Switch>
-              <PrivateRoute path='/' exact component={()=> <Home getData={this.getData} info={this.state.info} />} />
-              {/* <PrivateRoute path='/' exact component={TestHome} /> */}
+              <PrivateRoute path='/' exact component={()=> <Home getData={this.getData} />} />
+              <PrivateRoute path='/routines' exact component={()=> <Routines getData={this.getData} />} />
               <Route path='/signup' component={SignUp} />
               <Route path='/login' component={Login} />
             </Switch>
@@ -199,7 +198,6 @@ class App extends Component {
     //     <BrowserRouter>
     //       <Switch>
     //         <Route path='/' exact > <Home user={this.state.user} routines={this.state.routines} exercises={this.state.exercises}/> </Route>
-    //         <Route path='/exercises' exact > <Exercises exercises={this.state.exercises} resetExercises={this.resetExercises} /> </Route>
     //         <Route path='/exercises/add' > <AddExercise exercises={this.state.exercises} userId={this.state.user.id} resetExercises={this.resetExercises} /> </Route>
     //         <Route path='/exercises/:exerciseId' component={SingleExercise} />
     //         <Route path='/routines' exact > <Routines routines={this.state.routines} resetRoutines={this.resetRoutines} /> </Route>
