@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Component } from 'react'
 import axios from 'axios';
 import { API_URL } from './utils';
+import PrivateRoute from './components/PrivateRoute';
 
 import Footer from './components/Footer'
 import Home from './pages/home/Home'
@@ -15,6 +16,8 @@ import AddExercise from './pages/exercises/AddExercise';
 import AddRoutine from './pages/routines/AddRoutine';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+import { AuthProvider } from './contexts/AuthContext';
+import TestHome from './components/TestHome';
 
 class App extends Component {
 
@@ -150,65 +153,81 @@ class App extends Component {
       })
   }
 
-  componentDidMount = () => {
-    const token = sessionStorage.getItem("authToken");
-    axios
-      .get(`${API_URL}/profile`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then(response => {
-        if (response.status === 200) {
-          this.setState({
-            isLoggedIn: true,
-            user: response.data,
-            exercises: response.data.exercise,
-            routines: response.data.routine,
-            isLoading: false
-          })
-        }
-      })
-      .catch (err => {
-        this.setState({
-          isLoading: false
-        })
-      })
-  }
+  // componentDidMount = () => {
+  //   const token = sessionStorage.getItem("authToken");
+  //   axios
+  //     .get(`${API_URL}/profile`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`
+  //       }
+  //     })
+  //     .then(response => {
+  //       if (response.status === 200) {
+  //         this.setState({
+  //           isLoggedIn: true,
+  //           user: response.data,
+  //           exercises: response.data.exercise,
+  //           routines: response.data.routine,
+  //           isLoading: false
+  //         })
+  //       }
+  //     })
+  //     .catch (err => {
+  //       this.setState({
+  //         isLoading: false
+  //       })
+  //     })
+  // }
 
   render() {
-    if(this.state.isLoading) 
-    return (
-      <div className="app">
-        <p>Loading...</p>
-      </div>
-    ) 
+    // if(this.state.isLoading) 
+    // return (
+    //   <div className="app">
+    //     <p>Loading...</p>
+    //   </div>
+    // ) 
     
-    if (!this.state.isLoggedIn) {
-      return (
-        <div className="app">
-          {this.state.signUp ? <SignUp error={this.state.error} signup={this.handleSignUp} login={this.startLogin}  /> : <Login google={this.handleGoogle} error={this.state.error} login={this.handleLogin} signUp={this.startSignUp}/>}
-        </div>
-      )
-    }
-
     return (
       <div className="app">
         <BrowserRouter>
-          <Switch>
-            <Route path='/' exact > <Home user={this.state.user} routines={this.state.routines} exercises={this.state.exercises}/> </Route>
-            <Route path='/exercises' exact > <Exercises exercises={this.state.exercises} resetExercises={this.resetExercises} /> </Route>
-            <Route path='/exercises/add' > <AddExercise exercises={this.state.exercises} userId={this.state.user.id} resetExercises={this.resetExercises} /> </Route>
-            <Route path='/exercises/:exerciseId' component={SingleExercise} />
-            <Route path='/routines' exact > <Routines routines={this.state.routines} resetRoutines={this.resetRoutines} /> </Route>
-            <Route path='/routines/add' > <AddRoutine routines={this.state.routines} userId={this.state.user.id}  resetRoutines={this.resetRoutines}/> </Route>
-            <Route path='/routines/:routineId' component={SingleRoutine} />
-            <Route path='/favourites' > <Favourites exercises={this.state.exercises} /> </Route>
-          </Switch>
-          <Footer resetExercises={this.resetExercises} resetRoutines={this.resetRoutines} logout={this.handleLogOut}/>
+          <AuthProvider>
+            <Switch>
+              <PrivateRoute path='/' exact component={TestHome} />
+              <Route path='/signup' component={SignUp} />
+              <Route path='/login' component={Login} />
+            </Switch>
+          </AuthProvider>
         </BrowserRouter>
       </div>
-    );
+    )
+
+    // if (!this.state.isLoggedIn) {
+    //   return (
+    //     <div className="app">
+    //       <AuthProvider>
+    //         <SignUp error={this.state.error} signupOld={this.handleSignUp} login={this.startLogin}  />
+    //       </AuthProvider>
+    //     </div>
+    //   )
+    // }
+
+    // return (
+    //   <div className="app">
+    //     <BrowserRouter>
+    //       <Switch>
+    //         <Route path='/' exact > <Home user={this.state.user} routines={this.state.routines} exercises={this.state.exercises}/> </Route>
+    //         <Route path='/exercises' exact > <Exercises exercises={this.state.exercises} resetExercises={this.resetExercises} /> </Route>
+    //         <Route path='/exercises/add' > <AddExercise exercises={this.state.exercises} userId={this.state.user.id} resetExercises={this.resetExercises} /> </Route>
+    //         <Route path='/exercises/:exerciseId' component={SingleExercise} />
+    //         <Route path='/routines' exact > <Routines routines={this.state.routines} resetRoutines={this.resetRoutines} /> </Route>
+    //         <Route path='/routines/add' > <AddRoutine routines={this.state.routines} userId={this.state.user.id}  resetRoutines={this.resetRoutines}/> </Route>
+    //         <Route path='/routines/:routineId' component={SingleRoutine} />
+    //         <Route path='/favourites' > <Favourites exercises={this.state.exercises} /> </Route>
+    //       </Switch>
+    //       <Footer resetExercises={this.resetExercises} resetRoutines={this.resetRoutines} logout={this.handleLogOut}/>
+    //     </BrowserRouter>
+    //   </div>
+    // );
   }
 }
 
