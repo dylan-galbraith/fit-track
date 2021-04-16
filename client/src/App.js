@@ -126,20 +126,7 @@ class App extends Component {
       })
   }
 
-  handleLogOut = () => {
-    sessionStorage.removeItem("authToken")
-    this.setState({
-      token: null,
-      isLoggedIn: false,
-      signUp: false,
-      errorMessage: null,
-      user: null,
-      exercises: null,
-      routines: null
-    })
-  }
-
-  getExercises = async () => {
+  getData = async () => {
     try {
       const exercises = await axios.get(`${API_URL}/exercises/all/20`)
       const routines = await axios.get(`${API_URL}/routines/all/20`)
@@ -147,36 +134,7 @@ class App extends Component {
     } catch {
       console.log("error");
     }
-    // axios
-    //   .get(`${API_URL}/exercises/all/20`)
-    //   .then(response => {
-    //     const exercises = response.data
-    //     axios
-    //     .get(`${API_URL}/routines/all/20`)
-    //     .then(response => {
-    //       const info = {
-    //         routines: response.data,
-    //         exercises: exercises
-    //       }
-    //       return info
-    //     })
-    //   })
   }
-
-  // getRoutines = () => {
-  //   axios
-  //     .get(`${API_URL}/routines/all/20`)
-  //     .then(response => {
-  //       this.setState({
-  //         info: {
-  //           routines: response.data
-  //         }
-  //       })
-  //     })
-  // }
-
-
-
   componentDidMount = () => {
     // const token = sessionStorage.getItem("authToken");
     // axios
@@ -210,17 +168,17 @@ class App extends Component {
     //     <p>Loading...</p>
     //   </div>
     // ) 
-    console.log(this.state);
     return (
       <div className="app">
         <BrowserRouter>
           <AuthProvider>
             <Switch>
-              <PrivateRoute path='/' exact component={()=> <Home getExercises={this.getExercises} info={this.state.info} />} />
+              <PrivateRoute path='/' exact component={()=> <Home getData={this.getData} info={this.state.info} />} />
               {/* <PrivateRoute path='/' exact component={TestHome} /> */}
               <Route path='/signup' component={SignUp} />
               <Route path='/login' component={Login} />
             </Switch>
+            <Footer resetExercises={this.resetExercises} resetRoutines={this.resetRoutines} logout={this.handleLogOut}/>
           </AuthProvider>
         </BrowserRouter>
       </div>

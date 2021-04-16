@@ -1,31 +1,17 @@
 import './Home.scss';
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '../../contexts/AuthContext';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-export default function Home({ getExercises }) {
+export default function Home({ getData }) {
 
+  const { currentUser, logout } = useAuth()
   const [info, setInfo] = useState()
 
   useEffect(async () => {
-    const data = await getExercises()
-    console.log(data);
+    const data = await getData()
     setInfo(data)
-  }, [])
-
-  const { currentUser, logout } = useAuth()
-
-  const history = useHistory()
-
-  async function handleLogout(e) {
-    e.preventDefault();
-
-    try {
-      await logout()
-      history.pushState('/login')
-    } catch {
-    }
-  }
+  }, [])  
 
   if(!info) {
     return <p>Loading...</p>
@@ -49,7 +35,6 @@ export default function Home({ getExercises }) {
           }
         )}
       </article>
-      <button onClick={handleLogout}>Log Out</button>
     </main>
   )
 }
