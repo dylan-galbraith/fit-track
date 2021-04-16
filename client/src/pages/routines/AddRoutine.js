@@ -1,60 +1,58 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import errorIcon from '../../assets/icons/alert-circle.svg';
 import { Redirect } from 'react-router-dom';
 import { API_URL } from '../../utils';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-class AddRoutine extends Component {
+export default function AddRoutine({ getData }) {
 
-  state = {
-    routines: this.props.routines,
-    redirect: null
-  }
+  const [info, setInfo] = useState()
+  const [redirect, setRedirect] = useState()
+  const [error, setError] = useState(false)
 
-  handleSubmit = (e) => {
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getData()
+      setInfo(data.routines)  
+    }
+    fetchData();
+  }, []) 
+
+  function handleSubmit(e) {
     e.preventDefault();
     const newRoutine = {
       name: e.target.name.value
     }
-    let approved = true
-    this.state.routines.forEach(item => {
-      if (item.name.toUpperCase() === newRoutine.name.toUpperCase()) {
-        approved = false
-        document.querySelector(".add-routine__error").classList.add("add-routine__error--show")
-      }
-    })
-    if (approved) {
+    if (info.find(item => item.name.toUpperCase() === newRoutine.name.toUpperCase())) {
+      setError(true)
+    }
+    if (!error) {
       axios
-        .post(`${API_URL}/routines/all/${this.props.userId}`, newRoutine)
+        .post(`${API_URL}/routines/all/20`, newRoutine)
         .then(response => {
-          this.props.resetRoutines()
-          this.setState({
-            redirect: `/routines/${response.data.id}`
-          })
+          setRedirect(`/routines/${response.data.id}`)
         })
     }
   }
 
-  render() {
-    if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />
-    }
-    return (
-      <main className="add-routine">
-        <h1 className="add-routine__heading">Add a New Routine</h1>
-        <form onSubmit={this.handleSubmit} className="add-routine__form">
-          <input className="add-routine__input" name="name" placeholder="Name of routine" />
-          <span className="add-routine__error"><img className="add-routine__icon" src={errorIcon} alt="error icon" /> You already have a routine with this name</span>
-          <button className="add-routine__add">Add</button>
-        </form>
-        <div className="add-routine__form" >
-          <Link to='/routines' className="add-routine__cancel">Cancel</Link>
-        </div>
-      </main>
-    )
+  if (!info) {
+    return <p>Loading...</p>
   }
+  if (redirect) {
+    return <Redirect to={redirect} />
+  }
+  return (
+    <main className="add-routine">
+      <h1 className="add-routine__heading">Add a New Routine</h1>
+      <form onSubmit={handleSubmit} className="add-routine__form">
+        <input className="add-routine__input" name="name" placeholder="Name of routine" />
+        <span className={error ? "add-routine__error" : "hidden"}><img className="add-routine__icon" src={errorIcon} alt="error icon" /> You already have a routine with this name</span>
+        <button className="add-routine__add">Add</button>
+      </form>
+      <div className="add-routine__form" >
+        <Link to='/routines' className="add-routine__cancel">Cancel</Link>
+      </div>
+    </main>
+  )
 }
-
-
-export default AddRoutine;

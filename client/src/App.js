@@ -20,111 +20,6 @@ import { AuthProvider } from './contexts/AuthContext';
 
 class App extends Component {
 
-  state = {
-    isLoggedIn: false,
-    signUp: false,
-    errorMessage: null,
-    user: null,
-    exercises: null,
-    routines: null,
-    isLoading: true,
-    error: false,
-
-    info: {
-      exercises: [],
-      routines: []
-    },
-    loggedIn: false
-  }
-
-  handleGoogle = (e) => {
-    e.preventDefault();
-    axios
-      .get(`${API_URL}/auth/google`)
-      .then(response => {
-        console.log(response);
-      })
-  }
-
-  handleLogin = (e) => {
-    e.preventDefault();
-    const user = {
-      username: e.target.username.value,
-      password: e.target.password.value
-    }
-    axios
-      .post(`${API_URL}/login`, user)
-      .then(response => {
-        if (response.status === 200) {
-          sessionStorage.setItem("authToken", response.data.token);
-          this.setState({
-            isLoggedIn: true,
-            user: response.data.user,
-            exercises: response.data.user.exercise,
-            routines: response.data.user.routine
-          })
-        } else (
-          this.setState({
-            error: true
-          })
-        )
-      })
-      .catch(err => {
-        this.setState({
-          error: true
-        })
-      })
-  }
-
-  startSignUp = (e) => {
-    this.setState({
-      signUp: true
-    })
-  }
-  startLogin = (e) => {
-    this.setState({
-      signUp: false
-    })
-  }
-
-  handleSignUp = (e) => {
-    e.preventDefault();
-    if(e.target.password.value !== e.target.confirm.value) {
-      return
-    }
-    const newUser = {
-      firstName: e.target.firstName.value,
-      lastName: e.target.lastName.value,
-      username: e.target.username.value,
-      password: e.target.password.value
-    }
-    axios
-      .post(`${API_URL}/signup`, newUser)
-      .then(response => {
-        if(response.status === 200) {
-          axios
-          .post(`${API_URL}/login`, newUser)
-          .then(response => {
-            if (response.status === 200) {
-              sessionStorage.setItem("authToken", response.data.token);
-    
-              this.setState({
-                isLoggedIn: true,
-                user: response.data.user,
-                exercises: response.data.user.exercise,
-                routines: response.data.user.routine
-              })
-            }
-          })
-        }
-      })
-      .catch(err => {
-        this.setState({
-          error: true
-        })
-      })
-  }
-
   getData = async () => {
     try {
       const exercises = await axios.get(`${API_URL}/exercises/all/20`)
@@ -134,39 +29,9 @@ class App extends Component {
       console.log("error");
     }
   }
-  componentDidMount = () => {
-    // const token = sessionStorage.getItem("authToken");
-    // axios
-    //   .get(`${API_URL}/profile`, {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`
-    //     }
-    //   })
-    //   .then(response => {
-    //     if (response.status === 200) {
-    //       this.setState({
-    //         isLoggedIn: true,
-    //         user: response.data,
-    //         exercises: response.data.exercise,
-    //         routines: response.data.routine,
-    //         isLoading: false
-    //       })
-    //     }
-    //   })
-    //   .catch (err => {
-    //     this.setState({
-    //       isLoading: false
-    //     })
-    //   })
-  }
+
 
   render() {
-    // if(this.state.isLoading) 
-    // return (
-    //   <div className="app">
-    //     <p>Loading...</p>
-    //   </div>
-    // ) 
     return (
       <div className="app">
         <BrowserRouter>
@@ -174,6 +39,7 @@ class App extends Component {
             <Switch>
               <PrivateRoute path='/' exact component={()=> <Home getData={this.getData} />} />
               <PrivateRoute path='/routines' exact component={()=> <Routines getData={this.getData} />} />
+              <PrivateRoute path='/routines/add' component={()=> <AddRoutine getData={this.getData} />} />
               <Route path='/signup' component={SignUp} />
               <Route path='/login' component={Login} />
             </Switch>
@@ -182,16 +48,6 @@ class App extends Component {
         </BrowserRouter>
       </div>
     )
-
-    // if (!this.state.isLoggedIn) {
-    //   return (
-    //     <div className="app">
-    //       <AuthProvider>
-    //         <SignUp error={this.state.error} signupOld={this.handleSignUp} login={this.startLogin}  />
-    //       </AuthProvider>
-    //     </div>
-    //   )
-    // }
 
     // return (
     //   <div className="app">

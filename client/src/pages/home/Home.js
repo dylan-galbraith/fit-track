@@ -8,10 +8,13 @@ export default function Home({ getData }) {
   const { currentUser, logout } = useAuth()
   const [info, setInfo] = useState()
 
-  useEffect(async () => {
-    const data = await getData()
-    setInfo(data)
-  }, [])  
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getData()
+      setInfo(data)  
+    }
+    fetchData();
+  }, []) 
 
   if(!info) {
     return <p>Loading...</p>

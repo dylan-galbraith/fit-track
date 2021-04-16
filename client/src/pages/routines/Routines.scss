@@ -69,13 +69,10 @@
   }
 
   &__error {
-    display: none;
-    &--show {
-      color: $danger-color;
-      font-size: 0.8rem;
-      font-weight: 500;
-      display: initial;  
-    }
+    color: $danger-color;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: initial;  
   }
 }
 
