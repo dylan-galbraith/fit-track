@@ -19,8 +19,6 @@ import UpdateName from './components/UpdateName';
 
 function App() {
 
-  const { REACT_APP_API_URL } = process.env;
-
   async function getData(id) {
     try {
       const exercises = await axios.get(`${process.env.API_URL}/exercises/all/${id}`)
