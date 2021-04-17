@@ -11,6 +11,17 @@ router.get('/all/:userId', async (req, res) => {
   const result = await prisma.routine.findMany({
     where: {
       userId: parseInt(req.params.userId)
+    },
+    select: {
+      name: true,
+      id: true,
+      exercise: {
+        select: {
+          name: true,
+          record: true,
+          id: true
+        }
+      }
     }
   });
   res.json(result);

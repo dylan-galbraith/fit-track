@@ -40,6 +40,7 @@ class App extends Component {
               <PrivateRoute path='/' exact component={()=> <Home getData={this.getData} />} />
               <PrivateRoute path='/routines' exact component={()=> <Routines getData={this.getData} />} />
               <PrivateRoute path='/routines/add' component={()=> <AddRoutine getData={this.getData} />} />
+              <PrivateRoute path='/routines/:routineId' component={()=> <SingleRoutine getData={this.getData} />} />
               <Route path='/signup' component={SignUp} />
               <Route path='/login' component={Login} />
             </Switch>
