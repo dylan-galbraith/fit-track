@@ -19,7 +19,7 @@ export default function Routines({ getData }) {
   }, [getData, currentUser.uid]) 
 
   function handleChange(e) {
-    setSearch(e.target.value.toUpperCase)
+    setSearch(e.target.value.toUpperCase())
   }
 
   if(!info) {
