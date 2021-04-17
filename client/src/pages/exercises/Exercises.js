@@ -1,48 +1,48 @@
-import { Component } from 'react';
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import filledStarIcon from '../../assets/icons/star.svg';
 import './Exercises.scss';
+import filledStarIcon from '../../assets/icons/star.svg';
 
-class Exercises extends Component {
+export default function Routines({ getData }) {
 
-  state = {
-    search: ""
+  const [info, setInfo] = useState()
+  const [search, setSearch] = useState("")
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getData()
+      setInfo(data.exercises)  
+    }
+    fetchData();
+  }, []) 
+
+  function handleChange(e) {
+    setSearch(e.target.value.toUpperCase)
   }
 
-  handleChange = (e) => {
-    this.setState({
-      search: e.target.value.toUpperCase()
-    })
+  if(!info) {
+    return <p>Loading...</p>
   }
-
-  componentDidMount = () => {
-    this.props.resetExercises();
-  }
-
-  render() {
-    return (
-      <main className="exercises">
-        <h1 className="exercises__heading">Exercises</h1>
-        <div className="exercises__list">
-          <input onChange={this.handleChange} className="exercises__search" placeholder="Search" />
-          <Link to='/exercises/add' className="exercises__add">Add a New Exercise!</Link>
-          {this.props.exercises.map(item => {
-            if (item.name.toUpperCase().includes(this.state.search)){
-              return (
-                <Link 
-                  key={item.id} 
-                  to={`/exercises/${item.id}`} 
-                  className="exercises__name">
-                    {item.name} {item.favourite ? <img src={filledStarIcon} className="exercises__icon" alt="favourite icon" /> : null}
-                </Link>
-              )
-            }
-            return null
-          })}
-        </div>
-      </main>
-    )
-  }
+  return (
+    <main className="exercises">
+      <h1 className="exercises__heading">Exercises</h1>
+      <div className="exercises__list">
+        <input onChange={handleChange} className="exercises__search" placeholder="Search" />
+        <Link to='/exercises/add' className="exercises__add">Add a New Exercise!</Link>
+        {info.map(item => {
+          if (item.name.toUpperCase().includes(search)){
+            return (
+              <Link 
+                key={item.id} 
+                to={`/exercises/${item.id}`} 
+                className="exercises__name">
+                  {item.name} {item.favourite ? <img src={filledStarIcon} className="exercises__icon" alt="favourite icon" /> : null}
+              </Link>
+            )
+          }
+          return null
+        })}
+      </div>
+    </main>
+  )
 }
-
-export default Exercises
