@@ -16,12 +16,16 @@ export default function SingleRoutine({ getData }) {
 
   async function fetchData() {
     const data = await getData()
-    setInfo(data.exercises.find(item => item.id == exerciseId))
+    setInfo(data.exercises.find(item => item.id === parseInt(exerciseId)))
   }
 
   useEffect(() => {
-    fetchData();
-  }, []) 
+    async function fetchData() {
+      const data = await getData()
+      setInfo(data.exercises.find(item => item.id === parseInt(exerciseId)))
+    }
+    fetchData()
+  }, [getData, exerciseId]) 
 
   function favouriteExercise() {
     const favStatus = {favourite: !info.favourite}

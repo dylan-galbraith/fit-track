@@ -12,7 +12,7 @@ export default function Routines({ getData }) {
       setInfo(data.routines)  
     }
     fetchData();
-  }, []) 
+  }, [getData]) 
 
   if(!info) {
     return <p>Loading...</p>

@@ -13,7 +13,7 @@ export default function Home({ getData }) {
       setInfo(data.exercises)  
     }
     fetchData();
-  }, []) 
+  }, [getData]) 
 
   if(!info) {
     return <p>Loading...</p>

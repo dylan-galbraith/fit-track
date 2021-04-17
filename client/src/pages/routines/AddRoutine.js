@@ -17,7 +17,7 @@ export default function AddRoutine({ getData }) {
       setInfo(data.routines)  
     }
     fetchData();
-  }, []) 
+  }, [getData]) 
 
   function handleSubmit(e) {
     e.preventDefault();

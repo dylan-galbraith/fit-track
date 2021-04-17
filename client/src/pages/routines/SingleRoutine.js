@@ -17,12 +17,17 @@ export default function SingleRoutine({ getData }) {
   async function fetchData() {
     const data = await getData()
     setAllExercises(data.exercises)
-    setInfo(data.routines.find(item => item.id == routineId))
+    setInfo(data.routines.find(item => item.id === parseInt(routineId)))
   }
 
   useEffect(() => {
+    async function fetchData() {
+      const data = await getData()
+      setAllExercises(data.exercises)
+      setInfo(data.routines.find(item => item.id === parseInt(routineId)))
+    }
     fetchData();
-  }, []) 
+  }, [getData, routineId]) 
 
   function addRecord(e) {
     e.preventDefault();

@@ -17,7 +17,7 @@ export default function AddRoutine({ getData }) {
       setInfo(data.exercises)  
     }
     fetchData();
-  }, []) 
+  }, [getData]) 
 
   function handleSubmit(e) {
     e.preventDefault();

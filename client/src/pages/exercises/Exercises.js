@@ -14,7 +14,7 @@ export default function Routines({ getData }) {
       setInfo(data.exercises)  
     }
     fetchData();
-  }, []) 
+  }, [getData]) 
 
   function handleChange(e) {
     setSearch(e.target.value.toUpperCase)

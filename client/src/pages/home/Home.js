@@ -14,7 +14,7 @@ export default function Home({ getData }) {
       setInfo(data)  
     }
     fetchData();
-  }, []) 
+  }, [getData]) 
 
   if(!info) {
     return <p>Loading...</p>
