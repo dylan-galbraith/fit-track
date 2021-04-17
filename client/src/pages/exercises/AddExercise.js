@@ -4,20 +4,22 @@ import errorIcon from '../../assets/icons/alert-circle.svg';
 import { Redirect } from 'react-router-dom';
 import { API_URL } from '../../utils';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function AddRoutine({ getData }) {
 
   const [info, setInfo] = useState()
   const [redirect, setRedirect] = useState()
   const [error, setError] = useState(false)
+  const { currentUser } = useAuth()
 
   useEffect(() => {
     async function fetchData() {
-      const data = await getData()
+      const data = await getData(currentUser.uid)
       setInfo(data.exercises)  
     }
     fetchData();
-  }, [getData]) 
+  }, [getData, currentUser.uid]) 
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -29,7 +31,7 @@ export default function AddRoutine({ getData }) {
     }
     if (!error) {
       axios
-        .post(`${API_URL}/exercises/all/20`, newExercise)
+        .post(`${API_URL}/exercises/all/${currentUser.uid}`, newExercise)
         .then(response => {
           setRedirect(`/exercises/${response.data.id}`)
         })

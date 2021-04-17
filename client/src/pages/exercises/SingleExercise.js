@@ -6,26 +6,28 @@ import exitIcon from '../../assets/icons/exit-icon.svg';
 import { Link, Redirect, useParams } from 'react-router-dom';
 import { API_URL } from '../../utils';
 import React, { useEffect, useState } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function SingleRoutine({ getData }) {
 
   const [info, setInfo] = useState()
   const [redirect, setRedirect] = useState()
+  const { currentUser } = useAuth()
 
   const { exerciseId } = useParams();
 
   async function fetchData() {
-    const data = await getData()
+    const data = await getData(currentUser.uid)
     setInfo(data.exercises.find(item => item.id === parseInt(exerciseId)))
   }
 
   useEffect(() => {
     async function fetchData() {
-      const data = await getData()
+      const data = await getData(currentUser.uid)
       setInfo(data.exercises.find(item => item.id === parseInt(exerciseId)))
     }
     fetchData()
-  }, [getData, exerciseId]) 
+  }, [getData, exerciseId, currentUser.uid]) 
 
   function favouriteExercise() {
     const favStatus = {favourite: !info.favourite}
@@ -45,7 +47,7 @@ export default function SingleRoutine({ getData }) {
       note: e.target.note.value
     }
     axios
-      .post(`${API_URL}/records/20`, newRecord)
+      .post(`${API_URL}/records`, newRecord)
       .then(() => {
         e.target.weight.value = "";
         e.target.reps.value = "";

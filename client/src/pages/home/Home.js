@@ -10,11 +10,11 @@ export default function Home({ getData }) {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await getData()
+      const data = await getData(currentUser.uid)
       setInfo(data)  
     }
     fetchData();
-  }, [getData]) 
+  }, [getData, currentUser.uid]) 
 
   if(!info) {
     return <p>Loading...</p>
@@ -22,7 +22,7 @@ export default function Home({ getData }) {
 
   return(
     <main className="home">
-      <h1 className="home__heading">Welcome, {currentUser.email}!</h1>
+      <h1 className="home__heading">Welcome, {currentUser.displayName}!</h1>
       <h3 className="home__category__heading">Routines</h3>
       <article className="home__category">
         <Link to='/routines/add' className={info.routines.length===0 ? "home__name home__name--top" : "hidden"}>Add a New Routine!</Link>

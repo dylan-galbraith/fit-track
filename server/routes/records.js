@@ -6,7 +6,7 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-router.post('/:userId', async (req, res) => {
+router.post('/', async (req, res) => {
   const result = await prisma.record.create({
     data: {
       exercise: {
@@ -14,7 +14,6 @@ router.post('/:userId', async (req, res) => {
           id: parseInt(req.body.exerciseId)
         }
       },
-      userId: parseInt(req.params.userId),
       weight: `${req.body.weight} lbs`,
       reps: req.body.reps,
       note: req.body.note

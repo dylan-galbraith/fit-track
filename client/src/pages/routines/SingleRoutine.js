@@ -4,6 +4,7 @@ import backIcon from '../../assets/icons/arrow-back.svg';
 import { Link, Redirect, useParams } from 'react-router-dom';
 import exitIcon from '../../assets/icons/exit-icon.svg';
 import { API_URL } from '../../utils';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function SingleRoutine({ getData }) {
 
@@ -13,21 +14,22 @@ export default function SingleRoutine({ getData }) {
   const [allExercises, setAllExercises] = useState()
 
   const { routineId } = useParams();
+  const { currentUser } = useAuth()
 
   async function fetchData() {
-    const data = await getData()
+    const data = await getData(currentUser.uid)
     setAllExercises(data.exercises)
     setInfo(data.routines.find(item => item.id === parseInt(routineId)))
   }
 
   useEffect(() => {
     async function fetchData() {
-      const data = await getData()
+      const data = await getData(currentUser.uid)
       setAllExercises(data.exercises)
       setInfo(data.routines.find(item => item.id === parseInt(routineId)))
     }
     fetchData();
-  }, [getData, routineId]) 
+  }, [getData, routineId, currentUser.uid]) 
 
   function addRecord(e) {
     e.preventDefault();
@@ -38,7 +40,7 @@ export default function SingleRoutine({ getData }) {
     }
     document.getElementById(e.target.id).classList.add("disabled");
     axios
-      .post(`${API_URL}/records/20`, newRecord)
+      .post(`${API_URL}/records`, newRecord)
   }
 
   function addMenu() {

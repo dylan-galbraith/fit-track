@@ -16,7 +16,7 @@ model Exercise {
   record      Record[]
   routine     Routine[]
   favourite   Boolean      @default(false)
-  userId      Int          
+  userId      String          
 }
 model Record {
   id          Int         @default(autoincrement()) @id
@@ -25,12 +25,11 @@ model Record {
   date        DateTime    @default(now())
   weight      String      @db.VarChar(225)
   reps        String      @db.VarChar(225)
-  userId      Int         
   note        String      @db.VarChar(225) @default("")
 }
 model Routine {
   id          Int          @default(autoincrement()) @id
   name        String       @db.VarChar(225)
   exercise    Exercise[]
-  userId      Int          
+  userId      String          
 }

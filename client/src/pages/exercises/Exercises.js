@@ -2,19 +2,21 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import './Exercises.scss';
 import filledStarIcon from '../../assets/icons/star.svg';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function Routines({ getData }) {
 
   const [info, setInfo] = useState()
   const [search, setSearch] = useState("")
+  const { currentUser } = useAuth()
 
   useEffect(() => {
     async function fetchData() {
-      const data = await getData()
+      const data = await getData(currentUser.uid)
       setInfo(data.exercises)  
     }
     fetchData();
-  }, [getData]) 
+  }, [getData, currentUser.uid]) 
 
   function handleChange(e) {
     setSearch(e.target.value.toUpperCase)

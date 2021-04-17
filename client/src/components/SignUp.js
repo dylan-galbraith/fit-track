@@ -23,7 +23,7 @@ function SignUp() {
       setLoading(true)
       await signup(e.target.email.value, e.target.password.value)
 
-      history.push('/')
+      history.push('/update')
     } catch {
       setError("Failed to create an account")
     }
@@ -34,8 +34,6 @@ function SignUp() {
     <main className="signup">
       <h1 className="signup__heading">Please Sign Up</h1>
       <form onSubmit={handleSubmit} className="signup__form">
-        <input className="signup__input" name="firstName" placeholder="First Name *" />
-        <input className="signup__input" name="lastName" placeholder="Last Name *" />
         <input className="signup__input" name="email" placeholder="Email *" />
         <input className="signup__input" name="password" placeholder="Password *" type="password" />
         <input className="signup__input" name="confirm" placeholder="Confirm Password *" type="password"/>

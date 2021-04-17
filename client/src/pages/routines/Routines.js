@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import './Routines.scss';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function Routines({ getData }) {
 
   const [info, setInfo] = useState()
+  const { currentUser } = useAuth()
 
   useEffect(() => {
     async function fetchData() {
-      const data = await getData()
+      const data = await getData(currentUser.uid)
       setInfo(data.routines)  
     }
     fetchData();
-  }, [getData]) 
+  }, [getData, currentUser.uid]) 
 
   if(!info) {
     return <p>Loading...</p>
