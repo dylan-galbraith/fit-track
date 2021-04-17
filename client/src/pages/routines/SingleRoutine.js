@@ -14,7 +14,6 @@ export default function SingleRoutine({ getData }) {
 
   const { routineId } = useParams();
   const { currentUser } = useAuth()
-  const API_URL = process.env.API_URL
 
   async function fetchData() {
     const data = await getData(currentUser.uid)
@@ -40,7 +39,7 @@ export default function SingleRoutine({ getData }) {
     }
     document.getElementById(e.target.id).classList.add("disabled");
     axios
-      .post(`${API_URL}/records`, newRecord)
+      .post(`${process.env.REACT_APP_API_URL}/records`, newRecord)
   }
 
   function addMenu() {
@@ -49,7 +48,7 @@ export default function SingleRoutine({ getData }) {
 
   function selectedExercise (id) {
     axios
-      .put(`${API_URL}/exercises/${id}/add/${routineId}`)
+      .put(`${process.env.REACT_APP_API_URL}/exercises/${id}/add/${routineId}`)
       .then (() => {
         fetchData();
       })
@@ -57,7 +56,7 @@ export default function SingleRoutine({ getData }) {
 
   function deleteExercise(id) {
     axios
-      .put(`${API_URL}/routines/${routineId}/remove/${id}`)
+      .put(`${process.env.REACT_APP_API_URL}/routines/${routineId}/remove/${id}`)
       .then(response => {
         fetchData();
       })
@@ -65,7 +64,7 @@ export default function SingleRoutine({ getData }) {
 
   function deleteRoutine() {
     axios
-      .delete(`${API_URL}/routines/${routineId}`)
+      .delete(`${process.env.REACT_APP_API_URL}/routines/${routineId}`)
       .then(response => {
         setRedirect('/routines')
       })

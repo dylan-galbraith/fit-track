@@ -12,7 +12,6 @@ export default function SingleRoutine({ getData }) {
   const [info, setInfo] = useState()
   const [redirect, setRedirect] = useState()
   const { currentUser } = useAuth()
-  const API_URL = process.env.API_URL
 
   const { exerciseId } = useParams();
 
@@ -32,7 +31,7 @@ export default function SingleRoutine({ getData }) {
   function favouriteExercise() {
     const favStatus = {favourite: !info.favourite}
     axios
-      .put(`${API_URL}/exercises/${exerciseId}/favourite`, favStatus)
+      .put(`${process.env.REACT_APP_API_URL}/exercises/${exerciseId}/favourite`, favStatus)
       .then(() => {
         fetchData();
       })
@@ -47,7 +46,7 @@ export default function SingleRoutine({ getData }) {
       note: e.target.note.value
     }
     axios
-      .post(`${API_URL}/records`, newRecord)
+      .post(`${process.env.REACT_APP_API_URL}/records`, newRecord)
       .then(() => {
         e.target.weight.value = "";
         e.target.reps.value = "";
@@ -58,7 +57,7 @@ export default function SingleRoutine({ getData }) {
 
   function deleteExercise() {
     axios
-      .delete(`${API_URL}/exercises/${exerciseId}`)
+      .delete(`${process.env.REACT_APP_API_URL}/exercises/${exerciseId}`)
       .then(() => {
         setRedirect('/exercises')
       })
@@ -66,7 +65,7 @@ export default function SingleRoutine({ getData }) {
 
   function deleteRecord(id) {
     axios
-      .delete(`${API_URL}/records/${id}`)
+      .delete(`${process.env.REACT_APP_API_URL}/records/${id}`)
       .then(() => {
         fetchData();
       })

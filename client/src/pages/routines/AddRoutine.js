@@ -11,7 +11,6 @@ export default function AddRoutine({ getData }) {
   const [redirect, setRedirect] = useState()
   const [error, setError] = useState(false)
   const { currentUser } = useAuth()
-  const API_URL = process.env.API_URL
 
   useEffect(() => {
     async function fetchData() {
@@ -31,7 +30,7 @@ export default function AddRoutine({ getData }) {
     }
     if (!error) {
       axios
-        .post(`${API_URL}/routines/all/${currentUser.uid}`, newRoutine)
+        .post(`${process.env.REACT_APP_API_URL}/routines/all/${currentUser.uid}`, newRoutine)
         .then(response => {
           setRedirect(`/routines/${response.data.id}`)
         })
