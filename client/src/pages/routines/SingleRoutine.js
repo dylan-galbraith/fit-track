@@ -35,7 +35,8 @@ export default function SingleRoutine({ getData }) {
     const newRecord = {
       weight: e.target.weight.value,
       reps: e.target.reps.value,
-      exerciseId: e.target.id
+      exerciseId: e.target.id,
+      note: e.target.note.value
     }
     document.getElementById(e.target.id).classList.add("disabled");
     axios
@@ -114,6 +115,10 @@ export default function SingleRoutine({ getData }) {
               <div className="routine__item__row">
                 <p className="routine__item__stat">Reps: {item.record.length>0 ? item.record[0].reps : "N/A"}</p>
                 <label className="routine__item__stat"><input className="routine__item__input" name="reps" placeholder="Reps" />reps</label>
+              </div>
+              <div className="routine__item__row routine__item__row--notes">
+                <p className="routine__item__stat">Notes:<br/> {item.record.length>0 && item.record[0].note ? item.record[0].note : "N/A"}</p>
+                <label className="routine__item__stat"><textarea className="routine__item__input routine__item__input--notes" name="note" placeholder="Notes" /></label>
               </div>
               <button className="routine__item__button">Add</button>
             </form>

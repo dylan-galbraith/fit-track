@@ -122,11 +122,21 @@
     &__row {
       display: flex;
       align-items: center;
+
+      &--notes {
+        align-items: flex-start
+      }
     }
 
     &__input {
       @include input;
       width: 75%;
+
+      &--notes {
+        width: 100%;
+        height: 5rem;
+        resize: none;
+      }
     }
 
     &__stat {
