@@ -6,13 +6,15 @@ FitTrack was built as my final Capstone project at BrainStation. I was given abo
 
 ## Access
 
-If you would like to try out and use FitTrack, you can go to https://fit-track-capstone.herokuapp.com/ and create a new account.
+If you would like to try out and use FitTrack, you can go to https://fit-track.netlify.app/ and create a new account. After creating your account, you can start by creating some exercises. After youve created some exercises, you can create some routines. After you create a routine, you can add your already existing exercises to it.
 
 ## Tech-Stack
 
 ### Front-End
 
 The front-end of FitTrack was built using React and React-Router. Everything was built using JavaScript and HTML, and styled using SASS/CSS and BEM.
+
+All authentication and authorization is done through Firebase, and connected to my database on the back-end.
 
 ### Back-End
 
