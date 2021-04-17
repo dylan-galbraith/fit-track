@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function Home({ getData }) {
 
-  const { currentUser, logout } = useAuth()
+  const { currentUser } = useAuth()
   const [info, setInfo] = useState()
 
   useEffect(() => {

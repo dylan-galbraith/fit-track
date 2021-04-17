@@ -16,8 +16,6 @@ export default function SingleRoutine({ getData }) {
 
   async function fetchData() {
     const data = await getData()
-    console.log(data);
-    console.log(exerciseId);
     setInfo(data.exercises.find(item => item.id == exerciseId))
   }
 
@@ -27,7 +25,6 @@ export default function SingleRoutine({ getData }) {
 
   function favouriteExercise() {
     const favStatus = {favourite: !info.favourite}
-    console.log(favStatus);
     axios
       .put(`${API_URL}/exercises/${exerciseId}/favourite`, favStatus)
       .then(() => {
@@ -68,7 +65,6 @@ export default function SingleRoutine({ getData }) {
         fetchData();
       })
   }
-  console.log(info);
   if (!info) return <p>Loading...</p>
   if (redirect) return <Redirect to={redirect} />
   return (

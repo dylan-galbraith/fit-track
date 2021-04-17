@@ -38,6 +38,7 @@ class App extends Component {
           <AuthProvider>
             <Switch>
               <PrivateRoute path='/' exact component={()=> <Home getData={this.getData} />} />
+              <PrivateRoute path='/favourites' exact component={()=> <Favourites getData={this.getData} />} />
               <PrivateRoute path='/routines' exact component={()=> <Routines getData={this.getData} />} />
               <PrivateRoute path='/routines/add' component={()=> <AddRoutine getData={this.getData} />} />
               <PrivateRoute path='/routines/:routineId' component={()=> <SingleRoutine getData={this.getData} />} />

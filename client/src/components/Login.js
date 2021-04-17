@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom'
 
 function Login() {
 
-  const { login, currentUser } = useAuth();
+  const { login } = useAuth();
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const history = useHistory()
