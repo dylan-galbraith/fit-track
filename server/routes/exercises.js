@@ -25,12 +25,8 @@ router.post('/all/:userId', async (req, res) => {
   const result = await prisma.exercise.create({
     data: {
       name: req.body.name,
-      user: {
-        connect: {
-          id: parseInt(req.params.userId)
-        }
-      }
-    },
+      userId: parseInt(req.params.userId)
+    }
   })
   res.json(result)
 })

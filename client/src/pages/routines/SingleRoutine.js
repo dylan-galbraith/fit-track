@@ -33,9 +33,7 @@ export default function SingleRoutine({ getData }) {
     }
     document.getElementById(e.target.id).classList.add("disabled");
     axios
-      .post(`${API_URL}/records/${this.state.routine.user.id}`, newRecord)
-      .then(response => {
-      })
+      .post(`${API_URL}/records/20`, newRecord)
   }
 
   function addMenu() {
