@@ -23,7 +23,7 @@ router.post('/:userId', async (req, res) => {
   res.json(result)
 })
 
-router.delete('/:recordId/:userId', async (req, res) => {
+router.delete('/:recordId', async (req, res) => {
   const result = await prisma.record.delete({
     where: {
       id: parseInt(req.params.recordId)

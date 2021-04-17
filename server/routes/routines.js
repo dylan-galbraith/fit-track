@@ -18,7 +18,11 @@ router.get('/all/:userId', async (req, res) => {
       exercise: {
         select: {
           name: true,
-          record: true,
+          record: {
+            orderBy: {
+              date: 'desc'
+            }
+          },
           id: true
         }
       }

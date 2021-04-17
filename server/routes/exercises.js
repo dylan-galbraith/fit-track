@@ -13,6 +13,23 @@ router.get('/all/:userId', async (req, res) => {
     where: {
       userId: parseInt(req.params.userId)
     },
+    select: {
+      name: true,
+      id: true,
+      favourite: true,
+      record: {
+        orderBy: {
+          date: 'desc'
+        },
+        select: {
+          date: true,
+          weight: true,
+          reps: true,
+          id: true,
+          note: true
+        }
+      }
+    },
     orderBy: {
       name: 'asc'
     }
@@ -41,11 +58,7 @@ router.get('/:exerciseId', async (req, res) => {
       name: true,
       favourite: true,
       id: true,
-      user: {
-        select: {
-          id: true
-        }
-      },
+      userId: true,
       record: {
         orderBy: {
           date: 'desc'
@@ -81,7 +94,7 @@ router.put('/:exerciseId/add/:routineId', async (req, res) => {
 })
 
 // Favourite an exercise
-router.put('/:exerciseId/favourite/:userId', async (req, res) => {
+router.put('/:exerciseId/favourite', async (req, res) => {
   const result = await prisma.exercise.update({
     where: {
       id: parseInt(req.params.exerciseId)
@@ -94,7 +107,7 @@ router.put('/:exerciseId/favourite/:userId', async (req, res) => {
 })
 
 // Delete an exercise
-router.delete('/:exerciseId/:userId', async (req, res) => {
+router.delete('/:exerciseId', async (req, res) => {
   const result = await prisma.exercise.delete({
     where: {
       id: parseInt(req.params.exerciseId)
