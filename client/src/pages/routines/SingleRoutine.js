@@ -14,12 +14,13 @@ export default function SingleRoutine({ getData }) {
 
   const { routineId } = useParams();
 
+  async function fetchData() {
+    const data = await getData()
+    setAllExercises(data.exercises)
+    setInfo(data.routines.find(item => item.id == routineId))
+  }
+
   useEffect(() => {
-    async function fetchData() {
-      const data = await getData()
-      setAllExercises(data.exercises)
-      setInfo(data.routines.find(item => item.id == routineId))
-    }
     fetchData();
   }, []) 
 
@@ -37,62 +38,34 @@ export default function SingleRoutine({ getData }) {
       })
   }
 
-  function addExercises() {
-    axios
-      .get(`${API_URL}/exercises/all/${this.state.routine.user.id}`)
-      .then(response => {
-        this.setState({
-          allExercises: response.data,
-          adding: true
-        })
-      })
+  function addMenu() {
+    setAdding(!adding)
   }
 
   function selectedExercise (id) {
     axios
-      .put(`${API_URL}/exercises/${id}/add/${this.props.match.params.routineId}/${this.state.routine.user.id}`)
-      .then (response => {
-        this.setState({
-          allExercises: this.state.allExercises.filter(item => item.id !== id)
-        })
-      })
-  }
-
-  function exitAdding() {
-    axios
-      .get(`${API_URL}/routines/${this.props.match.params.routineId}`)
-      .then(response => {
-        this.setState({
-          routine: response.data,
-          adding: false
-        })
+      .put(`${API_URL}/exercises/${id}/add/${routineId}`)
+      .then (() => {
+        fetchData();
       })
   }
 
   function deleteExercise(id) {
     axios
-      .put(`${API_URL}/routines/${this.props.match.params.routineId}/remove/${id}/${this.state.routine.user.id}`)
+      .put(`${API_URL}/routines/${routineId}/remove/${id}`)
       .then(response => {
-        axios
-          .get(`${API_URL}/routines/${this.props.match.params.routineId}`)
-          .then(response => {
-            this.setState({
-              routine: response.data
-            })
-          })
+        fetchData();
       })
   }
 
   function deleteRoutine() {
     axios
-      .delete(`${API_URL}/routines/${this.props.match.params.routineId}/${this.state.routine.user.id}`)
+      .delete(`${API_URL}/routines/${routineId}`)
       .then(response => {
-        this.setState({
-          redirect: '/routines'
-        })
+        setRedirect('/routines')
       })
   }
-  console.log(info);
+
   if (!info) return <p>Loading...</p>
   if (redirect) return <Redirect to={redirect} />
   if (adding) {
@@ -100,12 +73,12 @@ export default function SingleRoutine({ getData }) {
       <main className="routine">
         <h1 className="routine__heading"><Link to="/routines"><img className="routine__icon" src={backIcon} alt="back icon" /></Link>{info.name}</h1>    
         <div className="routine__item">
-          <button  onClick={exitAdding} className="routine__add">Done</button>
+          <button  onClick={addMenu} className="routine__add">Done</button>
         </div>
         <div className="exercises__list">
         <Link to='/exercises/add' className="exercises__add">Create A New Exercise!</Link>
           {allExercises.map(item => {
-            if (!info.find(each => each.id === item.id)){
+            if (!info.exercise.find(each => each.id === item.id)){
               return <button key={item.id} onClick={() => selectedExercise(item.id)} className="routines__name adding">{item.name} </button>
             }
             return null
@@ -118,7 +91,7 @@ export default function SingleRoutine({ getData }) {
     <main className="routine">
       <h1 className="routine__heading"><Link to="/routines"><img className="routine__icon" src={backIcon} alt="back icon" /></Link>{info.name}</h1>
       <div className="routine__item">
-        <button  onClick={addExercises} className="routine__add">Add an Exercise!</button>
+        <button  onClick={addMenu} className="routine__add">Add an Exercise!</button>
       </div>
       {info.exercise.map(item => {
         return (

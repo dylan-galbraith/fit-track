@@ -32,11 +32,7 @@ router.post('/all/:userId', async (req, res) => {
   const result = await prisma.routine.create({
     data: {
       name: req.body.name,
-      user: {
-        connect: {
-          id: parseInt(req.params.userId)
-        }
-      }
+      userId: parseInt(req.params.userId)
     }
   });
   res.json(result);
@@ -68,7 +64,7 @@ router.get('/:routineId', async (req, res) => {
 })
 
 // Delete an exercise from a routine
-router.put('/:routineId/remove/:exerciseId/:userId', async (req, res) => {
+router.put('/:routineId/remove/:exerciseId', async (req, res) => {
   const result = await prisma.routine.update({
     where: {
       id: parseInt(req.params.routineId)
@@ -85,7 +81,7 @@ router.put('/:routineId/remove/:exerciseId/:userId', async (req, res) => {
 })
 
 // Delete a routine
-router.delete('/:routineId/:userId', async (req, res) => {
+router.delete('/:routineId', async (req, res) => {
   const result = await prisma.routine.delete({
     where: {
       id: parseInt(req.params.routineId)
