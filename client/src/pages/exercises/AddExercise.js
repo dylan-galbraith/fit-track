@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import errorIcon from '../../assets/icons/alert-circle.svg';
 import { Redirect } from 'react-router-dom';
-import { API_URL } from '../../utils';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -12,6 +11,7 @@ export default function AddRoutine({ getData }) {
   const [redirect, setRedirect] = useState()
   const [error, setError] = useState(false)
   const { currentUser } = useAuth()
+  const API_URL = process.env.API_URL
 
   useEffect(() => {
     async function fetchData() {

@@ -4,7 +4,6 @@ import filledStarIcon from '../../assets/icons/star.svg';
 import backIcon from '../../assets/icons/arrow-back.svg';
 import exitIcon from '../../assets/icons/exit-icon.svg';
 import { Link, Redirect, useParams } from 'react-router-dom';
-import { API_URL } from '../../utils';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -13,6 +12,7 @@ export default function SingleRoutine({ getData }) {
   const [info, setInfo] = useState()
   const [redirect, setRedirect] = useState()
   const { currentUser } = useAuth()
+  const API_URL = process.env.API_URL
 
   const { exerciseId } = useParams();
 

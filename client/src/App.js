@@ -1,7 +1,6 @@
 import './App.scss'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import axios from 'axios';
-import { API_URL } from './utils';
 import PrivateRoute from './components/PrivateRoute';
 
 import Footer from './components/Footer'
@@ -20,10 +19,12 @@ import UpdateName from './components/UpdateName';
 
 function App() {
 
+  const { REACT_APP_API_URL } = process.env;
+
   async function getData(id) {
     try {
-      const exercises = await axios.get(`${API_URL}/exercises/all/${id}`)
-      const routines = await axios.get(`${API_URL}/routines/all/${id}`)
+      const exercises = await axios.get(`${process.env.API_URL}/exercises/all/${id}`)
+      const routines = await axios.get(`${process.env.API_URL}/routines/all/${id}`)
       return {exercises: exercises.data, routines: routines.data}
     } catch {
       console.log("error");

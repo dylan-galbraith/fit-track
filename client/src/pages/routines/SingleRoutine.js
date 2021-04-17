@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import backIcon from '../../assets/icons/arrow-back.svg';
 import { Link, Redirect, useParams } from 'react-router-dom';
 import exitIcon from '../../assets/icons/exit-icon.svg';
-import { API_URL } from '../../utils';
 import { useAuth } from '../../contexts/AuthContext';
 
 export default function SingleRoutine({ getData }) {
@@ -15,6 +14,7 @@ export default function SingleRoutine({ getData }) {
 
   const { routineId } = useParams();
   const { currentUser } = useAuth()
+  const API_URL = process.env.API_URL
 
   async function fetchData() {
     const data = await getData(currentUser.uid)
