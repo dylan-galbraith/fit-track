@@ -21,8 +21,8 @@ function App() {
 
   async function getData(id) {
     try {
-      const exercises = await axios.get(`${process.env.API_URL}/exercises/all/${id}`)
-      const routines = await axios.get(`${process.env.API_URL}/routines/all/${id}`)
+      const exercises = await axios.get(`${process.env.REACT_APP_API_URL}/exercises/all/${id}`)
+      const routines = await axios.get(`${process.env.REACT_APP_API_URL}/routines/all/${id}`)
       return {exercises: exercises.data, routines: routines.data}
     } catch {
       console.log("error");
