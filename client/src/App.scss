@@ -144,11 +144,20 @@
     padding-bottom: 3rem;
   }
 
-  &__logout {
+  &__button {
     @include button;
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    
+    &--logout {
+      top: 1rem;
+      left: 1rem;  
+    }
+
+    &--profile {
+      top: 1rem;
+      right: 1rem;  
+      text-decoration: none;
+    }
   }
 }
 

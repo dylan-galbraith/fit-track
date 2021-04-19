@@ -6,7 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 function SignUp() {
 
-  const { signup, updateName } = useAuth();
+  const { signup } = useAuth();
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const history = useHistory()
@@ -16,6 +16,10 @@ function SignUp() {
 
     if (e.target.password.value !== e.target.confirm.value) {
       return setError("Passwords do not match")
+    }
+
+    if (!e.target.password.value || !e.target.email.value || !e.target.name.value) {
+      return setError("Please make sure all fields are filled out")
     }
 
     try {

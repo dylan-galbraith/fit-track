@@ -29,7 +29,8 @@ export default function Footer() {
   if (open && currentUser) {
     return (
       <section className="menu">
-        <button onClick={handleLogout} className="menu__logout">Log Out</button>
+        <button onClick={handleLogout} className="menu__button menu__button--logout">Log Out</button>
+        <Link to='/update' onClick={menuHandler} className="menu__button menu__button--profile">Update Profile</Link>
         <div className="menu__list">
           <NavLink className="menu__item" to='/routines' onClick={menuHandler}>Routines</NavLink>
           <NavLink className="menu__item" to='/favourites' onClick={menuHandler}>Favourites</NavLink>
