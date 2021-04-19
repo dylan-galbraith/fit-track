@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom'
 
 function Login() {
 
-  const { login, signInWithGoogle, currentUser } = useAuth();
+  const { login, signInWithGoogle, signInWithFacebook, currentUser } = useAuth();
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const history = useHistory()
@@ -17,6 +17,17 @@ function Login() {
       await signInWithGoogle()
     } catch {
       setError("Failed to log in with Google")
+    }
+    setLoading(false)
+  }
+
+  async function facebook() {
+    try {
+      setError('')
+      setLoading(true)
+      await signInWithFacebook()
+    } catch {
+      setError("Failed to sign up with Facebook")
     }
     setLoading(false)
   }
@@ -42,14 +53,18 @@ function Login() {
   return (
     <main className="login">
       <h1 className="login__heading">Please Log In</h1>
-      <form onSubmit={handleSubmit} className="login__form">
-        <input className="login__input" name="email" placeholder="Email *" />
-        <input className="login__input" name="password" placeholder="Password *" type="password"/>
-        <span className={error ? "signup__error" : "signup__error--hidden"}><img className={error ? "signup__error__icon" : "signup__error__icon--hidden"}  src={errorIcon} alt="error icon" /> {error}</span>
-        <button disabled={loading} className="login__button">Login</button>
+      <div className="login__form">
+        <form onSubmit={handleSubmit}>
+          <input className="login__input" name="email" placeholder="Email *" />
+          <input className="login__input" name="password" placeholder="Password *" type="password"/>
+          <span className={error ? "signup__error" : "signup__error--hidden"}><img className={error ? "signup__error__icon" : "signup__error__icon--hidden"}  src={errorIcon} alt="error icon" /> {error}</span>
+          <button disabled={loading} className="login__button">Login</button>
+        </form>
+        <p className="login__signup">- OR -</p>
+        <button onClick={google} disabled={loading} className="login__button">Login With Google</button>
+        <button onClick={facebook} disabled={loading} className="login__button">Login With Facebook</button>
         <p className="login__signup">Don't have an account? <Link to='/signup' className="login__signup__link">Sign Up</Link> </p>
-      </form>
-      <button onClick={google} disabled={loading} className="login__button">Google</button>
+      </div>
     </main>
   )
 }

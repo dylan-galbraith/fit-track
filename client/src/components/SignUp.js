@@ -6,7 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 function SignUp() {
 
-  const { signup, signInWithGoogle, currentUser } = useAuth();
+  const { signup, signInWithGoogle, signInWithFacebook, currentUser } = useAuth();
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const history = useHistory()
@@ -18,6 +18,17 @@ function SignUp() {
       await signInWithGoogle()
     } catch {
       setError("Failed to sign up with Google")
+    }
+    setLoading(false)
+  }
+
+  async function facebook() {
+    try {
+      setError('')
+      setLoading(true)
+      await signInWithFacebook()
+    } catch {
+      setError("Failed to sign up with Facebook")
     }
     setLoading(false)
   }
@@ -51,16 +62,20 @@ function SignUp() {
   return (
     <main className="signup">
       <h1 className="signup__heading">Please Sign Up</h1>
-      <form onSubmit={handleSubmit} className="signup__form">
-        <input className="signup__input" name="email" placeholder="Email *" />
-        <input className="signup__input" name="name" placeholder="Name *" />
-        <input className="signup__input" name="password" placeholder="Password *" type="password" />
-        <input className="signup__input" name="confirm" placeholder="Confirm Password *" type="password"/>
-        <span className={error ? "signup__error" : "signup__error--hidden"}><img className={error ? "signup__error__icon" : "signup__error__icon--hidden"}  src={errorIcon} alt="error icon" />{error}</span>
-        <button className="signup__button" disabled={loading}>Sign Up</button>
+      <div className="signup__form">
+        <form onSubmit={handleSubmit}>
+          <input className="signup__input" name="email" placeholder="Email *" />
+          <input className="signup__input" name="name" placeholder="Name *" />
+          <input className="signup__input" name="password" placeholder="Password *" type="password" />
+          <input className="signup__input" name="confirm" placeholder="Confirm Password *" type="password"/>
+          <span className={error ? "signup__error" : "signup__error--hidden"}><img className={error ? "signup__error__icon" : "signup__error__icon--hidden"}  src={errorIcon} alt="error icon" />{error}</span>
+          <button className="signup__button" disabled={loading}>Sign Up</button>
+        </form>
+        <p className="signup__login">- OR -</p>
+        <button onClick={google} className="signup__button" disabled={loading}>Sign Up With Google</button>
+        <button onClick={facebook} className="signup__button" disabled={loading}>Sign Up With Facebook</button>
         <p className="signup__login">Already have an account? <Link to='/login' className="signup__login__link">Log In</Link> </p>
-      </form>
-      <button onClick={google} className="signup__button" disabled={loading}>Google</button>
+      </div>
     </main>
   )
 }
