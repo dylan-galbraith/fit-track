@@ -91,6 +91,12 @@
       display: none;
     }
   }
+
+  &__note {
+    opacity: 0.3;
+    font-size: 0.8rem;
+    padding-bottom: 0.5rem;
+  }
 }
 
 .footer {

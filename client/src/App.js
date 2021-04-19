@@ -15,7 +15,7 @@ import AddRoutine from './pages/routines/AddRoutine';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import { AuthProvider } from './contexts/AuthContext';
-import UpdateName from './components/UpdateName';
+import Profile from './components/Profile';
 
 function App() {
 
@@ -44,7 +44,7 @@ function App() {
             <PrivateRoute path='/exercises/:exerciseId' component={()=> <SingleExercise getData={getData} />} />
             <Route path='/signup' component={SignUp} />
             <Route path='/login' component={Login} />
-            <PrivateRoute path='/update' component={UpdateName} />
+            <PrivateRoute path='/profile' component={Profile} />
           </Switch>
           <Footer/>
         </AuthProvider>
