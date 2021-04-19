@@ -6,7 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 function SignUp() {
 
-  const { signup } = useAuth();
+  const { signup, updateName } = useAuth();
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const history = useHistory()
@@ -21,9 +21,8 @@ function SignUp() {
     try {
       setError('')
       setLoading(true)
-      await signup(e.target.email.value, e.target.password.value)
-
-      history.push('/update')
+      await signup(e.target.email.value, e.target.password.value, e.target.name.value)
+      history.push('/')
     } catch {
       setError("Failed to create an account")
     }
@@ -35,6 +34,7 @@ function SignUp() {
       <h1 className="signup__heading">Please Sign Up</h1>
       <form onSubmit={handleSubmit} className="signup__form">
         <input className="signup__input" name="email" placeholder="Email *" />
+        <input className="signup__input" name="name" placeholder="Name *" />
         <input className="signup__input" name="password" placeholder="Password *" type="password" />
         <input className="signup__input" name="confirm" placeholder="Confirm Password *" type="password"/>
         <span className={error ? "signup__error" : "signup__error--hidden"}><img className={error ? "signup__error__icon" : "signup__error__icon--hidden"}  src={errorIcon} alt="error icon" />{error}</span>

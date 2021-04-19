@@ -15,15 +15,21 @@ export function AuthProvider({ children }) {
     return auth.signInWithEmailAndPassword(email, password)
   }
 
-  function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password)
+  function signup(email, password, name) {
+    return (
+      auth.createUserWithEmailAndPassword(email, password)
+      .then((response) => {
+        console.log(response);
+        response.user.updateProfile({displayName: name})
+      })
+    )
   }
 
   function logout() {
     return auth.signOut();
   }
 
-  function chooseName(name) {
+  function updateName(name) {
     return currentUser.updateProfile({displayName: name})
   }
 
@@ -43,7 +49,7 @@ export function AuthProvider({ children }) {
     login,
     signup,
     logout,
-    chooseName
+    updateName
   }
 
   return (
