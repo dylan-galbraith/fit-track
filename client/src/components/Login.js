@@ -5,10 +5,21 @@ import { Link, useHistory } from 'react-router-dom'
 
 function Login() {
 
-  const { login } = useAuth();
+  const { login, signInWithGoogle, currentUser } = useAuth();
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const history = useHistory()
+
+  async function google() {
+    try {
+      setError('')
+      setLoading(true)
+      await signInWithGoogle()
+    } catch {
+      setError("Failed to log in with Google")
+    }
+    setLoading(false)
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -23,6 +34,11 @@ function Login() {
     }
     setLoading(false)
   }
+
+  if(currentUser) {
+    history.push('/')
+  }
+
   return (
     <main className="login">
       <h1 className="login__heading">Please Log In</h1>
@@ -33,6 +49,7 @@ function Login() {
         <button disabled={loading} className="login__button">Login</button>
         <p className="login__signup">Don't have an account? <Link to='/signup' className="login__signup__link">Sign Up</Link> </p>
       </form>
+      <button onClick={google} disabled={loading} className="login__button">Google</button>
     </main>
   )
 }

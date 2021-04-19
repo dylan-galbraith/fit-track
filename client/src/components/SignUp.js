@@ -6,10 +6,21 @@ import { Link, useHistory } from 'react-router-dom';
 
 function SignUp() {
 
-  const { signup } = useAuth();
+  const { signup, signInWithGoogle, currentUser } = useAuth();
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const history = useHistory()
+
+  async function google() {
+    try {
+      setError('')
+      setLoading(true)
+      await signInWithGoogle()
+    } catch {
+      setError("Failed to sign up with Google")
+    }
+    setLoading(false)
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -33,6 +44,10 @@ function SignUp() {
     setLoading(false)
   }
 
+  if (currentUser) {
+    history.push('/')
+  }
+
   return (
     <main className="signup">
       <h1 className="signup__heading">Please Sign Up</h1>
@@ -45,6 +60,7 @@ function SignUp() {
         <button className="signup__button" disabled={loading}>Sign Up</button>
         <p className="signup__login">Already have an account? <Link to='/login' className="signup__login__link">Log In</Link> </p>
       </form>
+      <button onClick={google} className="signup__button" disabled={loading}>Google</button>
     </main>
   )
 }
