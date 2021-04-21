@@ -4,6 +4,7 @@ import errorIcon from '../../assets/icons/alert-circle.svg';
 import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import Loading from '../../components/Loading';
 
 export default function AddRoutine({ getData }) {
 
@@ -38,7 +39,7 @@ export default function AddRoutine({ getData }) {
   }
 
   if (!info) {
-    return <p>Loading...</p>
+    return <Loading/>
   }
   if (redirect) {
     return <Redirect to={redirect} />

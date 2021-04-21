@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import './Routines.scss';
 import { useAuth } from '../../contexts/AuthContext';
+import Loading from '../../components/Loading';
 
 export default function Routines({ getData }) {
 
@@ -17,7 +18,7 @@ export default function Routines({ getData }) {
   }, [getData, currentUser.uid]) 
 
   if(!info) {
-    return <p>Loading...</p>
+    return <Loading />
   }
 
   return (

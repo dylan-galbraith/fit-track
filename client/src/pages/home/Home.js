@@ -2,6 +2,7 @@ import './Home.scss';
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
+import Loading from '../../components/Loading';
 
 export default function Home({ getData }) {
 
@@ -17,7 +18,7 @@ export default function Home({ getData }) {
   }, [getData, currentUser.uid]) 
 
   if(!info) {
-    return <p>Loading...</p>
+    return <Loading />
   }
 
   return(

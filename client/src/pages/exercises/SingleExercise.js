@@ -6,6 +6,7 @@ import exitIcon from '../../assets/icons/exit-icon.svg';
 import { Link, Redirect, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import Loading from '../../components/Loading';
 
 export default function SingleRoutine({ getData }) {
 
@@ -70,7 +71,7 @@ export default function SingleRoutine({ getData }) {
         fetchData();
       })
   }
-  if (!info) return <p>Loading...</p>
+  if (!info) return <Loading/>
   if (redirect) return <Redirect to={redirect} />
   return (
     <main className="exercise">

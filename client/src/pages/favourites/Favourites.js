@@ -3,6 +3,7 @@ import './Favourites.scss';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import Loading from '../../components/Loading';
 
 export default function Home({ getData }) {
 
@@ -16,9 +17,9 @@ export default function Home({ getData }) {
     }
     fetchData();
   }, [getData, currentUser]) 
-  
+
   if(!info) {
-    return <p>Loading...</p>
+    return <Loading />
   }  return (
     <div className="favourites">
       <h1 className="favourites__heading">Favourites</h1>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Exercises.scss';
 import filledStarIcon from '../../assets/icons/star.svg';
 import { useAuth } from '../../contexts/AuthContext';
+import Loading from '../../components/Loading';
 
 export default function Routines({ getData }) {
 
@@ -23,7 +24,7 @@ export default function Routines({ getData }) {
   }
 
   if(!info) {
-    return <p>Loading...</p>
+    return <Loading />
   }
   return (
     <main className="exercises">
