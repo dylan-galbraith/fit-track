@@ -3,6 +3,9 @@
 
 .favourites {
   padding: 1rem 1rem 8rem;
+  @include tablet {
+    padding-top: 4rem;
+  }
 
   &__heading {
     @include page-heading;

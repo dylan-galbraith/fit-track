@@ -3,6 +3,9 @@
 
 .exercises {
   padding: 1rem 1rem 8rem;
+  @include tablet {
+    padding-top: 4rem;
+  }
 
   &__heading {
     @include page-heading;
@@ -13,14 +16,19 @@
   }
 
   &__search {
-    background-color: $secondary-background;
-    border: none;
-    border-bottom: 1px solid $border-color;
-    padding: 0.5rem;
-    width: 100%;
+    // background-color: $secondary-background;
+    // border: none;
+    // border-bottom: 1px solid $border-color;
+    // padding: 0.5rem;
+    // width: 100%;
+    // text-align: center;
+    // &:focus {
+    //   outline: none;
+    // }
+    @include input;
     text-align: center;
-    &:focus {
-      outline: none;
+    @include tablet {
+      margin-bottom: 0;
     }
   }
 
@@ -30,6 +38,9 @@
 
   &__icon {
     height: 1rem;
+    @include tablet {
+      height: 1.2rem
+    }
   }
 
   &__add {
@@ -41,6 +52,9 @@
 
 .add-exercise {
   padding: 1rem 1rem 8rem;
+  @include tablet {
+    padding-top: 20rem;
+  }
 
   &__heading {
     @include page-heading;
@@ -65,10 +79,9 @@
     text-decoration: none;
     color: $danger-color;
     border-color: $danger-color;
-  }
-
-  &__icon {
-    height: 0.8rem;
+    @include tablet {
+      margin-top: 0;
+    }
   }
 
   &__error {
@@ -84,6 +97,9 @@
 
 .exercise {
   padding: 1rem 1rem 8rem;
+  @include tablet {
+    padding-top: 4rem;
+  }
 
   &__heading {
     @include page-heading;
@@ -101,6 +117,9 @@
 
   &__stat {
     padding: 0.5rem;
+    @include tablet {
+      font-size: 1.5rem;
+    }
 
     &--hide {
       display: none;
@@ -110,10 +129,14 @@
   &__label {
     font-weight: 600;
     letter-spacing: 0.1rem;
+    font-size: 1.5rem;
   }
 
   &__icon {
     height: 2rem;
+    @include tablet {
+      height: 3rem;
+    }
   }
 
   &__form {
@@ -142,6 +165,9 @@
     height: 1rem;
     position: absolute;
     right: 0.5rem;
+    @include tablet {
+      height: 1.5rem
+    }
   }
 
   &__delete {
@@ -149,5 +175,8 @@
     margin-top: 0;
     color: $danger-color;
     border-color: $danger-color;
+    @include tablet {
+      margin-top: 0;
+    }
   }
 }

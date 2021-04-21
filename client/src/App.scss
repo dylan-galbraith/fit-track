@@ -10,9 +10,9 @@
 
 .login {
   padding: 9rem 1rem 8rem;
+
   @include tablet {
-    margin: 0 auto;
-    width: 30rem
+    padding-top: 10rem;
   }
 
   &__heading {
@@ -37,12 +37,18 @@
     font-size: 0.8rem;
     padding-top: 1rem;
     text-align: center;
+    @include tablet {
+      font-size: 1.5rem;
+    }
 
     &__link {
       color: $secondary-color;
       font-size: 0.8rem;
       font-weight: 600;
       text-decoration: none;
+      @include tablet {
+        font-size: 1.5rem;
+      }
 
       &:hover {
         cursor: pointer;
@@ -54,8 +60,7 @@
 .signup {
   padding: 7rem 1rem 8rem;
   @include tablet {
-    margin: 0 auto;
-    width: 30rem
+    padding-top: 10rem;
   }
 
   &__heading {
@@ -80,12 +85,18 @@
     font-size: 0.8rem;
     padding-top: 1rem;
     text-align: center;
+    @include tablet {
+      font-size: 1.5rem;
+    }
 
     &__link {
       color: $secondary-color;
       font-size: 0.8rem;
       font-weight: 600;
       text-decoration: none;
+      @include tablet {
+        font-size: 1.5rem;
+      }
 
       &:hover {
         cursor: pointer;
@@ -96,9 +107,15 @@
   &__error {
     color: $danger-color;
     font-size: 0.8rem;
+    @include tablet {
+      font-size: 1.2rem;
+    }
 
     &__icon {
       height: 0.8rem;
+      @include tablet {
+        height: 1.2rem;
+      }
     }
 
     &--hidden {
@@ -131,8 +148,9 @@
     font-style: italic;
     letter-spacing: -0.3rem;
     @include tablet {
-      width: 100%;
+      margin: 0 auto;
       text-align: center;
+      font-size: 6rem;
     }
   }
 
@@ -147,7 +165,7 @@
 .menu {
   position: fixed;
   top: 0;
-  height: 90vh;
+  height: 100vh;
   width: 100vw;
   background-color: $secondary-background;
   display: flex;
@@ -172,6 +190,9 @@
     font-weight: 100;
     text-decoration: none;
     padding-bottom: 3rem;
+    @include tablet {
+      font-size: 4rem
+    }
   }
 
   &__button {
