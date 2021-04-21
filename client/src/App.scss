@@ -10,6 +10,10 @@
 
 .login {
   padding: 9rem 1rem 8rem;
+  @include tablet {
+    margin: 0 auto;
+    width: 30rem
+  }
 
   &__heading {
     @include page-heading;
@@ -49,6 +53,10 @@
 
 .signup {
   padding: 7rem 1rem 8rem;
+  @include tablet {
+    margin: 0 auto;
+    width: 30rem
+  }
 
   &__heading {
     @include page-heading;
@@ -122,6 +130,10 @@
     font-weight: 700;
     font-style: italic;
     letter-spacing: -0.3rem;
+    @include tablet {
+      width: 100%;
+      text-align: center;
+    }
   }
 
   &__icon {
@@ -141,12 +153,18 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  @include tablet {
+    justify-content: center;
+  }
 
   &__list {
     padding-right: 2rem;
     display: flex;
     flex-direction: column;
     text-align: right;
+    @include tablet {
+      text-align: center;
+    }
   }
 
   &__item {

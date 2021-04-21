@@ -1,5 +1,18 @@
 @use './variables' as *;
 
+// Breakpoints
+@mixin tablet {
+  @media (min-width: $tablet-breakpoint) {
+      @content;
+  } 
+}
+@mixin desktop {
+  @media (min-width: $desktop-breakpoint) {
+      @content;
+  }
+}
+
+// Styling
 @mixin button {
   background-color: $secondary-background;
   border: 1px solid $border-color;
@@ -22,6 +35,11 @@
   &--main {
     letter-spacing: 0.6rem;
   }
+  @include tablet {
+    padding-bottom: 2rem;
+    width: 60%;
+    margin: 0 auto;
+  }
 }
 
 @mixin container {
@@ -31,6 +49,10 @@
   border-radius: 0.7rem;
   display: flex;
   flex-direction: column;
+  @include tablet {
+    width: 60%;
+    margin: 1rem auto;
+  }
 }
 
 @mixin list-item {

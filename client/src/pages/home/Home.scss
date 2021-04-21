@@ -4,6 +4,18 @@
 
 .home {
   padding: 1rem 1rem 8rem;
+  @include tablet {
+    padding: 4rem 2rem 8rem;
+
+    &__tablet {
+      display: flex;
+      justify-content: space-between;
+
+      &__box {
+        width: 45%
+      }
+    }
+  }
 
   &__heading {
     @include page-heading;
@@ -11,6 +23,9 @@
 
   &__category {
     @include container;
+    @include tablet {
+      width: 100%;
+    }
 
     &__heading {
       text-align: center;
