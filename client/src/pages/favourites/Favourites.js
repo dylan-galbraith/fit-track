@@ -2,19 +2,21 @@ import filledStarIcon from '../../assets/icons/star.svg';
 import './Favourites.scss';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function Home({ getData }) {
 
   const [info, setInfo] = useState()
+  const { currentUser } = useAuth()
 
   useEffect(() => {
     async function fetchData() {
-      const data = await getData()
+      const data = await getData(currentUser.uid)
       setInfo(data.exercises)  
     }
     fetchData();
-  }, [getData]) 
-
+  }, [getData, currentUser]) 
+  
   if(!info) {
     return <p>Loading...</p>
   }  return (
